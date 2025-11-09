@@ -1,0 +1,114 @@
+---
+import Section from "@/components/layout/Section.astro";
+import Stack from "@/components/layout/Stack.astro";
+import ProjectDetails from "./ProjectDetails.astro";
+import FadeIn from "@/components/animations/FadeIn";
+import SlideIn from "@/components/animations/SlideIn";
+import StaggerContainer from "@/components/animations/StaggerContainer";
+import StaggerItem from "@/components/animations/StaggerItem";
+import { Image } from "astro:assets";
+import { projects, categories } from "@/lib/projectsData";
+---
+
+<Section id="projects">
+    <Stack gap="6xl">
+        <FadeIn client:load delay={0.1} duration={0.5}>
+            <Stack gap="base" as="header" class="section-header">
+                <h2 class="text-3xl font-bold">Projects</h2>
+                <p class="text-lg text-muted">Explore my recent work and side projects</p>
+            </Stack>
+        </FadeIn>
+
+        <!-- Split Layout: Projects List (Left) & Details (Right) -->
+        <div class="projects-split-layout">
+            <!-- Left: Project List -->
+            <SlideIn client:load delay={0.2} direction="left" duration={0.6}>
+                <div class="projects-list">
+                    {
+                        projects.map((project, index) => (
+                            <button
+                                data-project-id={project.id}
+                                class={`project-list-item ${index === 0 ? 'active' : ''}`}
+                                aria-label={`View ${project.title} details`}
+                            >
+                                <div class="project-list-item-image">
+                                    <Image
+                                        src={project.image}
+                                        alt={`View of ${project.title} project`}
+                                        layout="constrained"
+                                        width="800"
+                                        height="600"
+                                    />
+                                </div>
+                                <div class="project-list-item-content">
+                                    <h3 class="project-list-item-title">{project.title}</h3>
+                                    <p class="project-list-item-category">{project.category}</p>
+                                </div>
+                            </button>
+                        ))
+                    }
+                </div>
+            </SlideIn>
+
+            <!-- Right: Project Details -->
+            <SlideIn client:load delay={0.4} direction="right" duration={0.6}>
+                <div class="project-details-panel">
+                    <div id="project-details-content">
+                        <!-- Server-render first project details -->
+                        <ProjectDetails project={projects[0]} />
+                    </div>
+
+                    <!-- Hidden templates for each project to swap client-side -->
+                    {projects.map(project => (
+                        <template id={`project-template-${project.id}`}>
+                            <ProjectDetails project={project} />
+                        </template>
+                    ))}
+                </div>
+            </SlideIn>
+        </div>
+    </Stack>
+</Section>
+
+<script define:vars={{ projects }}>
+    // Project details functionality (client)
+    const projectListItems = document.querySelectorAll(".project-list-item");
+    const detailsContent = document.getElementById("project-details-content");
+
+    // Load first project template already rendered server-side
+
+    // Handle project list item clicks - swap templates
+    projectListItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            const projectId = item.getAttribute("data-project-id");
+            const template = document.getElementById(`project-template-${projectId}`);
+
+            if (template && detailsContent) {
+                // Update active state
+                projectListItems.forEach((i) => i.classList.remove("active"));
+                item.classList.add("active");
+
+                // Replace details content with template clone
+                detailsContent.innerHTML = '';
+                detailsContent.appendChild(template.content.cloneNode(true));
+            }
+        });
+    });
+
+    // Keyboard navigation
+    projectListItems.forEach((item, index) => {
+        item.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowDown") {
+                e.preventDefault();
+                const nextIndex = (index + 1) % projectListItems.length;
+                projectListItems[nextIndex]?.focus();
+                projectListItems[nextIndex]?.click();
+            } else if (e.key === "ArrowUp") {
+                e.preventDefault();
+                const prevIndex = (index - 1 + projectListItems.length) % projectListItems.length;
+                projectListItems[prevIndex]?.focus();
+                projectListItems[prevIndex]?.click();
+            }
+        });
+    });
+</script>

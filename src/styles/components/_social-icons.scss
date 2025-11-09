@@ -1,0 +1,278 @@
+// ============================================================================
+// SOCIAL ICONS STYLES
+// ============================================================================
+// Styles for social media icons in About and Hero sections.
+// Migrated from Tailwind to custom SCSS.
+//
+// @layer: Components
+// @category: Social Media
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// ABOUT SECTION - Large filled icons with labels
+// ============================================================================
+
+.social-icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: spacing(md);
+    padding: spacing(sm) spacing(base);
+    border-radius: radius(md);
+    border: 2px solid transparent;
+    @include transition(all, super-fast, smooth);
+    text-decoration: none !important;
+
+    &:hover {
+        scale: 1.05;
+    }
+
+    &:active {
+        scale: 1.0;
+    }
+}
+
+.social-icon-wrapper {
+    width: spacing(4xl);
+    height: spacing(4xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: radius(full);
+    @include transition(all, super-fast, smooth);
+    background: hsl(var(--muted));
+}
+
+.social-icon {
+    width: spacing(2xl);
+    height: spacing(2xl);
+    color: white;
+    @include transition(color, super-fast, smooth);
+}
+
+.social-icon-label {
+    font-size: font-size(base);
+    font-weight: font-weight(semibold);
+    color: hsl(var(--foreground));
+    @include transition(color, super-fast, smooth);
+}
+
+// LinkedIn hover
+.linkedin-link:hover {
+    .social-icon-wrapper {
+        background: brand-color("linkedin", "light");
+        box-shadow: shadow(lg);
+    }
+
+    .social-icon {
+        color: brand-color("white");
+    }
+
+    .social-icon-label {
+        color: brand-color("linkedin", "light");
+    }
+
+    // Dark mode variations
+    .dark & .social-icon-wrapper {
+        background: brand-color("linkedin", "hover-light");
+        box-shadow: shadow(xl);
+    }
+
+    .dark & .social-icon-label {
+        color: brand-color("linkedin", "dark");
+    }
+}
+
+// GitHub hover
+.github-link:hover {
+    .social-icon-wrapper {
+        background: hsl(0 0% 9%);
+        box-shadow: shadow(lg);
+    }
+
+    .social-icon {
+        color: white;
+    }
+
+    .social-icon-label {
+        color: hsl(0 0% 9%);
+    }
+
+    // Lighter in dark mode
+    .dark & .social-icon-wrapper {
+        background: hsl(0 0% 85%);
+        box-shadow: shadow(xl);
+    }
+
+    .dark & .social-icon {
+        color: hsl(0 0% 9%);
+    }
+
+    .dark & .social-icon-label {
+        color: hsl(0 0% 90%);
+    }
+}
+
+// Discord hover
+.discord-link:hover {
+    .social-icon-wrapper {
+        background: hsl(235 86% 65%);
+        box-shadow: shadow(lg);
+    }
+
+    .social-icon {
+        color: white;
+    }
+
+    .social-icon-label {
+        color: hsl(235 86% 65%);
+    }
+
+    // Slightly lighter in dark mode
+    .dark & .social-icon-wrapper {
+        background: hsl(235 86% 70%);
+        box-shadow: shadow(xl);
+    }
+
+    .dark & .social-icon-label {
+        color: hsl(235 86% 75%);
+    }
+}
+
+// Email hover
+.email-link:hover {
+    .social-icon-wrapper {
+        background: hsl(var(--primary));
+        box-shadow: shadow(lg);
+    }
+
+    .social-icon {
+        color: white;
+    }
+
+    .social-icon-label {
+        color: hsl(var(--primary));
+    }
+
+    // Same in dark mode with adjusted glow
+    .dark & .social-icon-wrapper {
+        background: hsl(var(--primary));
+        box-shadow: shadow(xl);
+    }
+
+    .dark & .social-icon-label {
+        color: hsl(var(--primary));
+    }
+}
+
+// ============================================================================
+// HERO SECTION - Small outline icons with color changes
+// ============================================================================
+
+.hero-social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: spacing(3xl);
+    height: spacing(3xl);
+    background: alpha-color(background, opacity(medium));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: border-width(thin) solid alpha-color(border, opacity(light));
+    border-radius: radius(md);
+    color: hsl(var(--muted-foreground));
+    @include transition(all, base, smooth);
+    text-decoration: none;
+    box-shadow: shadow(sm);
+
+    .dark & {
+        background: alpha-color(background, opacity(moderate));
+        border-color: alpha-color(border, opacity(light));
+    }
+
+    svg {
+        width: spacing(lg);
+        height: spacing(lg);
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: shadow(md);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+// GitHub hover
+.hero-github:hover {
+    color: brand-color("github", "default");
+    border-color: alpha-color(github, opacity(moderate));
+    background: hsla(0, 0%, 9%, opacity(subtle));
+
+    .dark & {
+        color: hsl(0 0% 90%);
+        border-color: hsla(0, 0%, 90%, opacity(moderate));
+        background: hsla(0, 0%, 90%, opacity(subtle));
+    }
+}
+
+// LinkedIn hover
+.hero-linkedin:hover {
+    color: hsl(211 94% 40%);
+    border-color: hsla(211, 94%, 40%, opacity(moderate));
+    background: hsla(211, 94%, 40%, opacity(subtle));
+
+    .dark & {
+        color: white;
+        border-color: hsla(211, 94%, 60%, opacity(moderate));
+        background: brand-color("linkedin", "hover-light");
+    }
+}
+
+// Discord hover
+.hero-discord:hover {
+    color: hsl(235 86% 65%);
+    border-color: hsla(235, 86%, 65%, opacity(moderate));
+    background: hsla(235, 86%, 65%, opacity(subtle));
+
+    .dark & {
+        color: hsl(235 86% 70%);
+        border-color: hsla(235, 86%, 70%, opacity(moderate));
+        background: hsla(235, 86%, 70%, opacity(light));
+    }
+}
+
+// Email hover
+.hero-email:hover {
+    color: hsl(var(--primary));
+    border-color: alpha-color(primary, opacity(medium));
+    background: alpha-color(primary, opacity(subtle));
+    box-shadow: shadow(md);
+
+    .dark & {
+        color: hsl(var(--primary));
+        border-color: alpha-color(primary, opacity(medium));
+        background: alpha-color(primary, opacity(light));
+        box-shadow: shadow(lg);
+    }
+}
+
+// ============================================================================
+// SOCIAL LINKS GRID - Grid layout for social links with focus states
+// ============================================================================
+
+.social-links-grid {
+    // Grid already handles layout, just ensure it's nav-aware
+    & [aria-label] {
+        // Accessibility: ensure social links have proper focus states
+        &:focus-visible {
+            outline: 2px solid hsl(var(--ring));
+            outline-offset: 2px;
+        }
+    }
+}
+

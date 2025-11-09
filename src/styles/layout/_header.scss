@@ -1,0 +1,187 @@
+// ============================================================================
+// HEADER - Navigation and site header
+// ============================================================================
+// Global header styles used by Header.astro component.
+// Component-specific scoped styles remain in Header.astro.
+//
+// @layer: Layout
+// @category: Header
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// HEADER CONTAINER
+// ============================================================================
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: z(sticky);
+    width: 100%;
+    // Modern subtle shadow instead of border
+    box-shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.05),
+                0 1px 2px -1px hsl(var(--foreground) / 0.05);
+    background-color: alpha-color(background, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.header-container {
+    height: spacing(5xl);
+    width: 100%;
+    max-width: container(2xl);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: spacing(base);
+    padding-right: spacing(base);
+    font-size: font-size(lg);
+
+    @include bp(md) {
+        padding-left: spacing(xl);
+        padding-right: spacing(xl);
+        font-size: font-size(xl);
+    }
+
+    @include bp(lg) {
+        font-size: font-size(2xl);
+    }
+
+    .logo {
+        font-size: font-size(2xl);
+        font-weight: font-weight(bold);
+
+        @include bp(md) {
+            font-size: font-size(3xl);
+        }
+    }
+
+    .nav,
+    .actions {
+        font-size: font-size(sm);
+
+        @include bp(md) {
+            font-size: font-size(xl);
+        }
+
+        .nav-item {
+            position: relative;
+            @include transition(color, base, smooth);
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: hsl(var(--primary));
+                @include transition(width, slow, smooth);
+            }
+
+            &:hover {
+                color: hsl(var(--primary));
+
+                &::after {
+                    width: 100%;
+                }
+            }
+
+            &:active {
+                transform: scale(0.98);
+            }
+        }
+    }
+
+    a,
+    button {
+        padding: spacing(sm) 0;
+
+        @include bp(md) {
+            padding: spacing(md) 0;
+        }
+    }
+}
+
+// ============================================================================
+// HEADER LOGO AND NAVIGATION
+// ============================================================================
+
+.header-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: spacing(sm);
+}
+
+.header-nav-desktop {
+    display: none;
+
+    @include bp(md) {
+        display: flex;
+        align-items: center;
+        gap: spacing(lg);
+    }
+}
+
+.header-nav-mobile {
+    display: flex;
+    align-items: center;
+    gap: spacing(sm);
+
+    @include bp(md) {
+        display: none;
+    }
+}
+
+// ============================================================================
+// MOBILE MENU
+// ============================================================================
+
+.mobile-menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: spacing(2xl);
+    width: spacing(2xl);
+    border-radius: radius(md);
+    @include transition(background-color, fast, smooth);
+
+    &:hover {
+        background-color: hsl(var(--accent));
+    }
+}
+
+.mobile-menu {
+    display: none;
+    border-top: border-width(thin) solid hsl(var(--border));
+    background-color: hsl(var(--background));
+
+    @include bp(md) {
+        display: none !important;
+    }
+}
+
+.mobile-menu-nav {
+    max-width: container(2xl);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: spacing(base);
+    padding: spacing(base);
+}
+
+.mobile-nav-item {
+    text-align: left;
+    font-size: font-size(lg);
+    font-weight: font-weight(medium);
+    @include transition(color, fast, smooth);
+
+    &:hover {
+        color: hsl(var(--primary));
+    }
+}
+

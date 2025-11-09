@@ -1,0 +1,50 @@
+---
+import Section from "@/components/layout/Section.astro";
+import Stack from "@/components/layout/Stack.astro";
+import Grid from "@/components/layout/Grid.astro";
+import Badge from "@/components/ui/Badge.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import CardHeader from "@/components/ui/CardHeader.astro";
+import CardTitle from "@/components/ui/CardTitle.astro";
+import FadeIn from "@/components/animations/FadeIn";
+import StaggerContainer from "@/components/animations/StaggerContainer";
+import StaggerItem from "@/components/animations/StaggerItem";
+import { skillsData } from "@/lib/skillsData";
+---
+
+<Section id="skills">
+    <Stack gap="6xl">
+        <FadeIn client:load delay={0.1} duration={0.5}>
+            <Stack gap="base" as="header">
+                <h2 class="text-3xl font-bold">Skills</h2>
+                <p class="text-lg text-muted">Technologies and tools I work with</p>
+            </Stack>
+        </FadeIn>
+
+        <StaggerContainer client:load delay={0.2} staggerDelay={0.15}>
+            <Grid columns={3} gap="lg">
+                {
+                    skillsData.map((category) => (
+                        <StaggerItem client:load>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle class="text-xl">{category.category}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div class="skills-badge-group">
+                                        {category.skills.map((skill) => (
+                                            <Badge variant="secondary">
+                                                {skill}
+                                            </Badge>
+                                        ))}
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </StaggerItem>
+                    ))
+                }
+            </Grid>
+        </StaggerContainer>
+    </Stack>
+</Section>

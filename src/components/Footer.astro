@@ -1,0 +1,14 @@
+---
+import Container from "@/components/layout/Container.astro";
+import Stack from "@/components/layout/Stack.astro";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+    <Container>
+        <Stack gap="lg" align="center" as="div" class="footer-content">
+            <p class="footer-copyright">© {currentYear} All rights reserved.</p>
+        </Stack>
+    </Container>
+</footer>

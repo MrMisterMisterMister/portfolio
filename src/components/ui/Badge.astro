@@ -1,0 +1,17 @@
+---
+interface Props {
+    variant?: "default" | "secondary" | "destructive" | "outline";
+    class?: string;
+}
+
+const { variant = "default", class: className } = Astro.props;
+---
+
+<div
+    class:list={[
+        "badge badge-secondary",
+        className,
+    ]}
+>
+    <slot />
+</div>

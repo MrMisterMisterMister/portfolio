@@ -1,0 +1,345 @@
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
+// Collection of reusable SCSS functions for common calculations and utilities.
+// These functions help with unit conversions, color manipulations, and more.
+//
+// @layer: Abstracts - Settings only, no CSS output
+// @category: Utility Functions
+// ============================================================================
+
+@use "sass:math";
+@use "sass:color";
+@use "sass:string";
+@use "sass:list";
+@use "sass:map";
+
+// ============================================================================
+// UNIT CONVERSION FUNCTIONS
+// ============================================================================
+
+// Convert pixels to rem units
+// @param {Number} $pixels - Pixel value to convert
+// @param {Number} $base - Base font size in pixels (default: 16px)
+// @return {Number} - Value in rem units
+// @example scss
+//   font-size: px-to-rem(24px);        // 1.5rem
+//   padding: px-to-rem(32px);          // 2rem
+@function px-to-rem($pixels, $base: 16px) {
+    @if math.is-unitless($pixels) {
+        $pixels: $pixels * 1px;
+    }
+    @if math.is-unitless($base) {
+        $base: $base * 1px;
+    }
+    @return math.div($pixels, $base) * 1rem;
+}
+
+// Convert rem to pixels
+// @param {Number} $rem - Rem value to convert
+// @param {Number} $base - Base font size in pixels (default: 16px)
+// @return {Number} - Value in pixels
+// @example scss
+//   max-width: rem-to-px(2rem);        // 32px
+@function rem-to-px($rem, $base: 16px) {
+    @if math.is-unitless($base) {
+        $base: $base * 1px;
+    }
+    @return math.div($rem, 1rem) * $base;
+}
+
+// Convert pixels to em units
+// @param {Number} $pixels - Pixel value to convert
+// @param {Number} $context - Context font size in pixels (default: 16px)
+// @return {Number} - Value in em units
+// @example scss
+//   padding: px-to-em(12px, 16px);     // 0.75em
+@function px-to-em($pixels, $context: 16px) {
+    @if math.is-unitless($pixels) {
+        $pixels: $pixels * 1px;
+    }
+    @if math.is-unitless($context) {
+        $context: $context * 1px;
+    }
+    @return math.div($pixels, $context) * 1em;
+}
+
+// Strip unit from a number
+// @param {Number} $number - Number with unit
+// @return {Number} - Unitless number
+// @example scss
+//   $value: strip-unit(16px);          // 16
+@function strip-unit($number) {
+    @if type-of($number) == "number" and not math.is-unitless($number) {
+        @return math.div($number, ($number * 0 + 1));
+    }
+    @return $number;
+}
+
+// ============================================================================
+// MATH FUNCTIONS
+// ============================================================================
+
+// Clamp a value between a minimum and maximum
+// @param {Number} $value - Value to clamp
+// @param {Number} $min - Minimum value
+// @param {Number} $max - Maximum value
+// @return {Number} - Clamped value
+// @example scss
+//   width: clamp-value(150%, 100%, 200%);  // 150%
+@function clamp-value($value, $min, $max) {
+    @return math.max($min, math.min($value, $max));
+}
+
+// Calculate a percentage
+// @param {Number} $value - Part value
+// @param {Number} $total - Total value
+// @return {Number} - Percentage value
+// @example scss
+//   width: percentage(4, 12);          // 33.33333%
+@function percentage($value, $total) {
+    @return math.div($value, $total) * 100%;
+}
+
+// Power function (exponentiation)
+// @param {Number} $base - Base number
+// @param {Number} $exponent - Exponent
+// @return {Number} - Result of base^exponent
+// @example scss
+//   $scale: pow(1.2, 3);               // 1.728
+@function pow($base, $exponent) {
+    $result: 1;
+    @if $exponent > 0 {
+        @for $i from 1 through $exponent {
+            $result: $result * $base;
+        }
+    } @else if $exponent < 0 {
+        @for $i from $exponent through -1 {
+            $result: math.div($result, $base);
+        }
+    }
+    @return $result;
+}
+
+// ============================================================================
+// FLUID TYPOGRAPHY FUNCTIONS
+// ============================================================================
+
+// Calculate fluid value between min and max based on viewport width
+// @param {Number} $min-size - Minimum size
+// @param {Number} $max-size - Maximum size
+// @param {Number} $min-width - Minimum viewport width (default: 320px)
+// @param {Number} $max-width - Maximum viewport width (default: 1920px)
+// @return {String} - CSS clamp() function
+// @example scss
+//   font-size: fluid-size(1rem, 2rem);
+@function fluid-size($min-size, $max-size, $min-width: 320px, $max-width: 1920px) {
+    $min-size-rem: strip-unit($min-size);
+    $max-size-rem: strip-unit($max-size);
+    $min-width-rem: strip-unit(px-to-rem($min-width));
+    $max-width-rem: strip-unit(px-to-rem($max-width));
+
+    $slope: math.div($max-size-rem - $min-size-rem, $max-width-rem - $min-width-rem);
+    $y-intersection: -1 * $min-width-rem * $slope + $min-size-rem;
+
+    @return clamp(#{$min-size}, #{$y-intersection}rem + #{$slope * 100}vw, #{$max-size});
+}
+
+// ============================================================================
+// COLOR FUNCTIONS
+// ============================================================================
+
+// Tint a color (mix with white)
+// @param {Color} $color - Base color
+// @param {Number} $percentage - Percentage of white to mix (0-100)
+// @return {Color} - Tinted color
+// @example scss
+//   background-color: tint(#3B82F6, 20%);  // Lighter blue
+@function tint($color, $percentage) {
+    @return color.mix(white, $color, $percentage);
+}
+
+// Shade a color (mix with black)
+// @param {Color} $color - Base color
+// @param {Number} $percentage - Percentage of black to mix (0-100)
+// @return {Color} - Shaded color
+// @example scss
+//   background-color: shade(#3B82F6, 20%);  // Darker blue
+@function shade($color, $percentage) {
+    @return color.mix(black, $color, $percentage);
+}
+
+// Tone a color (mix with gray)
+// @param {Color} $color - Base color
+// @param {Number} $percentage - Percentage of gray to mix (0-100)
+// @return {Color} - Toned color
+// @example scss
+//   background-color: tone(#3B82F6, 20%);  // Muted blue
+@function tone($color, $percentage) {
+    @return color.mix(gray, $color, $percentage);
+}
+
+// Get contrasting text color (black or white) for a background
+// @param {Color} $background - Background color
+// @param {Color} $dark - Dark text color (default: #000000)
+// @param {Color} $light - Light text color (default: #FFFFFF)
+// @return {Color} - Contrasting text color
+// @example scss
+//   color: contrasting-color(#3B82F6);     // white
+@function contrasting-color($background, $dark: #000000, $light: #FFFFFF) {
+    $luminance: color.lightness($background);
+    @if $luminance > 50% {
+        @return $dark;
+    } @else {
+        @return $light;
+    }
+}
+
+// ============================================================================
+// STRING FUNCTIONS
+// ============================================================================
+
+// Replace substring in a string
+// @param {String} $string - Original string
+// @param {String} $search - Substring to search for
+// @param {String} $replace - Replacement substring
+// @return {String} - Modified string
+// @example scss
+//   $url: str-replace("path/to/file.png", "/", "-");  // "path-to-file.png"
+@function str-replace($string, $search, $replace: "") {
+    $index: string.index($string, $search);
+    @if $index {
+        @return string.slice($string, 1, $index - 1) + $replace +
+            str-replace(
+                string.slice($string, $index + string.length($search)),
+                $search,
+                $replace
+            );
+    }
+    @return $string;
+}
+
+// ============================================================================
+// LIST FUNCTIONS
+// ============================================================================
+
+// Reverse a list
+// @param {List} $list - List to reverse
+// @return {List} - Reversed list
+// @example scss
+//   $reversed: reverse-list(1, 2, 3, 4);   // 4, 3, 2, 1
+@function reverse-list($list) {
+    $result: ();
+    @for $i from list.length($list) * -1 through -1 {
+        $result: list.append($result, list.nth($list, math.abs($i)), comma);
+    }
+    @return $result;
+}
+
+// Get first item from a list
+// @param {List} $list - Source list
+// @return {*} - First item
+// @example scss
+//   $first: first((a, b, c));              // a
+@function first($list) {
+    @return list.nth($list, 1);
+}
+
+// Get last item from a list
+// @param {List} $list - Source list
+// @return {*} - Last item
+// @example scss
+//   $last: last((a, b, c));                // c
+@function last($list) {
+    @return list.nth($list, list.length($list));
+}
+
+// ============================================================================
+// MAP FUNCTIONS
+// ============================================================================
+
+// Deep merge two maps
+// @param {Map} $map1 - First map
+// @param {Map} $map2 - Second map (overrides first)
+// @return {Map} - Merged map
+// @example scss
+//   $merged: map-deep-merge($default-config, $custom-config);
+@function map-deep-merge($map1, $map2) {
+    $result: $map1;
+    @each $key, $value in $map2 {
+        @if type-of($value) == "map" and type-of(map.get($map1, $key)) == "map" {
+            $result: map.set($result, $key, map-deep-merge(map.get($map1, $key), $value));
+        } @else {
+            $result: map.set($result, $key, $value);
+        }
+    }
+    @return $result;
+}
+
+// Check if a map has a nested key
+// @param {Map} $map - Map to search
+// @param {List} $keys - List of keys to check
+// @return {Boolean} - True if nested key exists
+// @example scss
+//   $exists: map-has-nested($config, (theme, colors, primary));
+@function map-has-nested($map, $keys) {
+    @each $key in $keys {
+        @if not map.has-key($map, $key) {
+            @return false;
+        }
+        $map: map.get($map, $key);
+    }
+    @return true;
+}
+
+// Get nested map value
+// @param {Map} $map - Source map
+// @param {List} $keys - List of nested keys
+// @return {*} - Nested value or null
+// @example scss
+//   $color: map-get-nested($config, (theme, colors, primary));
+@function map-get-nested($map, $keys) {
+    @each $key in $keys {
+        @if type-of($map) != "map" or not map.has-key($map, $key) {
+            @return null;
+        }
+        $map: map.get($map, $key);
+    }
+    @return $map;
+}
+
+// ============================================================================
+// VALIDATION FUNCTIONS
+// ============================================================================
+
+// Check if a value is a valid CSS length
+// @param {*} $value - Value to check
+// @return {Boolean} - True if valid length
+// @example scss
+//   @if is-length(10px) { ... }            // true
+@function is-length($value) {
+    @return type-of($value) == "number" and
+        list.index(
+            "px" "em" "rem" "%" "vw" "vh" "vmin" "vmax" "ch" "ex",
+            math.unit($value)
+        ) !=
+        null;
+}
+
+// Check if a value is a valid color
+// @param {*} $value - Value to check
+// @return {Boolean} - True if valid color
+// @example scss
+//   @if is-color(#3B82F6) { ... }          // true
+@function is-color($value) {
+    @return type-of($value) == "color";
+}
+
+// Check if a value is a number
+// @param {*} $value - Value to check
+// @return {Boolean} - True if number
+// @example scss
+//   @if is-number(42) { ... }              // true
+@function is-number($value) {
+    @return type-of($value) == "number";
+}

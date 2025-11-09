@@ -1,0 +1,46 @@
+// ============================================================================
+// BASE INDEX
+// ============================================================================
+// Central import file for all base layer styles. Base styles include resets,
+// typography, and global element-level styles that apply across the site.
+//
+// This layer outputs CSS that targets bare HTML elements (h1, p, a, etc.)
+// and sets foundational styles with low specificity.
+//
+// @layer: Base - Low-specificity element styles
+// @category: Index
+// ============================================================================
+
+// Import base styles in order of specificity
+@use "reset";      // 1. CSS reset - normalizes browser defaults
+@use "typography"; // 2. Typography - text and heading styles
+@use "global";     // 3. Global - root, body, and utility classes
+
+// ============================================================================
+// LAYER ORGANIZATION
+// ============================================================================
+//
+// The base layer follows this structure:
+//
+// 1. Reset (_reset.scss)
+//    - Modern CSS reset
+//    - Box-sizing, margins, padding normalization
+//    - Form and interactive element resets
+//    - Accessibility improvements
+//
+// 2. Typography (_typography.scss)
+//    - Font families and stacks
+//    - Heading styles (h1-h6)
+//    - Paragraph and text element styles
+//    - Code, lists, and inline text elements
+//    - Typography utility classes
+//
+// 3. Global (_global.scss)
+//    - Root element styles
+//    - Body styles
+//    - Selection and scrollbar customization
+//    - Focus styles and accessibility
+//    - Theme classes (.dark mode)
+//    - Global utility classes (.container, .section, etc.)
+//
+// ============================================================================

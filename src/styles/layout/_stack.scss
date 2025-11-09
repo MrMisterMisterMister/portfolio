@@ -1,0 +1,116 @@
+// ============================================================================
+// STACK COMPONENT - Vertical layout with consistent spacing
+// ============================================================================
+// Styles for the Stack.astro layout component. Uses flexbox column direction
+// with gap for clean vertical spacing without margin collapsing.
+//
+// @layer: Layout
+// @category: Stack
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// STACK BASE
+// ============================================================================
+
+.stack {
+    display: flex;
+    flex-direction: column;
+}
+
+// ============================================================================
+// GAP VARIANTS
+// ============================================================================
+
+.stack-gap-xs {
+    gap: spacing(xs);
+}
+
+.stack-gap-sm {
+    gap: spacing(sm);
+}
+
+.stack-gap-base {
+    gap: spacing(base);
+}
+
+.stack-gap-md {
+    gap: spacing(md);
+}
+
+.stack-gap-lg {
+    gap: spacing(lg);
+}
+
+.stack-gap-xl {
+    gap: spacing(xl);
+}
+
+.stack-gap-2xl {
+    gap: spacing(2xl);
+}
+
+.stack-gap-3xl {
+    gap: spacing(3xl);
+}
+
+.stack-gap-4xl {
+    gap: spacing(4xl);
+}
+
+.stack-gap-5xl {
+    gap: spacing(5xl);
+}
+
+.stack-gap-6xl {
+    gap: spacing(6xl);
+}
+
+// ============================================================================
+// ALIGN VARIANTS (HORIZONTAL ALIGNMENT)
+// ============================================================================
+
+.stack-align-start {
+    align-items: flex-start;
+}
+
+.stack-align-center {
+    align-items: center;
+}
+
+.stack-align-end {
+    align-items: flex-end;
+}
+
+.stack-align-stretch {
+    align-items: stretch;
+}
+
+// ============================================================================
+// JUSTIFY VARIANTS (VERTICAL ALIGNMENT/DISTRIBUTION)
+// ============================================================================
+
+.stack-justify-start {
+    justify-content: flex-start;
+}
+
+.stack-justify-center {
+    justify-content: center;
+}
+
+.stack-justify-end {
+    justify-content: flex-end;
+}
+
+.stack-justify-between {
+    justify-content: space-between;
+}
+
+.stack-justify-around {
+    justify-content: space-around;
+}
+
+.stack-justify-evenly {
+    justify-content: space-evenly;
+}

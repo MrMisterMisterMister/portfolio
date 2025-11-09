@@ -1,0 +1,383 @@
+// ============================================================================
+// DESIGN SYSTEM VARIABLES
+// ============================================================================
+// Centralized design tokens for consistent styling across the entire project.
+// These variables form the foundation of the design system and should be
+// used throughout the codebase for maintainability and scalability.
+//
+// @layer: Abstracts - Settings only, no CSS output
+// @category: Design Tokens
+// ============================================================================
+
+@use "sass:map";
+@use "sass:list";
+
+// ============================================================================
+// SPACING SCALE
+// ============================================================================
+// A consistent spacing scale based on a 4px base unit (0.25rem).
+// Use these values for margin, padding, and gap properties.
+//
+// @example scss - Usage
+//   .element {
+//     padding: spacing(md);
+//     margin-bottom: spacing(xl);
+//   }
+// ============================================================================
+
+$spacing: (
+    none: 0,           // 0px
+    xs: 0.25rem,       // 4px  - Tight spacing
+    sm: 0.5rem,        // 8px  - Small spacing
+    md: 0.75rem,       // 12px - Medium spacing
+    base: 1rem,        // 16px - Base unit
+    lg: 1.5rem,        // 24px - Large spacing
+    xl: 2rem,          // 32px - Extra large
+    2xl: 2.5rem,       // 40px - 2x extra large
+    3xl: 3rem,         // 48px - 3x extra large
+    4xl: 4rem,         // 64px - 4x extra large
+    5xl: 6rem,         // 96px - 5x extra large
+    6xl: 8rem,         // 128px - 6x extra large
+) !default;
+
+// ============================================================================
+// TYPOGRAPHY SCALE
+// ============================================================================
+// Font sizes, weights, and line heights for consistent typography.
+// Based on a modular scale for harmonious proportions.
+// ============================================================================
+
+// Font size scale - Use for consistent text sizing
+// @type Map
+$font-sizes: (
+    xs: 0.75rem,       // 12px - Fine print, captions
+    sm: 0.875rem,      // 14px - Small text, labels
+    base: 1rem,        // 16px - Body text (default)
+    lg: 1.125rem,      // 18px - Slightly larger body
+    xl: 1.25rem,       // 20px - Large text
+    2xl: 1.5rem,       // 24px - Subheadings
+    3xl: 1.875rem,     // 30px - Section headings
+    4xl: 2.25rem,      // 36px - Page headings
+    5xl: 3rem,         // 48px - Hero headings
+    6xl: 3.75rem,      // 60px - Display headings
+    7xl: 4.5rem,       // 72px - Extra large display
+) !default;
+
+// Font weight scale - Semantic naming for font weights
+// @type Map
+$font-weights: (
+    light: 300,        // Light text
+    normal: 400,       // Regular/normal text (default)
+    medium: 500,       // Medium emphasis
+    semibold: 600,     // Semi-bold headings
+    bold: 700,         // Bold headings/emphasis
+    extrabold: 800,    // Extra bold display text
+) !default;
+
+// Line height scale - For optimal readability
+// @type Map
+$line-heights: (
+    none: 1,           // No line height (1:1 ratio)
+    tight: 1.2,        // Tight leading (headings)
+    snug: 1.4,         // Snug leading (subheadings)
+    normal: 1.5,       // Normal leading (body text)
+    relaxed: 1.7,      // Relaxed leading (long-form)
+    loose: 1.8,        // Loose leading (accessibility)
+    heading: 1.25,     // Optimized for headings
+    body: 1.6,         // Optimized for body text
+) !default;
+
+// Letter spacing scale - For fine-tuning typography
+// @type Map
+$letter-spacings: (
+    tighter: -0.05em,  // Tighter tracking
+    tight: -0.025em,   // Tight tracking
+    normal: 0,         // Normal tracking
+    wide: 0.025em,     // Wide tracking
+    wider: 0.05em,     // Wider tracking
+    widest: 0.1em,     // Widest tracking
+) !default;
+
+// ============================================================================
+// BORDER & RADIUS
+// ============================================================================
+// Border widths and radius values for consistent shapes.
+// ============================================================================
+
+// Border width scale
+// @type Map
+$border-widths: (
+    none: 0,           // No border
+    thin: 1px,         // Thin border (default)
+    base: 2px,         // Base border
+    thick: 4px,        // Thick border
+    thicker: 8px,      // Extra thick border
+) !default;
+
+// Border radius scale - For consistent rounded corners
+// @type Map
+$radius: (
+    none: 0,           // Sharp corners
+    sm: 0.25rem,       // 4px  - Subtle rounding
+    base: 0.5rem,      // 8px  - Base rounding (default)
+    md: 0.75rem,       // 12px - Medium rounding
+    lg: 1rem,          // 16px - Large rounding
+    xl: 1.5rem,        // 24px - Extra large rounding
+    2xl: 2rem,         // 32px - 2x extra large
+    full: 9999px,      // Pill shape / circle
+) !default;
+
+// ============================================================================
+// TRANSITIONS & ANIMATIONS
+// ============================================================================
+// Timing and easing functions for smooth animations.
+// ============================================================================
+
+// Animation duration scale
+// @type Map
+$transitions: (
+    instant: 0s,       // No transition
+    super-fast: 0.05s, // 50ms  - Instant feedback
+    fast: 0.15s,       // 150ms - Quick transitions
+    base: 0.2s,        // 200ms - Standard transitions
+    moderate: 0.3s,    // 300ms - Moderate transitions
+    slow: 0.5s,        // 500ms - Slow transitions
+    slower: 0.7s,      // 700ms - Very slow transitions
+    slowest: 1s,       // 1000ms - Slowest transitions
+) !default;
+
+// Easing functions - For natural motion
+// @type Map
+$easings: (
+    linear: linear,
+    ease: ease,
+    ease-in: ease-in,
+    ease-out: ease-out,
+    ease-in-out: ease-in-out,
+    smooth: cubic-bezier(0.4, 0, 0.2, 1),      // Material Design standard
+    bouncy: cubic-bezier(0.68, -0.55, 0.265, 1.55), // Bouncy effect
+    swift: cubic-bezier(0.4, 0, 0.6, 1),       // Swift out
+    entrance: cubic-bezier(0, 0, 0.2, 1),      // Entrance animation
+    exit: cubic-bezier(0.4, 0, 1, 1),          // Exit animation
+) !default;
+
+// ============================================================================
+// BREAKPOINTS
+// ============================================================================
+// Responsive breakpoints for mobile-first design.
+// Matches common device sizes and modern best practices.
+// ============================================================================
+
+// Breakpoint scale - Mobile-first responsive design
+// @type Map
+$breakpoints: (
+    xs: 480px,         // Extra small devices (large phones)
+    sm: 640px,         // Small devices (tablets portrait)
+    md: 768px,         // Medium devices (tablets landscape)
+    lg: 1024px,        // Large devices (laptops)
+    xl: 1280px,        // Extra large devices (desktops)
+    2xl: 1536px,       // 2x extra large (large desktops)
+    3xl: 1920px,       // 3x extra large (ultra-wide)
+) !default;
+
+// ============================================================================
+// Z-INDEX LAYERS
+// ============================================================================
+// Centralized z-index management to prevent stacking conflicts.
+// Higher layers appear above lower layers.
+// ============================================================================
+
+// Z-index scale - Layering system
+// @type Map
+$z-index: (
+    base: 0,           // Base layer
+    dropdown: 1000,    // Dropdowns
+    sticky: 1020,      // Sticky elements
+    fixed: 1030,       // Fixed elements
+    overlay: 1040,     // Overlay backgrounds
+    modal-backdrop: 1050, // Modal backdrops
+    modal: 1060,       // Modal dialogs
+    popover: 1070,     // Popovers
+    tooltip: 1080,     // Tooltips
+    notification: 1090, // Notifications/toasts
+) !default;
+
+// ============================================================================
+// CONTAINER WIDTHS
+// ============================================================================
+// Maximum container widths for different breakpoints.
+// Ensures content doesn't stretch too wide on large screens.
+// ============================================================================
+
+// Container max-width scale
+// @type Map
+$container: (
+    sm: 640px,         // Small container
+    md: 768px,         // Medium container
+    lg: 1024px,        // Large container
+    xl: 1280px,        // Extra large container
+    2xl: 1400px,       // 2x extra large (max width)
+    full: 100%,        // Full width container
+) !default;
+
+// ============================================================================
+// SHADOWS
+// ============================================================================
+// Box shadow presets for depth and elevation.
+// Based on Material Design elevation system.
+// ============================================================================
+
+// Shadow scale - Elevation system with distributed shadows
+// @type Map
+$shadows: (
+    none: none,
+    sm: 0 0 3px 0 rgba(0, 0, 0, 0.06),                                 // Subtle all-around
+    base: 0 0 6px 0 rgba(0, 0, 0, 0.08) 0 2px 4px -1px rgba(0, 0, 0, 0.06), // Default distributed
+    md: 0 0 10px 0 rgba(0, 0, 0, 0.08) 0 4px 8px -2px rgba(0, 0, 0, 0.1),   // Medium lifted
+    lg: 0 0 20px 0 rgba(0, 0, 0, 0.08) 0 8px 16px -4px rgba(0, 0, 0, 0.12), // Large elevated
+    xl: 0 0 30px 0 rgba(0, 0, 0, 0.1) 0 12px 24px -6px rgba(0, 0, 0, 0.15),  // Extra large
+    2xl: 0 0 50px 0 rgba(0, 0, 0, 0.12) 0 20px 40px -10px rgba(0, 0, 0, 0.2), // 2x extra large
+    inner: inset 0 0 4px 0 rgba(0, 0, 0, 0.06),                        // Inner shadow
+    focus: 0 0 0 3px rgba(66, 153, 225, 0.5)                           // Focus ring
+) !default;
+
+// Dark mode shadows (adjusted for dark backgrounds)
+$shadows-dark: (
+    none: none,
+    sm: 0 0 3px 0 rgba(0, 0, 0, 0.4),
+    base: 0 0 6px 0 rgba(0, 0, 0, 0.5) 0 2px 4px -1px rgba(0, 0, 0, 0.4),
+    md: 0 0 10px 0 rgba(0, 0, 0, 0.5) 0 4px 8px -2px rgba(0, 0, 0, 0.5),
+    lg: 0 0 20px 0 rgba(0, 0, 0, 0.5) 0 8px 16px -4px rgba(0, 0, 0, 0.6),
+    xl: 0 0 30px 0 rgba(0, 0, 0, 0.6) 0 12px 24px -6px rgba(0, 0, 0, 0.7),
+    2xl: 0 0 50px 0 rgba(0, 0, 0, 0.7) 0 20px 40px -10px rgba(0, 0, 0, 0.8),
+    inner: inset 0 0 4px 0 rgba(0, 0, 0, 0.3),
+    focus: 0 0 0 3px rgba(66, 153, 225, 0.5)
+) !default;
+
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
+// Utility functions to retrieve values from the maps above.
+// These provide a clean API for accessing design tokens.
+// ============================================================================
+
+// Get spacing value
+// @param {String} $key - Spacing key (xs, sm, md, lg, etc.)
+// @return {Number} - Spacing value in rem
+// @example scss
+//   padding: spacing(md); // 0.75rem
+@function spacing($key) {
+    @return map.get($spacing, $key);
+}
+
+// Get font size value
+// @param {String} $key - Font size key (xs, sm, base, lg, etc.)
+// @return {Number} - Font size in rem
+// @example scss
+//   font-size: font-size(lg); // 1.125rem
+@function font-size($key) {
+    @return map.get($font-sizes, $key);
+}
+
+// Get font weight value
+// @param {String} $key - Font weight key (light, normal, bold, etc.)
+// @return {Number} - Font weight value
+// @example scss
+//   font-weight: font-weight(semibold); // 600
+@function font-weight($key) {
+    @return map.get($font-weights, $key);
+}
+
+// Get line height value
+// @param {String} $key - Line height key (tight, normal, relaxed, etc.)
+// @return {Number} - Line height value
+// @example scss
+//   line-height: line-height(relaxed); // 1.7
+@function line-height($key) {
+    @return map.get($line-heights, $key);
+}
+
+// Get letter spacing value
+// @param {String} $key - Letter spacing key
+// @return {Number} - Letter spacing in em
+// @example scss
+//   letter-spacing: letter-spacing(wide); // 0.025em
+@function letter-spacing($key) {
+    @return map.get($letter-spacings, $key);
+}
+
+// Get border width value
+// @param {String} $key - Border width key
+// @return {Number} - Border width
+// @example scss
+//   border-width: border-width(base); // 2px
+@function border-width($key) {
+    @return map.get($border-widths, $key);
+}
+
+// Get border radius value
+// @param {String} $key - Radius key (sm, base, lg, etc.)
+// @return {Number} - Border radius value
+// @example scss
+//   border-radius: radius(lg); // 1rem
+@function radius($key) {
+    @return map.get($radius, $key);
+}
+
+// Get transition duration
+// @param {String} $key - Transition key (fast, base, slow, etc.)
+// @return {Number} - Duration in seconds
+// @example scss
+//   transition-duration: transition(base); // 0.2s
+@function transition($key) {
+    @return map.get($transitions, $key);
+}
+
+// Get easing function
+// @param {String} $key - Easing key (smooth, bouncy, etc.)
+// @return {String} - Easing function
+// @example scss
+//   transition-timing-function: easing(smooth); // cubic-bezier(0.4, 0, 0.2, 1)
+@function easing($key) {
+    @return map.get($easings, $key);
+}
+
+// Get breakpoint value
+// @param {String} $key - Breakpoint key (sm, md, lg, etc.)
+// @return {Number} - Breakpoint value in px
+// @example scss
+//   @media (min-width: breakpoint(md)) { ... } // 768px
+@function breakpoint($key) {
+    @return map.get($breakpoints, $key);
+}
+
+// Get z-index value
+// @param {String} $key - Z-index key (dropdown, modal, tooltip, etc.)
+// @return {Number} - Z-index value
+// @example scss
+//   z-index: z(modal); // 1060
+@function z($key) {
+    @return map.get($z-index, $key);
+}
+
+// Get container max-width
+// @param {String} $key - Container key (sm, md, lg, xl, etc.)
+// @return {Number} - Container width in px
+// @example scss
+//   max-width: container(xl); // 1280px
+@function container($key) {
+    @return map.get($container, $key);
+}
+
+// Get shadow value
+// @param {String} $key - Shadow key (sm, base, lg, etc.)
+// @param {Boolean} $dark - Use dark mode shadow
+// @return {String} - Box shadow value
+// @example scss
+//   box-shadow: shadow(md); // Medium shadow
+@function shadow($key, $dark: false) {
+    @if $dark {
+        @return map.get($shadows-dark, $key);
+    }
+    @return map.get($shadows, $key);
+}

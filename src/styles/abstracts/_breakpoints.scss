@@ -1,0 +1,317 @@
+// ============================================================================
+// RESPONSIVE BREAKPOINTS
+// ============================================================================
+// Responsive breakpoint system for mobile-first design.
+// This file provides utilities and documentation for using breakpoints
+// consistently across the project.
+//
+// @layer: Abstracts - Settings only, no CSS output
+// @category: Responsive Design
+// ============================================================================
+
+@use "variables" as *;
+@use "mixins" as mx;
+
+// ============================================================================
+// BREAKPOINT REFERENCE
+// ============================================================================
+//
+// The following breakpoints are defined in _variables.scss:
+//
+// xs:   480px  - Extra small devices (large phones, landscape)
+// sm:   640px  - Small devices (tablets portrait)
+// md:   768px  - Medium devices (tablets landscape, small laptops)
+// lg:   1024px - Large devices (laptops, desktops)
+// xl:   1280px - Extra large devices (desktops, monitors)
+// 2xl:  1536px - 2x extra large (large desktops, ultra-wide)
+// 3xl:  1920px - 3x extra large (4K displays)
+//
+// ============================================================================
+
+// ============================================================================
+// USAGE EXAMPLES
+// ============================================================================
+//
+// Use the bp() mixin for min-width media queries (mobile-first):
+//
+// .element {
+//   font-size: 1rem;        // Base (mobile) size
+//
+//   @include mx.bp(md) {
+//     font-size: 1.5rem;    // Tablet and up
+//   }
+//
+//   @include mx.bp(xl) {
+//     font-size: 2rem;      // Desktop and up
+//   }
+// }
+//
+// Use bp-down() for max-width media queries:
+//
+// .mobile-only {
+//   display: block;
+//
+//   @include mx.bp-down(md) {
+//     display: none;        // Hide on tablet and up
+//   }
+// }
+//
+// Use bp-between() for range queries:
+//
+// .tablet-only {
+//   @include mx.bp-between(sm, lg) {
+//     display: flex;        // Only show between sm and lg
+//   }
+// }
+//
+// ============================================================================
+
+// ============================================================================
+// COMMON DEVICE CATEGORIES
+// ============================================================================
+// These are semantic groupings of breakpoints for easier reference
+// ============================================================================
+
+// Mobile devices (below tablet)
+// @example scss
+//   @include mx.bp-down(md) {
+//     // Mobile styles
+//   }
+$mobile-max: breakpoint(md);
+
+// Tablet devices (between mobile and desktop)
+// @example scss
+//   @include mx.bp-between(md, lg) {
+//     // Tablet styles
+//   }
+$tablet-min: breakpoint(md);
+$tablet-max: breakpoint(lg);
+
+// Desktop devices (laptop and above)
+// @example scss
+//   @include mx.bp(lg) {
+//     // Desktop styles
+//   }
+$desktop-min: breakpoint(lg);
+
+// Large desktop devices (monitors and ultra-wide)
+// @example scss
+//   @include mx.bp(xl) {
+//     // Large desktop styles
+//   }
+$large-desktop-min: breakpoint(xl);
+
+// ============================================================================
+// RESPONSIVE VISIBILITY UTILITIES
+// ============================================================================
+// Note: These generate CSS output and should be used sparingly.
+// Consider using the mixins directly in your components instead.
+// ============================================================================
+
+// Uncomment if you want to generate visibility utility classes
+//
+// .hide-mobile {
+//     @include mx.bp-down(md) {
+//         display: none !important;
+//     }
+// }
+//
+// .hide-tablet {
+//     @include mx.bp-between(md, lg) {
+//         display: none !important;
+//     }
+// }
+//
+// .hide-desktop {
+//     @include mx.bp(lg) {
+//         display: none !important;
+//     }
+// }
+//
+// .show-mobile {
+//     display: none !important;
+//
+//     @include mx.bp-down(md) {
+//         display: block !important;
+//     }
+// }
+//
+// .show-tablet {
+//     display: none !important;
+//
+//     @include mx.bp-between(md, lg) {
+//         display: block !important;
+//     }
+// }
+//
+// .show-desktop {
+//     display: none !important;
+//
+//     @include mx.bp(lg) {
+//         display: block !important;
+//     }
+// }
+
+// ============================================================================
+// CONTAINER BREAKPOINT SETTINGS
+// ============================================================================
+// Container max-widths at different breakpoints (defined in _variables.scss)
+// These are used by the container() mixin
+// ============================================================================
+
+// sm:   640px
+// md:   768px
+// lg:   1024px
+// xl:   1280px
+// 2xl:  1400px
+// full: 100%
+
+// ============================================================================
+// PRINT MEDIA QUERY
+// ============================================================================
+
+// Print media query mixin
+// @content - Styles for print media
+// @example scss
+//   @include print {
+//     color: black;
+//     background: white;
+//   }
+@mixin print {
+    @media print {
+        @content;
+    }
+}
+
+// ============================================================================
+// PREFERS-REDUCED-MOTION
+// ============================================================================
+
+// Reduced motion media query for accessibility
+// @content - Styles when user prefers reduced motion
+// @example scss
+//   @include reduced-motion {
+//     animation: none;
+//   }
+@mixin reduced-motion {
+    @media (prefers-reduced-motion: reduce) {
+        @content;
+    }
+}
+
+// Motion allowed (inverse of reduced-motion)
+// @content - Styles when animations are allowed
+// @example scss
+//   @include motion-allowed {
+//     animation: fadeIn 0.3s ease;
+//   }
+@mixin motion-allowed {
+    @media (prefers-reduced-motion: no-preference) {
+        @content;
+    }
+}
+
+// ============================================================================
+// COLOR SCHEME PREFERENCES
+// ============================================================================
+
+// Dark mode preference media query
+// @content - Styles for dark mode preference
+// @example scss
+//   @include prefers-dark {
+//     background: #000;
+//   }
+@mixin prefers-dark {
+    @media (prefers-color-scheme: dark) {
+        @content;
+    }
+}
+
+// Light mode preference media query
+// @content - Styles for light mode preference
+// @example scss
+//   @include prefers-light {
+//     background: #fff;
+//   }
+@mixin prefers-light {
+    @media (prefers-color-scheme: light) {
+        @content;
+    }
+}
+
+// ============================================================================
+// HOVER CAPABILITY
+// ============================================================================
+
+// Hover capability media query (fine pointer devices)
+// @content - Styles for devices with hover capability
+// @example scss
+//   @include hover-capable {
+//     &:hover {
+//       background: blue;
+//     }
+//   }
+@mixin hover-capable {
+    @media (hover: hover) and (pointer: fine) {
+        @content;
+    }
+}
+
+// Touch device media query (coarse pointer)
+// @content - Styles for touch devices
+// @example scss
+//   @include touch {
+//     padding: 1rem;  // Larger touch targets
+//   }
+@mixin touch {
+    @media (hover: none) and (pointer: coarse) {
+        @content;
+    }
+}
+
+// ============================================================================
+// ORIENTATION
+// ============================================================================
+
+// Portrait orientation media query
+// @content - Styles for portrait orientation
+// @example scss
+//   @include portrait {
+//     flex-direction: column;
+//   }
+@mixin portrait {
+    @media (orientation: portrait) {
+        @content;
+    }
+}
+
+// Landscape orientation media query
+// @content - Styles for landscape orientation
+// @example scss
+//   @include landscape {
+//     flex-direction: row;
+//   }
+@mixin landscape {
+    @media (orientation: landscape) {
+        @content;
+    }
+}
+
+// ============================================================================
+// HIGH RESOLUTION DISPLAYS
+// ============================================================================
+
+// Retina/high-DPI display media query
+// @param {Number} $ratio - Minimum pixel ratio (default: 2)
+// @content - Styles for high-resolution displays
+// @example scss
+//   @include retina {
+//     background-image: url('image@2x.png');
+//   }
+@mixin retina($ratio: 2) {
+    @media (-webkit-min-device-pixel-ratio: $ratio),
+        (min-resolution: #{$ratio}dppx),
+        (min-resolution: #{$ratio * 96}dpi) {
+        @content;
+    }
+}

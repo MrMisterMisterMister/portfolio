@@ -1,0 +1,55 @@
+---
+/**
+ * Section Component
+ *
+ * A semantic section wrapper with consistent padding and optional styling.
+ * Combines <section> element with Container and Stack for page sections.
+ *
+ * @component
+ * @example
+ * ```astro
+ * <Section id="about">
+ *   <h2>About Section</h2>
+ *   <p>Content goes here</p>
+ * </Section>
+ * ```
+ *
+ * @example
+ * ```astro
+ * <Section id="projects" variant="accent" spacing="xl">
+ *   <h2>Featured Projects</h2>
+ * </Section>
+ * ```
+ */
+
+interface Props {
+    /** Section ID for navigation anchors */
+    id?: string;
+    /** Vertical padding size */
+    spacing?: "sm" | "base" | "lg" | "xl" | "2xl";
+    /** Visual variant */
+    variant?: "default" | "accent" | "muted";
+    /** Container max-width */
+    containerSize?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
+    /** Additional CSS classes */
+    class?: string;
+}
+
+const {
+    id,
+    spacing = "xl",
+    variant = "default",
+    containerSize = "2xl",
+    class: className,
+} = Astro.props;
+
+const spacingClass = `section-spacing-${spacing}`;
+const variantClass = `section-variant-${variant}`;
+const containerClass = `container-${containerSize}`;
+---
+
+<section id={id} class:list={["section", spacingClass, variantClass, className]}>
+    <div class:list={["section-container", containerClass]}>
+        <slot />
+    </div>
+</section>

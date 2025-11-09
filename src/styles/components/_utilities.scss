@@ -1,0 +1,132 @@
+// ============================================================================
+// UTILITIES - Animations, Scrollbar, etc.
+// ============================================================================
+// Utility styles, animations, and decorative effects.
+// Migrated from Tailwind to custom SCSS.
+//
+// @layer: Utilities
+// @category: Utilities
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// DECORATIVE ANIMATIONS
+// ============================================================================
+
+@keyframes gradientShift {
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(5%, 5%) rotate(1deg);
+    }
+    50% {
+        transform: translate(-5%, 5%) rotate(-1deg);
+    }
+    75% {
+        transform: translate(-5%, -5%) rotate(0.5deg);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: opacity(strong);
+    }
+    50% {
+        transform: translateY(-100px) translateX(50px);
+        opacity: opacity(full);
+    }
+    90% {
+        opacity: opacity(strong);
+    }
+}
+
+// ============================================================================
+// CUSTOM SCROLLBARS
+// ============================================================================
+
+// Custom minimalistic scrollbar - invisible until hover
+.scrollbar-thin {
+    // Firefox
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+
+    &:hover {
+        scrollbar-color: alpha-color(muted-foreground, opacity(light)) transparent;
+    }
+
+    // Webkit browsers (Chrome, Safari, Edge)
+    &::-webkit-scrollbar {
+        width: spacing(sm);
+        height: spacing(sm);
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-radius: radius(lg);
+        @include transition(background, base, smooth);
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+        background: alpha-color(muted-foreground, opacity(subtle));
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: alpha-color(muted-foreground, opacity(moderate));
+    }
+}
+
+// Alternative: Always visible but minimal
+.scrollbar-minimal {
+    // Firefox
+    scrollbar-width: thin;
+    scrollbar-color: alpha-color(muted-foreground, opacity(subtle)) transparent;
+
+    // Webkit browsers
+    &::-webkit-scrollbar {
+        width: spacing(xs);
+        height: spacing(xs);
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: alpha-color(muted-foreground, opacity(subtle));
+        border-radius: radius(lg);
+        @include transition(background, base, smooth);
+
+        &:hover {
+            background: alpha-color(muted-foreground, opacity(moderate));
+        }
+    }
+}
+
+// ============================================================================
+// GLASS MORPHISM EFFECT
+// ============================================================================
+
+.glass {
+    background: alpha-color(card, opacity(light));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: border-width(thin) solid alpha-color(border, opacity(light));
+    @include transition(all, base, smooth);
+
+    &:hover {
+        background: alpha-color(card, opacity(moderate));
+        border-color: alpha-color(border, opacity(moderate));
+    }
+}

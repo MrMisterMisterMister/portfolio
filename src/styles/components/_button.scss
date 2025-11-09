@@ -1,0 +1,118 @@
+// ============================================================================
+// BUTTON COMPONENT - Button variants and states
+// ============================================================================
+// Styles for button UI component with multiple variants.
+//
+// @layer: Components
+// @category: Button
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// BUTTON
+// ============================================================================
+
+.btn {
+    @include button-base();
+    border-radius: radius(lg);
+    font-size: font-size(base);
+    font-weight: font-weight(medium);
+    position: relative;
+    padding: spacing(base) spacing(xl);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    &-primary {
+        background: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+        box-shadow: 0 1px 3px 0 hsl(var(--primary) / 0.3);
+
+        &:hover {
+            background: hsl(var(--primary-hover));
+            box-shadow: 0 4px 6px -1px hsl(var(--primary) / 0.4),
+                        0 2px 4px -2px hsl(var(--primary) / 0.4);
+            color: hsl(var(--accent-hover));
+        }
+
+        &:active {
+            background: hsl(var(--primary-active));
+        }
+    }
+
+    &-secondary {
+        background: hsl(var(--secondary));
+        color: hsl(var(--secondary-foreground));
+        box-shadow: 0 1px 2px 0 hsl(var(--foreground) / 0.05);
+
+        &:hover {
+            background: hsl(var(--secondary-hover));
+            box-shadow: 0 2px 4px 0 hsl(var(--foreground) / 0.08);
+        }
+
+        &:active {
+            background: hsl(var(--secondary-active));
+        }
+    }
+
+    &-outline {
+        // Subtle shadow instead of border
+        background: transparent;
+        color: hsl(var(--foreground));
+        box-shadow: inset 0 0 0 1px hsl(var(--border)),
+                    0 1px 2px 0 hsl(var(--foreground) / 0.05);
+
+        &:hover {
+            background: hsl(var(--accent-hover));
+            color: hsl(var(--accent-foreground));
+            box-shadow: inset 0 0 0 1px hsl(var(--primary) / 0.5),
+                        0 2px 4px 0 hsl(var(--foreground) / 0.08);
+        }
+
+        &:active {
+            background: hsl(var(--accent-active));
+        }
+    }
+
+    &-ghost {
+        background: transparent;
+        color: hsl(var(--foreground));
+
+        &:hover {
+            background: hsl(var(--accent-hover));
+            color: hsl(var(--accent-foreground));
+        }
+
+        &:active {
+            background: hsl(var(--accent-active));
+        }
+    }
+
+    &-destructive {
+        background: hsl(var(--destructive));
+        color: hsl(var(--destructive-foreground));
+        box-shadow: 0 1px 3px 0 hsl(var(--destructive) / 0.3);
+
+        &:hover {
+            background: hsl(var(--destructive-hover));
+            box-shadow: 0 4px 6px -1px hsl(var(--destructive) / 0.4),
+                        0 2px 4px -2px hsl(var(--destructive) / 0.4);
+        }
+
+        &:active {
+            background: hsl(var(--destructive-active));
+        }
+    }
+
+    svg {
+        width: spacing(lg);
+        height: spacing(lg);
+    }
+}

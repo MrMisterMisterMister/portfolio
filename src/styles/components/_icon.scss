@@ -1,0 +1,45 @@
+// ============================================================================
+// ICON UTILITIES - Icon size and color utilities
+// ============================================================================
+// Utility classes for icons used throughout the application.
+//
+// @layer: Components
+// @category: Icon
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// ICON UTILITIES
+// ============================================================================
+
+.icon-lg {
+    width: spacing(2xl);
+    height: spacing(2xl);
+}
+
+.icon-md {
+    width: spacing(xl);
+    height: spacing(xl);
+}
+
+.icon-sm {
+    width: spacing(base);
+    height: spacing(base);
+}
+
+.icon-primary {
+    color: hsl(var(--primary));
+}
+
+.icon-secondary {
+    color: hsl(var(--secondary));
+}
+
+.icon-muted {
+    color: hsl(var(--muted-foreground));
+}
+
+.icon-accent {
+    color: hsl(var(--accent-foreground));
+}

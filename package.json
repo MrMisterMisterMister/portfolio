@@ -1,0 +1,39 @@
+{
+    "name": "portfolio",
+    "packageManager": "bun@1.0.0",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "astro dev",
+        "start": "astro dev",
+        "build": "astro check && astro build",
+        "preview": "astro preview",
+        "astro": "astro",
+        "lint": "eslint .",
+        "format": "prettier --write \"**/*.{js,jsx,ts,tsx,astro,json,css,scss,md}\""
+    },
+    "dependencies": {
+        "@astrojs/check": "^0.9.4",
+        "@astrojs/react": "^4.4.1",
+        "astro": "^5.14.6",
+        "clsx": "2.1.1",
+        "framer-motion": "^12.23.24",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0"
+    },
+    "devDependencies": {
+        "@astrojs/sitemap": "^3.6.0",
+        "@eslint/js": "9.11.1",
+        "@types/node": "22.7.3",
+        "eslint": "^9.38.0",
+        "globals": "15.9.0",
+        "lightningcss": "^1.30.2",
+        "postcss": "8.4.47",
+        "prettier": "^3.0.0",
+        "prettier-plugin-astro": "^0.12.0",
+        "sass": "^1.93.2",
+        "typescript": "5.5.3",
+        "typescript-eslint": "8.7.0"
+    }
+}

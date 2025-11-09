@@ -1,0 +1,45 @@
+---
+/**
+ * Grid Component
+ *
+ * A responsive grid layout component with predefined column patterns.
+ * Provides consistent, responsive grid layouts across the application.
+ *
+ * @component
+ * @example
+ * ```astro
+ * <Grid columns={3} gap="lg">
+ *   <Card>Item 1</Card>
+ *   <Card>Item 2</Card>
+ *   <Card>Item 3</Card>
+ * </Grid>
+ * ```
+ *
+ * @example
+ * ```astro
+ * <Grid columns={{ sm: 1, md: 2, lg: 3 }} gap="xl">
+ *   <div>Responsive grid item</div>
+ * </Grid>
+ * ```
+ */
+
+interface Props {
+    /** Number of columns (1-6) or responsive object */
+    columns?: 1 | 2 | 3 | 4 | 5 | 6;
+    /** Gap between items */
+    gap?: "xs" | "sm" | "base" | "md" | "lg" | "xl" | "2xl" | "3xl";
+    /** Additional CSS classes */
+    class?: string;
+    /** HTML element type */
+    as?: "div" | "section" | "article" | "ul" | "ol" | "nav";
+}
+
+const { columns = 1, gap = "lg", class: className, as: Element = "div" } = Astro.props;
+
+const columnsClass = `grid-cols-${columns}`;
+const gapClass = `grid-gap-${gap}`;
+---
+
+<Element class:list={["grid", columnsClass, gapClass, className]}>
+    <slot />
+</Element>

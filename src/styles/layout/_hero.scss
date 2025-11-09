@@ -1,0 +1,167 @@
+// ============================================================================
+// HERO SECTION - Full-screen hero with animated background
+// ============================================================================
+// Styles for the hero section with gradient background, particles, and grid.
+// Used by Hero.astro component.
+//
+// @layer: Layout
+// @category: Hero
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// HERO SECTION
+// ============================================================================
+
+.section-hero {
+    padding: spacing(3xl) spacing(base);
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+
+    @include bp(md) {
+        padding: spacing(5xl) spacing(2xl);
+    }
+
+    @include bp(lg) {
+        padding: spacing(6xl) spacing(3xl);
+    }
+
+    // Animated gradient background
+    &::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+                circle at 30% 50%,
+                alpha-color(primary, opacity(light)) 0%,
+                transparent 50%
+            ),
+            radial-gradient(
+                circle at 70% 50%,
+                alpha-color(primary, opacity(subtle)) 0%,
+                transparent 50%
+            );
+        animation: gradientShift 20s ease-in-out infinite;
+        z-index: -2;
+    }
+
+    // Grid pattern overlay
+    &::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(
+                alpha-color(border, opacity(moderate)) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                90deg,
+                alpha-color(border, opacity(moderate)) 1px,
+                transparent 1px
+            );
+        background-size: 50px 50px;
+        background-position: -1px -1px;
+        mask-image: radial-gradient(
+            ellipse 100% 70% at 50% 40%,
+            black 30%,
+            transparent 100%
+        );
+        z-index: -1;
+        opacity: opacity(moderate);
+
+        @include bp(md) {
+            background-size: 80px 80px;
+            opacity: opacity(moderate);
+        }
+    }
+
+    // Floating particles
+    .hero-particles {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: alpha-color(primary, opacity(moderate));
+        border-radius: radius(full);
+        opacity: 0;
+        animation: float 15s infinite ease-in-out;
+
+        @include bp(md) {
+            width: 6px;
+            height: 6px;
+        }
+    }
+
+    .particle-1 {
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 20s;
+    }
+
+    .particle-2 {
+        top: 60%;
+        left: 80%;
+        animation-delay: 4s;
+        animation-duration: 18s;
+    }
+
+    .particle-3 {
+        top: 30%;
+        left: 70%;
+        animation-delay: 2s;
+        animation-duration: 22s;
+    }
+
+    .particle-4 {
+        top: 70%;
+        left: 20%;
+        animation-delay: 6s;
+        animation-duration: 16s;
+    }
+
+    .particle-5 {
+        top: 40%;
+        left: 90%;
+        animation-delay: 8s;
+        animation-duration: 24s;
+    }
+
+    .particle-6 {
+        top: 80%;
+        left: 50%;
+        animation-delay: 10s;
+        animation-duration: 19s;
+    }
+}
+
+// ============================================================================
+// HERO CONTENT
+// ============================================================================
+
+.text-center {
+    text-align: center;
+}
+
+.hero-social-nav {
+    display: flex;
+    align-items: flex-start;
+    gap: spacing(base);
+}
+

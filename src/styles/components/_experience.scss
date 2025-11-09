@@ -1,0 +1,101 @@
+// ============================================================================
+// EXPERIENCE - Experience and education section styles
+// ============================================================================
+// Styles for the experience, education, and certifications section.
+//
+// @layer: Components
+// @category: Experience
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// SECTION TITLE WITH ICON
+// ============================================================================
+
+.section-title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: spacing(sm);
+}
+
+// ============================================================================
+// EXPERIENCE CARD
+// ============================================================================
+
+.experience-header {
+    display: flex;
+    flex-direction: column;
+    gap: spacing(sm);
+
+    @include bp(md) {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+}
+
+.experience-company {
+    margin-top: spacing(xs);
+}
+
+.experience-meta {
+    font-size: font-size(sm);
+    color: hsl(var(--muted-foreground));
+
+    @include bp(md) {
+        text-align: right;
+    }
+}
+
+.experience-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: spacing(sm);
+}
+
+.experience-list-item {
+    font-size: font-size(sm);
+    color: hsl(var(--muted-foreground));
+    display: flex;
+    gap: spacing(sm);
+    align-items: center;
+}
+
+// .experience-bullet {
+//     // margin-top: spacing(xs);
+// }
+
+// ============================================================================
+// EXPERIENCE CONNECTOR
+// ============================================================================
+
+.experience-connector {
+    display: flex;
+    justify-content: center;
+    margin: spacing(base) 0;
+}
+
+.connector-line {
+    width: 1px;
+    height: spacing(xl);
+    background-color: hsl(var(--border));
+}
+
+// ============================================================================
+// CERTIFICATION LINK
+// ============================================================================
+
+.cert-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+.cert-icon {
+    margin-right: spacing(xs);
+    height: spacing(base);
+    width: spacing(base);
+}

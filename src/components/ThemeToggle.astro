@@ -1,0 +1,153 @@
+---
+/**
+ * ThemeToggle Component
+ *
+ * A performant, accessible theme switcher that prevents FOUC and persists
+ * user preference across sessions.
+ *
+ * Features:
+ * - No flash of unstyled content (FOUC)
+ * - Persists to localStorage
+ * - Respects prefers-color-scheme
+ * - Smooth icon transitions
+ * - Full keyboard accessibility
+ */
+---
+
+<button
+    id="theme-toggle"
+    type="button"
+    class="theme-toggle"
+    aria-label="Toggle between light and dark mode"
+    aria-live="polite"
+>
+    <svg
+        class="theme-toggle-icon theme-toggle-icon-sun"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+    >
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2"></path>
+        <path d="M12 20v2"></path>
+        <path d="m4.93 4.93 1.41 1.41"></path>
+        <path d="m17.66 17.66 1.41 1.41"></path>
+        <path d="M2 12h2"></path>
+        <path d="M20 12h2"></path>
+        <path d="m6.34 17.66-1.41 1.41"></path>
+        <path d="m19.07 4.93-1.41 1.41"></path>
+    </svg>
+    <svg
+        class="theme-toggle-icon theme-toggle-icon-moon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+    >
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+    </svg>
+    <span class="sr-only" id="theme-toggle-label">Toggle theme</span>
+</button>
+
+<script>
+    // ============================================================================
+    // THEME TOGGLE
+    // ============================================================================
+    // Theme initialization happens in Layout.astro <head> to prevent FOUC.
+    // This script only handles toggle functionality and label updates.
+    // ============================================================================
+
+    type Theme = "light" | "dark";
+
+    /**
+     * Apply theme to document and persist to localStorage
+     */
+    function setTheme(theme: Theme): void {
+        const root = document.documentElement;
+
+        if (theme === "dark") {
+            root.classList.add("dark");
+        } else {
+            root.classList.remove("dark");
+        }
+
+        localStorage.setItem("theme", theme);
+
+        // Update ARIA label for screen readers
+        const label = document.getElementById("theme-toggle-label");
+        if (label) {
+            label.textContent = theme === "dark"
+                ? "Switch to light mode"
+                : "Switch to dark mode";
+        }
+    }
+
+    /**
+     * Toggle between light and dark themes
+     */
+    function toggleTheme(): void {
+        const currentTheme = document.documentElement.classList.contains("dark")
+            ? "dark"
+            : "light";
+        const newTheme: Theme = currentTheme === "dark" ? "light" : "dark";
+        setTheme(newTheme);
+    }
+
+    /**
+     * Update label based on current theme
+     */
+    function updateLabel(): void {
+        const isDark = document.documentElement.classList.contains("dark");
+        const label = document.getElementById("theme-toggle-label");
+        if (label) {
+            label.textContent = isDark
+                ? "Switch to light mode"
+                : "Switch to dark mode";
+        }
+    }
+
+    // ============================================================================
+    // INITIALIZATION
+    // ============================================================================
+
+    /**
+     * Initialize theme toggle
+     * Handles both cases: DOM already loaded or still loading
+     */
+    function initializeThemeToggle(): void {
+        // Set initial label
+        updateLabel();
+
+        // Add toggle functionality
+        const toggleButton = document.getElementById("theme-toggle");
+        if (toggleButton) {
+            toggleButton.addEventListener("click", toggleTheme);
+        }
+
+        // Listen for system theme changes
+        const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        darkModeQuery.addEventListener("change", (e) => {
+            // Only update if user hasn't manually set a preference
+            if (!localStorage.getItem("theme")) {
+                setTheme(e.matches ? "dark" : "light");
+            }
+        });
+    }
+
+    // Execute immediately if DOM is already loaded, otherwise wait for DOMContentLoaded
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializeThemeToggle);
+    } else {
+        // DOM already loaded, execute immediately
+        initializeThemeToggle();
+    }
+</script>

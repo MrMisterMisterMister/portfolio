@@ -1,0 +1,88 @@
+---
+import Container from "@/components/layout/Container.astro";
+import Stack from "@/components/layout/Stack.astro";
+import Icon from "@/components/ui/Icon.astro";
+import FadeIn from "@/components/animations/FadeIn";
+import { personalInfo, socialLinks } from "@/lib/personalData";
+---
+
+<section class="section-hero">
+    <!-- Floating decorative elements -->
+    <div class="hero-particles" aria-hidden="true">
+        <span class="particle particle-1"></span>
+        <span class="particle particle-2"></span>
+        <span class="particle particle-3"></span>
+        <span class="particle particle-4"></span>
+        <span class="particle particle-5"></span>
+        <span class="particle particle-6"></span>
+    </div>
+
+    <Container size="lg" as="article" class="text-center">
+        <Stack gap="lg" align="center">
+            <FadeIn client:load delay={0.2} duration={0.6}>
+                <div class="terminal-window">
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$</span>
+                            <span class="terminal-command">whoami</span>
+                        </div>
+                        <div class="terminal-output">
+                            Hi, I'm <span class="text-primary">{personalInfo.firstName}</span>
+                        </div>
+                    </div>
+                </div>
+            </FadeIn>
+
+            <FadeIn client:load delay={0.4} duration={0.6}>
+                <nav aria-label="Social media links" class="hero-social-nav">
+                    {socialLinks.github && (
+                        <a
+                            href={socialLinks.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="hero-social-link hero-github"
+                            aria-label="Visit my GitHub profile"
+                        >
+                            <Icon name="github" size={24} />
+                            <span class="sr-only">GitHub</span>
+                        </a>
+                    )}
+                    {socialLinks.linkedin && (
+                        <a
+                            href={socialLinks.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="hero-social-link hero-linkedin"
+                            aria-label="Visit my LinkedIn profile"
+                        >
+                            <Icon name="linkedin" size={24} />
+                            <span class="sr-only">LinkedIn</span>
+                        </a>
+                    )}
+                    {socialLinks.discord && (
+                        <a
+                            href={socialLinks.discord}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="hero-social-link hero-discord"
+                            aria-label="Message me on Discord"
+                        >
+                            <Icon name="discord" size={24} />
+                            <span class="sr-only">Discord</span>
+                        </a>
+                    )}
+                    {personalInfo.contactEmail && (
+                        <a
+                            href={`mailto:${personalInfo.contactEmail}`}
+                            class="hero-social-link hero-email"
+                            aria-label={`Send email to ${personalInfo.contactEmail}`}
+                        >
+                            <Icon name="mail" size={24} />
+                            <span class="sr-only">Email</span>
+                        </a>
+                    )}
+                </nav>
+            </FadeIn>
+        </Stack>
+    </Container>
+</section>

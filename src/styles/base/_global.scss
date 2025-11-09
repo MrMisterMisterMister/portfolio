@@ -1,0 +1,447 @@
+// ============================================================================
+// GLOBAL STYLES
+// ============================================================================
+// Global, root-level styles that apply across the entire application.
+// Includes theme setup, scrollbar customization, and accessibility features.
+//
+// @layer: Base - Global element styles
+// @category: Global
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// ROOT ELEMENT
+// ============================================================================
+// Note: Theme colors are defined in abstracts/_colors.scss and automatically
+// included in the compiled CSS. No need to duplicate them here.
+// ============================================================================
+
+html {
+    // Enable smooth scrolling for users who don't prefer reduced motion
+    @include motion-allowed {
+        scroll-behavior: smooth;
+    }
+
+    // Hide scrollbar while maintaining scroll functionality
+    overflow-y: scroll;
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE and Edge
+
+    &::-webkit-scrollbar {
+        display: none; // Chrome, Safari, Opera
+    }
+
+    // Set base font size for rem calculations
+    font-size: 100%; // 16px
+
+    // Improve text rendering on all platforms
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// ============================================================================
+// BODY
+// ============================================================================
+
+body {
+    // Prevent horizontal scrolling
+    overflow-x: hidden;
+
+    // Minimum height to fill viewport
+    min-height: 100vh;
+
+    // Base typography
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+        sans-serif;
+    font-size: font-size(base);
+    font-weight: font-weight(normal);
+    line-height: line-height(body);
+
+    // Theme colors
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--background));
+
+    // Matrix-like animated background with moving lights
+    position: relative;
+    
+    // Moving grid pattern
+    &::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        pointer-events: none;
+        background: 
+            linear-gradient(90deg, hsl(var(--primary) / 0.05) 1px, transparent 1px),
+            linear-gradient(180deg, hsl(var(--primary) / 0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+        animation: matrixGrid 30s linear infinite;
+    }
+
+    // Animated light orbs
+    &::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+        background: 
+            radial-gradient(circle at 20% 30%, hsl(var(--primary) / 0.15) 0%, transparent 30%),
+            radial-gradient(circle at 80% 70%, hsl(var(--accent) / 0.12) 0%, transparent 35%),
+            radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.08) 0%, transparent 40%),
+            radial-gradient(circle at 10% 80%, hsl(var(--accent) / 0.1) 0%, transparent 25%),
+            radial-gradient(circle at 90% 20%, hsl(var(--primary) / 0.1) 0%, transparent 30%);
+        animation: matrixLights 25s ease-in-out infinite;
+    }
+
+    // Smooth transitions for theme changes
+    @include transition((color, background-color), moderate, smooth);
+}
+
+// Matrix grid animation - continuous scrolling
+@keyframes matrixGrid {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(40px);
+        opacity: 1;
+    }
+}
+
+// Matrix lights animation - complex movement
+@keyframes matrixLights {
+    0% {
+        opacity: 0.8;
+        transform: scale(1) rotate(0deg);
+        filter: blur(40px);
+    }
+    25% {
+        opacity: 1;
+        transform: scale(1.15) rotate(90deg) translate(-5%, 5%);
+        filter: blur(50px);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.05) rotate(180deg) translate(5%, -5%);
+        filter: blur(45px);
+    }
+    75% {
+        opacity: 1;
+        transform: scale(1.2) rotate(270deg) translate(-3%, -3%);
+        filter: blur(55px);
+    }
+    100% {
+        opacity: 0.8;
+        transform: scale(1) rotate(360deg);
+        filter: blur(40px);
+    }
+}
+
+// ============================================================================
+// GLOBAL LINK STYLES
+// ============================================================================
+
+a {
+    // Reset text decoration globally
+    text-decoration: none !important;
+    color: hsl(var(--primary));
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: hsl(var(--primary-hover));
+    }
+
+    &:active {
+        color: hsl(var(--primary-active));
+    }
+
+    &:focus-visible {
+        outline: 2px solid hsl(var(--ring));
+        outline-offset: 2px;
+        border-radius: 2px;
+    }
+}
+
+// ============================================================================
+// MAIN CONTENT
+// ============================================================================
+
+main {
+    // Ensure main content is accessible
+    display: block;
+    position: relative;
+
+    // Add focus outline for skip-to-content links
+    &:focus {
+        outline: none;
+    }
+}
+
+// ============================================================================
+// SELECTION STYLES
+// ============================================================================
+
+// Customize text selection colors
+::selection {
+    background-color: alpha-color(primary, opacity(moderate));
+    color: hsl(var(--primary-foreground));
+    text-shadow: none;
+}
+
+::-moz-selection {
+    background-color: alpha-color(primary, opacity(moderate));
+    color: hsl(var(--primary-foreground));
+    text-shadow: none;
+}
+
+// ============================================================================
+// SCROLLBAR CUSTOMIZATION
+// ============================================================================
+
+// Custom scrollbar styles for webkit browsers
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted));
+    border-radius: radius(full);
+    border: 3px solid hsl(var(--background));
+
+    &:hover {
+        background-color: hsl(var(--muted-foreground));
+    }
+}
+
+// Firefox scrollbar customization
+* {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) hsl(var(--background));
+}
+
+// ============================================================================
+// FOCUS STYLES
+// ============================================================================
+
+// Default focus styles for accessibility
+:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+}
+
+// Remove outline for non-keyboard focus
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+// ============================================================================
+// SKIP TO CONTENT LINK
+// ============================================================================
+
+// Skip link for keyboard navigation accessibility
+.skip-to-content {
+    position: absolute;
+    top: spacing(base);
+    left: spacing(base);
+    z-index: z(tooltip);
+    padding: spacing(md) spacing(lg);
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    text-decoration: none;
+    border-radius: radius(base);
+    font-weight: font-weight(semibold);
+    transform: translateY(-200%);
+    transition: transform transition(fast) easing(smooth);
+
+    &:focus {
+        transform: translateY(0);
+    }
+}
+
+// ============================================================================
+// REDUCED MOTION
+// ============================================================================
+
+// Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+// ============================================================================
+// PRINT STYLES
+// ============================================================================
+
+@media print {
+    // Optimize for printing
+    *,
+    *::before,
+    *::after {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    // Show URLs after links
+    a[href]::after {
+        content: " (" attr(href) ")";
+    }
+
+    // Don't show URLs for anchor links or javascript links
+    a[href^="#"]::after,
+    a[href^="javascript:"]::after {
+        content: "";
+    }
+
+    // Page break optimization
+    pre,
+    blockquote {
+        border: border-width(thin) solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+
+    // Hide non-essential elements when printing
+    nav,
+    aside,
+    .no-print {
+        display: none !important;
+    }
+}
+
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
+
+// Container utility
+.container {
+    @include container(2xl, spacing(lg));
+
+    @include bp(md) {
+        @include container(2xl, spacing(xl));
+    }
+}
+
+// Full width container
+.container-fluid {
+    width: 100%;
+    padding-left: spacing(lg);
+    padding-right: spacing(lg);
+
+    @include bp(md) {
+        padding-left: spacing(xl);
+        padding-right: spacing(xl);
+    }
+}
+
+// Section spacing
+.section {
+    padding: spacing(4xl) 0;
+
+    @include bp(md) {
+        padding: spacing(5xl) 0;
+    }
+
+    @include bp(lg) {
+        padding: spacing(6xl) 0;
+    }
+}
+
+// Hidden utility (visually hidden but accessible)
+.visually-hidden {
+    @include visually-hidden();
+}
+
+// Hidden utility (completely hidden)
+.hidden {
+    display: none !important;
+}
+
+// ============================================================================
+// DARK MODE CLASS
+// ============================================================================
+
+// Dark mode is toggled via the .dark class on the root element
+// Color values are defined in abstracts/_colors.scss using CSS custom properties
+// The theme toggle component adds/removes this class
+
+.dark {
+    // Dark mode shadows need to be more pronounced
+    --shadow-color: rgba(0, 0, 0, 0.5);
+
+    // Optional: Add any additional dark mode-specific adjustments here
+}
+
+// ============================================================================
+// ACCESSIBILITY HELPERS
+// ============================================================================
+
+// Ensure interactive elements have minimum touch target size (44x44px per WCAG)
+button,
+a,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+[role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+// Improve readability for high contrast mode
+@media (prefers-contrast: high) {
+    // Increase border widths
+    *:not(svg *) {
+        border-width: border-width(base) !important;
+    }
+
+    // Ensure focus indicators are visible
+    :focus-visible {
+        outline-width: 3px !important;
+    }
+}

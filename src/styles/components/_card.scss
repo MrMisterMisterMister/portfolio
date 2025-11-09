@@ -1,0 +1,73 @@
+// ============================================================================
+// CARD COMPONENT - Card container with variants
+// ============================================================================
+// Styles for card UI component used throughout the application.
+//
+// @layer: Components
+// @category: Card
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// CARD
+// ============================================================================
+
+.card {
+    border-radius: radius(sm);
+    // Replace border with subtle shadow
+    background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+    box-shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.08),
+                0 1px 2px -1px hsl(var(--foreground) / 0.08);
+    @include transition((box-shadow, transform), base, smooth);
+
+    &:hover {
+        box-shadow: 0 4px 6px -1px hsl(var(--foreground) / 0.1),
+                    0 2px 4px -2px hsl(var(--foreground) / 0.1);
+        // transform: translateY(-2px);
+    }
+
+    // &-hover:hover {
+    //     box-shadow: 0 10px 15px -3px hsl(var(--foreground) / 0.1),
+    //                 0 4px 6px -4px hsl(var(--foreground) / 0.1);
+    //     transform: translateY(-4px);
+    // }
+
+    &-header {
+        display: flex;
+        flex-direction: column;
+        gap: spacing(sm);
+        padding: spacing(xl);
+        padding-bottom: spacing(base);
+    }
+
+    &-content {
+        padding: spacing(xl);
+        padding-top: spacing(base);
+    }
+
+    &-title {
+        font-size: font-size(2xl);
+        font-weight: font-weight(semibold);
+        line-height: line-height(tight);
+        letter-spacing: letter-spacing(tight);
+
+        &-lg {
+            font-size: font-size(3xl);
+        }
+
+        &-md {
+            font-size: font-size(2xl);
+        }
+
+        &-sm {
+            font-size: font-size(xl);
+        }
+    }
+
+    &-description {
+        font-size: font-size(sm);
+        color: hsl(var(--muted-foreground));
+    }
+}

@@ -1,0 +1,45 @@
+// ============================================================================
+// BADGE COMPONENT - Badge/tag component with variants
+// ============================================================================
+// Styles for badge UI component used for tags and labels.
+//
+// @layer: Components
+// @category: Badge
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// BADGE
+// ============================================================================
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    border-radius: radius(sm);
+    padding: spacing(xs) spacing(sm);
+    font-size: font-size(xs);
+    font-weight: font-weight(semibold);
+    @include transition(all, fast, smooth);
+
+    &-default {
+        background-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+    }
+
+    &-secondary {
+        background-color: hsl(var(--secondary));
+        color: hsl(var(--secondary-foreground));
+    }
+
+    &-outline {
+        border: border-width(thin) solid hsl(var(--border));
+        color: hsl(var(--foreground));
+    }
+
+    &-destructive {
+        background-color: hsl(var(--destructive));
+        color: hsl(var(--destructive-foreground));
+    }
+}

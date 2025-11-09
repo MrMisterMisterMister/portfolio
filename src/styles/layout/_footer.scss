@@ -1,0 +1,34 @@
+// ============================================================================
+// FOOTER - Site footer styles
+// ============================================================================
+// Styles for the global site footer.
+//
+// @layer: Layout
+// @category: Footer
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// FOOTER
+// ============================================================================
+
+.footer {
+    width: 100%;
+    border-top: border-width(thin) solid hsl(var(--border));
+    background-color: hsl(var(--background));
+    padding: spacing(xl) 0;
+
+    @include bp(md) {
+        padding: spacing(2xl) 0;
+    }
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.footer-copyright {
+    font-size: font-size(sm);
+    color: hsl(var(--muted-foreground));
+}

@@ -1,0 +1,20 @@
+// ============================================================================
+// LAYOUT INDEX
+// ============================================================================
+// Central import file for all layout-related styles. Layout styles define
+// the macro structure of pages and major layout patterns.
+//
+// @layer: Layout - Structural layout styles
+// @category: Index
+// ============================================================================
+
+// Layout modules
+@use "header";
+@use "hero";
+@use "footer";
+
+// Layout components
+@use "section";
+@use "container";
+@use "stack";
+@use "grid";

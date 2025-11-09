@@ -1,0 +1,54 @@
+---
+/**
+ * Stack Component
+ *
+ * A layout component that arranges children vertically with consistent spacing.
+ * Uses flexbox with gap for clean, maintainable spacing without margin collapsing.
+ *
+ * @component
+ * @example
+ * ```astro
+ * <Stack gap="lg">
+ *   <h1>Title</h1>
+ *   <p>Content with spacing</p>
+ * </Stack>
+ * ```
+ *
+ * @example
+ * ```astro
+ * <Stack gap="xl" align="center" as="section">
+ *   <h2>Centered content</h2>
+ *   <p>With extra spacing</p>
+ * </Stack>
+ * ```
+ */
+
+interface Props {
+    /** Gap between children (xs, sm, base, md, lg, xl, 2xl, 3xl, 4xl, 5xl) */
+    gap?: "xs" | "sm" | "base" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl";
+    /** Align items horizontally */
+    align?: "start" | "center" | "end" | "stretch";
+    /** Justify content vertically */
+    justify?: "start" | "center" | "end" | "between" | "around" | "evenly";
+    /** Additional CSS classes */
+    class?: string;
+    /** HTML element type */
+    as?: "div" | "section" | "article" | "aside" | "nav" | "header" | "footer" | "main";
+}
+
+const {
+    gap = "base",
+    align,
+    justify,
+    class: className,
+    as: Element = "div",
+} = Astro.props;
+
+const gapClass = `stack-gap-${gap}`;
+const alignClass = align ? `stack-align-${align}` : "";
+const justifyClass = justify ? `stack-justify-${justify}` : "";
+---
+
+<Element class:list={["stack", gapClass, alignClass, justifyClass, className]}>
+    <slot />
+</Element>

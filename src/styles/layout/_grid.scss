@@ -1,0 +1,119 @@
+// ============================================================================
+// GRID COMPONENT - Responsive grid layouts with predefined column patterns
+// ============================================================================
+// Styles for the Grid.astro layout component. Provides consistent, responsive
+// grid layouts with automatic breakpoint handling.
+//
+// @layer: Layout
+// @category: Grid
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// GRID BASE
+// ============================================================================
+
+.grid {
+    display: grid;
+}
+
+// ============================================================================
+// COLUMN VARIANTS WITH RESPONSIVE BREAKPOINTS
+// ============================================================================
+
+.grid-cols-1 {
+    grid-template-columns: 1fr;
+}
+
+.grid-cols-2 {
+    grid-template-columns: 1fr;
+
+    @include bp(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.grid-cols-3 {
+    grid-template-columns: 1fr;
+
+    @include bp(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include bp(lg) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+
+    @include bp(md) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include bp(lg) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.grid-cols-5 {
+    grid-template-columns: repeat(2, 1fr);
+
+    @include bp(md) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include bp(lg) {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.grid-cols-6 {
+    grid-template-columns: repeat(2, 1fr);
+
+    @include bp(md) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include bp(lg) {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+// ============================================================================
+// GAP VARIANTS
+// ============================================================================
+
+.grid-gap-xs {
+    gap: spacing(xs);
+}
+
+.grid-gap-sm {
+    gap: spacing(sm);
+}
+
+.grid-gap-base {
+    gap: spacing(base);
+}
+
+.grid-gap-md {
+    gap: spacing(md);
+}
+
+.grid-gap-lg {
+    gap: spacing(lg);
+}
+
+.grid-gap-xl {
+    gap: spacing(xl);
+}
+
+.grid-gap-2xl {
+    gap: spacing(2xl);
+}
+
+.grid-gap-3xl {
+    gap: spacing(3xl);
+}

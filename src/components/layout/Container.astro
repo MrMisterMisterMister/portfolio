@@ -1,0 +1,48 @@
+---
+/**
+ * Container Component
+ *
+ * A semantic wrapper component that constrains content width and centers it.
+ * Provides consistent max-width and horizontal padding across the application.
+ *
+ * @component
+ * @example
+ * ```astro
+ * <Container size="xl">
+ *   <p>Centered content with max-width</p>
+ * </Container>
+ * ```
+ *
+ * @example
+ * ```astro
+ * <Container size="full" padding="none">
+ *   <p>Full-width content without padding</p>
+ * </Container>
+ * ```
+ */
+
+interface Props {
+    /** Maximum width of container (sm, md, lg, xl, 2xl, full) */
+    size?: "sm" | "md" | "lg" | "xl" | "2xl" | "full" | "max";
+    /** Horizontal padding (none, sm, base, lg, xl) */
+    padding?: "none" | "sm" | "base" | "lg" | "xl";
+    /** Additional CSS classes */
+    class?: string;
+    /** HTML element type */
+    as?: "div" | "section" | "article" | "main" | "aside" | "nav";
+}
+
+const {
+    size = "2xl",
+    padding = "lg",
+    class: className,
+    as: Element = "div",
+} = Astro.props;
+
+const sizeClass = `container-${size}`;
+const paddingClass = padding !== "none" ? `container-padding-${padding}` : "";
+---
+
+<Element class:list={["container", sizeClass, paddingClass, className]}>
+    <slot />
+</Element>

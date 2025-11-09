@@ -1,0 +1,59 @@
+// ============================================================================
+// FORM COMPONENTS - Form elements and inputs
+// ============================================================================
+// Styles for form UI components including inputs, textareas, and selects.
+//
+// @layer: Components
+// @category: Form
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// FORM
+// ============================================================================
+
+.form-group {
+    margin-bottom: spacing(lg);
+
+    label {
+        display: block;
+        margin-bottom: spacing(sm);
+        font-size: font-size(sm);
+        font-weight: font-weight(medium);
+        color: hsl(var(--foreground));
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        padding: spacing(md) spacing(base);
+        border: border-width(thin) solid hsl(var(--input));
+        border-radius: radius(md);
+        background: hsl(var(--background));
+        color: hsl(var(--foreground));
+        font-size: font-size(base);
+        @include transition(all, base, smooth);
+
+        &:focus {
+            outline: none;
+            border-color: hsl(var(--ring));
+            box-shadow: 0 0 0 2px alpha-color(ring, opacity(medium));
+        }
+
+        &::placeholder {
+            color: hsl(var(--muted-foreground));
+        }
+
+        &:disabled {
+            opacity: opacity(strong);
+            cursor: not-allowed;
+        }
+    }
+
+    textarea {
+        min-height: spacing(5xl);
+        resize: vertical;
+    }
+}

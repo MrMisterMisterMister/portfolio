@@ -1,0 +1,469 @@
+// ============================================================================
+// TYPOGRAPHY
+// ============================================================================
+// Typography system including font families, sizes, weights, and text styles.
+// Provides consistent, accessible, and responsive typography across the site.
+//
+// @layer: Base - Element-level typography styles
+// @category: Typography
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// FONT STACKS
+// ============================================================================
+// System font stacks for optimal performance and cross-platform consistency
+// ============================================================================
+
+// Sans-serif font stack (default)
+// Uses system fonts for best performance and native feel
+$font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+// Serif font stack
+$font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif !default;
+
+// Monospace font stack (for code)
+$font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace !default;
+
+// ============================================================================
+// BASE TYPOGRAPHY
+// ============================================================================
+
+// Root font size and family
+html {
+    font-family: $font-family-sans;
+    font-size: 100%; // 16px default
+    line-height: line-height(normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// Body text styles
+body {
+    font-family: $font-family-sans;
+    font-size: font-size(base); // 1rem = 16px
+    font-weight: font-weight(normal);
+    line-height: line-height(body);
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--background));
+
+    // Improve text rendering
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+}
+
+// ============================================================================
+// HEADINGS
+// ============================================================================
+
+// Base heading styles
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-weight: font-weight(bold);
+    line-height: line-height(heading);
+    color: hsl(var(--foreground));
+    text-wrap: balance;
+}
+
+// Heading size scale (mobile-first)
+h1 {
+    font-size: font-size(4xl); // 36px
+    letter-spacing: letter-spacing(tight);
+
+    @include bp(md) {
+        font-size: font-size(5xl); // 48px
+    }
+
+    @include bp(lg) {
+        font-size: font-size(6xl); // 60px
+    }
+}
+
+h2 {
+    font-size: font-size(3xl); // 30px
+    letter-spacing: letter-spacing(tight);
+
+    @include bp(md) {
+        font-size: font-size(4xl); // 36px
+    }
+
+    @include bp(lg) {
+        font-size: font-size(5xl); // 48px
+    }
+}
+
+h3 {
+    font-size: font-size(2xl); // 24px
+
+    @include bp(md) {
+        font-size: font-size(3xl); // 30px
+    }
+
+    @include bp(lg) {
+        font-size: font-size(4xl); // 36px
+    }
+}
+
+h4 {
+    font-size: font-size(xl); // 20px
+
+    @include bp(md) {
+        font-size: font-size(2xl); // 24px
+    }
+}
+
+h5 {
+    font-size: font-size(lg); // 18px
+
+    @include bp(md) {
+        font-size: font-size(xl); // 20px
+    }
+}
+
+h6 {
+    font-size: font-size(base); // 16px
+
+    @include bp(md) {
+        font-size: font-size(lg); // 18px
+    }
+}
+
+// ============================================================================
+// PARAGRAPHS & TEXT BLOCKS
+// ============================================================================
+
+p {
+    margin: 0;
+    text-wrap: pretty;
+}
+
+// Add bottom margin for flow content
+p + p,
+p + ul,
+p + ol,
+p + blockquote {
+    margin-top: spacing(base);
+}
+
+// ============================================================================
+// LISTS
+// ============================================================================
+
+ul,
+ol {
+    margin: 0;
+    padding-left: spacing(lg);
+}
+
+li {
+    margin-bottom: spacing(sm);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Reset for role="list" (used in navigation, etc.)
+ul[role="list"],
+ol[role="list"] {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+        margin-bottom: 0;
+    }
+}
+
+// ============================================================================
+// LINKS
+// ============================================================================
+
+a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+    transition: color transition(fast) easing(smooth);
+
+    &:hover {
+        color: hsl(var(--primary));
+        text-decoration: underline;
+    }
+
+    &:focus-visible {
+        @include focus-ring();
+    }
+}
+
+// ============================================================================
+// INLINE TEXT ELEMENTS
+// ============================================================================
+
+// Strong/bold text
+b,
+strong {
+    font-weight: font-weight(bold);
+}
+
+// Emphasis/italic text
+em,
+i {
+    font-style: italic;
+}
+
+// Small text
+small {
+    font-size: font-size(sm);
+}
+
+// Mark/highlight
+mark {
+    background-color: alpha-color(accent, opacity(medium));
+    color: hsl(var(--accent-foreground));
+    padding: spacing(xs) spacing(sm);
+    border-radius: radius(sm);
+}
+
+// Deleted text
+del {
+    text-decoration: line-through;
+    opacity: opacity(intense);
+}
+
+// Inserted text
+ins {
+    text-decoration: underline;
+    text-decoration-color: hsl(var(--primary));
+}
+
+// Abbreviations
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+// Code and preformatted text
+code,
+kbd,
+samp,
+pre {
+    font-family: $font-family-mono;
+    font-size: 0.9em;
+}
+
+// Inline code
+code {
+    background-color: hsl(var(--muted));
+    color: hsl(var(--foreground));
+    padding: spacing(xs) spacing(sm);
+    border-radius: radius(sm);
+    font-weight: font-weight(medium);
+}
+
+// Keyboard input
+kbd {
+    background-color: hsl(var(--muted));
+    color: hsl(var(--foreground));
+    padding: spacing(xs) spacing(sm);
+    border-radius: radius(sm);
+    border: border-width(thin) solid hsl(var(--border));
+    box-shadow: shadow(sm);
+    font-size: font-size(sm);
+    font-weight: font-weight(semibold);
+}
+
+// Preformatted text blocks
+pre {
+    background-color: hsl(var(--muted));
+    color: hsl(var(--foreground));
+    padding: spacing(lg);
+    border-radius: radius(md);
+    overflow-x: auto;
+    line-height: line-height(relaxed);
+    margin: spacing(lg) 0;
+
+    code {
+        background-color: transparent;
+        padding: 0;
+        border-radius: 0;
+        font-size: font-size(sm);
+    }
+}
+
+// ============================================================================
+// BLOCKQUOTES
+// ============================================================================
+
+blockquote {
+    margin: spacing(lg) 0;
+    padding-left: spacing(lg);
+    border-left: 4px solid hsl(var(--border));
+    font-style: italic;
+    color: hsl(var(--muted-foreground));
+
+    p {
+        margin-bottom: spacing(md);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    cite {
+        display: block;
+        margin-top: spacing(md);
+        font-size: font-size(sm);
+        font-style: normal;
+        color: hsl(var(--muted-foreground));
+
+        &::before {
+            content: "\2014 \0020"; // em dash
+        }
+    }
+}
+
+// ============================================================================
+// HORIZONTAL RULES
+// ============================================================================
+
+hr {
+    margin: spacing(3xl) 0;
+    border: 0;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        hsl(var(--border) / 0.4) 20%,
+        hsl(var(--border) / 0.4) 80%,
+        transparent
+    );
+}
+
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
+
+// Text size utilities
+.text-xs {
+    font-size: font-size(xs);
+}
+.text-sm {
+    font-size: font-size(sm);
+}
+.text-base {
+    font-size: font-size(base);
+}
+.text-lg {
+    font-size: font-size(lg);
+}
+.text-xl {
+    font-size: font-size(xl);
+}
+.text-2xl {
+    font-size: font-size(2xl);
+}
+.text-3xl {
+    font-size: font-size(3xl);
+}
+.text-4xl {
+    font-size: font-size(4xl);
+}
+.text-5xl {
+    font-size: font-size(5xl);
+}
+
+// Font weight utilities
+.font-light {
+    font-weight: font-weight(light);
+}
+.font-normal {
+    font-weight: font-weight(normal);
+}
+.font-medium {
+    font-weight: font-weight(medium);
+}
+.font-semibold {
+    font-weight: font-weight(semibold);
+}
+.font-bold {
+    font-weight: font-weight(bold);
+}
+
+// Text alignment utilities
+.text-left {
+    text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.text-justify {
+    text-align: justify;
+}
+
+// Text transform utilities
+.uppercase {
+    text-transform: uppercase;
+}
+.lowercase {
+    text-transform: lowercase;
+}
+.capitalize {
+    text-transform: capitalize;
+}
+
+// Text decoration utilities
+.underline {
+    text-decoration: underline;
+}
+.line-through {
+    text-decoration: line-through;
+}
+.no-underline {
+    text-decoration: none;
+}
+
+// Text truncation utility
+.truncate {
+    @include truncate();
+}
+
+// Line clamp utilities
+.line-clamp-1 {
+    @include line-clamp(1);
+}
+.line-clamp-2 {
+    @include line-clamp(2);
+}
+.line-clamp-3 {
+    @include line-clamp(3);
+}
+.line-clamp-4 {
+    @include line-clamp(4);
+}
+
+// Color utilities
+.text-primary {
+    color: hsl(var(--primary));
+}
+.text-secondary {
+    color: hsl(var(--secondary-foreground));
+}
+.text-muted {
+    color: hsl(var(--muted-foreground));
+}
+.text-accent {
+    color: hsl(var(--accent-foreground));
+}
+.text-destructive {
+    color: hsl(var(--destructive));
+}

@@ -1,0 +1,43 @@
+// ============================================================================
+// MAIN STYLESHEET - Portfolio
+// ============================================================================
+// ITCSS (Inverted Triangle CSS) Architecture
+//
+// This file imports all SCSS modules in order of specificity, from most
+// generic to most specific. This ensures proper cascade and maintainability.
+//
+// ITCSS Layers:
+// 1. Abstracts  - Variables, functions, mixins (no CSS output)
+// 2. Base       - Resets, typography, global styles (element selectors)
+// 3. Layout     - Header, hero, sections (structural layout)
+// 4. Components - Cards, buttons, forms, etc. (reusable UI)
+//
+// @architecture: ITCSS
+// @preprocessor: Dart Sass
+// ============================================================================
+
+
+// ============================================================================
+// 1. ABSTRACTS LAYER
+// ============================================================================
+// Variables, functions, and mixins (no CSS output)
+@use "abstracts";
+
+// ============================================================================
+// 2. BASE LAYER
+// ============================================================================
+// Foundation: resets, typography, and global element styles
+// Outputs CSS with low specificity targeting bare HTML elements
+@use "base";
+
+// ============================================================================
+// 3. LAYOUT LAYER
+// ============================================================================
+// Structural layout patterns: header, hero, sections
+@use "layout";
+
+// ============================================================================
+// 4. COMPONENTS LAYER
+// ============================================================================
+// Reusable UI components: cards, buttons, badges, forms, etc.
+@use "components";

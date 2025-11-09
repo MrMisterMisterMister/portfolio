@@ -1,0 +1,174 @@
+---
+import Section from "@/components/layout/Section.astro";
+import Stack from "@/components/layout/Stack.astro";
+import Grid from "@/components/layout/Grid.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import CardDescription from "@/components/ui/CardDescription.astro";
+import CardHeader from "@/components/ui/CardHeader.astro";
+import CardTitle from "@/components/ui/CardTitle.astro";
+import Badge from "@/components/ui/Badge.astro";
+import Button from "@/components/ui/Button.astro";
+import Separator from "@/components/ui/Separator.astro";
+import Icon from "@/components/ui/Icon.astro";
+import FadeIn from "@/components/animations/FadeIn";
+import SlideIn from "@/components/animations/SlideIn";
+import StaggerContainer from "@/components/animations/StaggerContainer";
+import StaggerItem from "@/components/animations/StaggerItem";
+import { experiences, education, certifications } from "@/lib/experienceData";
+---
+
+<Section id="experience">
+    <Stack gap="base">
+        <FadeIn client:load delay={0.1} duration={0.5}>
+            <Stack gap="sm" as="header">
+                <h2 class="text-3xl font-bold">Experience & Education</h2>
+                <p class="text-muted">My professional journey and qualifications</p>
+            </Stack>
+        </FadeIn>
+
+        {/* Work Experience */}
+        <Stack gap="lg">
+            <SlideIn client:load delay={0.2} direction="left" duration={0.6}>
+                <div class="section-title-with-icon">
+                    <Icon name="briefcase" size={24} class="icon-lg icon-primary" />
+                    <h3 class="text-2xl font-semibold">Work Experience</h3>
+                </div>
+            </SlideIn>
+
+            <StaggerContainer client:load delay={0.3} staggerDelay={0.2}>
+                <Stack gap="lg">
+                    {
+                        experiences.map((exp, index) => (
+                            <StaggerItem client:load>
+                                <div>
+                                    <Card>
+                                        <CardHeader>
+                                            <div class="experience-header">
+                                                <div>
+                                                    <CardTitle>{exp.role}</CardTitle>
+                                                    <CardDescription class="text-base font-medium text-foreground experience-company">
+                                                        {exp.company}
+                                                    </CardDescription>
+                                                </div>
+                                                <div class="experience-meta">
+                                                    <div>{exp.duration}</div>
+                                                    <div>{exp.location}</div>
+                                                </div>
+                                            </div>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <ul class="experience-list">
+                                                {exp.description.map((item) => (
+                                                    <li class="experience-list-item">
+                                                        <span class="text-primary experience-bullet">•</span>
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </CardContent>
+                                    </Card>
+                                    {index < experiences.length - 1 && (
+                                        <div class="experience-connector">
+                                            <div class="connector-line" />
+                                        </div>
+                                    )}
+                                </div>
+                            </StaggerItem>
+                        ))
+                    }
+                </Stack>
+            </StaggerContainer>
+        </Stack>
+
+        <Separator />
+
+        {/* Education */}
+        <Stack gap="lg">
+            <SlideIn client:load delay={0.5} direction="left" duration={0.6}>
+                <div class="section-title-with-icon">
+                    <Icon name="graduationCap" size={24} class="icon-lg icon-primary" />
+                    <h3 class="text-2xl font-semibold">Education</h3>
+                </div>
+            </SlideIn>
+
+            <StaggerContainer client:load delay={0.6} staggerDelay={0.15}>
+                <Grid columns={2} gap="lg">
+                    {
+                        education.map((edu) => (
+                            <StaggerItem client:load>
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle class="text-xl">{edu.degree}</CardTitle>
+                                        <CardDescription class="text-base">{edu.field}</CardDescription>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <Stack gap="sm">
+                                            <p class="font-medium">{edu.institution}</p>
+                                            <p class="text-sm text-muted">{edu.duration}</p>
+                                            {edu.description && (
+                                                <p class="text-sm text-muted">{edu.description}</p>
+                                            )}
+                                        </Stack>
+                                    </CardContent>
+                                </Card>
+                            </StaggerItem>
+                        ))
+                    }
+                </Grid>
+            </StaggerContainer>
+        </Stack>
+
+        <Separator />
+
+        {/* Certifications */}
+        <Stack gap="lg">
+            <SlideIn client:load delay={0.8} direction="left" duration={0.6}>
+                <div class="section-title-with-icon">
+                    <Icon name="award" size={24} class="icon-lg icon-primary" />
+                    <h3 class="text-2xl font-semibold">Certifications</h3>
+                </div>
+            </SlideIn>
+
+            <StaggerContainer client:load delay={0.9} staggerDelay={0.1}>
+                <Grid columns={3} gap="lg">
+                    {
+                        certifications.map((cert) => (
+                            <StaggerItem client:load>
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle class="text-lg">{cert.name}</CardTitle>
+                                        <CardDescription>{cert.issuer}</CardDescription>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <Stack gap="base">
+                                            <Badge variant="outline">{cert.date}</Badge>
+                                            {cert.credentialUrl && (
+                                                <Button
+                                                    variant="link"
+                                                    size="sm"
+                                                    class="p-0 h-auto"
+                                                    href={cert.credentialUrl}
+                                                >
+                                                    <a
+                                                        href={cert.credentialUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="cert-link"
+                                                    >
+                                                        <Icon name="externalLink" size={12} class="cert-icon" />
+                                                View Credential
+                                            </a>
+                                        </Button>
+                                    )}
+                                </Stack>
+                            </CardContent>
+                        </Card>
+                            </StaggerItem>
+                        ))
+                    }
+                </Grid>
+            </StaggerContainer>
+        </Stack>
+    </Stack>
+</Section>

@@ -1,0 +1,411 @@
+// ============================================================================
+// MODERN CSS RESET
+// ============================================================================
+// A modern, opinionated CSS reset that provides consistent baseline styles
+// across all browsers while preserving accessibility and usability.
+//
+// Based on:
+// - modern-normalize v2.0.0
+// - Andy Bell's Modern CSS Reset
+// - Josh Comeau's Custom CSS Reset
+//
+// @layer: Base - Low-specificity, element-level styles
+// @category: Reset
+// ============================================================================
+
+// ============================================================================
+// DOCUMENT & BOX-SIZING
+// ============================================================================
+
+// Use border-box for all elements
+// This makes width/height calculations more intuitive
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// Root font size defaults
+// 1. Use the default system font size (typically 16px)
+// 2. Prevent adjustments of font size after orientation changes in iOS
+// 3. Use a more readable tab size
+html {
+    font-size: 100%; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    -moz-tab-size: 4; /* 3 */
+    tab-size: 4; /* 3 */
+}
+
+// ============================================================================
+// SECTIONS & GROUPING
+// ============================================================================
+
+// Remove default margin and padding
+// Prevents unexpected spacing
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+    padding: 0;
+}
+
+// Set core body defaults
+// 1. Improve text rendering
+// 2. Set minimum height to viewport
+body {
+    min-height: 100vh;
+    text-rendering: optimizeSpeed; /* 1 */
+    line-height: 1.5;
+}
+
+// ============================================================================
+// TEXT-LEVEL SEMANTICS
+// ============================================================================
+
+// Remove list styles on ul, ol elements with a list role
+// This removes bullet points/numbers while preserving accessibility
+ul[role="list"],
+ol[role="list"] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+// Set shorter line heights on headings and interactive elements
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+label {
+    line-height: 1.2;
+}
+
+// Balance text wrapping on headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+// Prevent orphans on paragraphs
+p {
+    text-wrap: pretty;
+}
+
+// Add the correct font weight in Chrome, Edge, and Safari
+b,
+strong {
+    font-weight: bolder;
+}
+
+// Correct font size in all browsers
+small {
+    font-size: 80%;
+}
+
+// Prevent sub and sup from affecting line height
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+// ============================================================================
+// EMBEDDED CONTENT
+// ============================================================================
+
+// Make images easier to work with
+// 1. Images are inline by default, make them block-level
+// 2. Prevent overflow
+// 3. Maintain aspect ratio
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block; /* 1 */
+    max-width: 100%; /* 2 */
+    height: auto; /* 3 */
+}
+
+// Remove default border on iframes
+iframe {
+    border: 0;
+}
+
+// ============================================================================
+// FORMS
+// ============================================================================
+
+// Inherit fonts for inputs and buttons
+// Makes form controls consistent with body text
+input,
+button,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+// Remove default button styles
+// Allows for easier custom styling
+button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+// Remove inner padding in Chrome and Safari on macOS
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+// Restore focus styles unset by previous rule
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+    outline: 1px dotted currentColor;
+}
+
+// Correct the inability to style clickable types in iOS and Safari
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+}
+
+// Remove the inner border and padding in Firefox
+::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+// Restore the focus styles unset by the previous rule
+:-moz-focusring {
+    outline: 1px dotted currentColor;
+}
+
+// Remove the additional :invalid styles in Firefox
+:-moz-ui-invalid {
+    box-shadow: none;
+}
+
+// Correct the cursor style of increment and decrement buttons in Safari
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+    height: auto;
+}
+
+// 1. Correct the odd appearance in Chrome and Safari
+// 2. Correct the outline style in Safari
+[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    outline-offset: -2px; /* 2 */
+}
+
+// Remove the inner padding in Chrome and Safari on macOS
+::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+// 1. Correct the inability to style clickable types in iOS and Safari
+// 2. Change font properties to inherit in Safari
+::-webkit-file-upload-button {
+    -webkit-appearance: button; /* 1 */
+    font: inherit; /* 2 */
+}
+
+// Remove default vertical scrollbar in IE 10+
+textarea {
+    overflow: auto;
+    resize: vertical;
+}
+
+// Prevent textarea from being resized horizontally
+textarea {
+    resize: vertical;
+}
+
+// Correct the padding in Firefox
+fieldset {
+    padding: 0.35em 0.75em 0.625em;
+}
+
+// 1. Correct the text wrapping in Edge and IE
+// 2. Correct the color inheritance from fieldset elements in IE
+// 3. Remove the padding so developers are not caught out when they zero out fieldset elements
+legend {
+    box-sizing: border-box; /* 1 */
+    color: inherit; /* 2 */
+    display: table; /* 1 */
+    max-width: 100%; /* 1 */
+    padding: 0; /* 3 */
+    white-space: normal; /* 1 */
+}
+
+// Add the correct vertical alignment in Chrome and Firefox
+progress {
+    vertical-align: baseline;
+}
+
+// ============================================================================
+// INTERACTIVE
+// ============================================================================
+
+// Add the correct display in Edge and IE
+summary {
+    display: list-item;
+    cursor: pointer;
+}
+
+// Remove default outline on focused elements
+// WARNING: Only do this if you provide alternative focus styles
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+}
+
+// Ensure focus-visible works correctly
+// This is for keyboard navigation - should have visible focus
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+// Remove text decoration from anchors
+// Add it back with hover states in your styles
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+// ============================================================================
+// TABLES
+// ============================================================================
+
+// Collapse border spacing on tables
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+// ============================================================================
+// HIDDEN ELEMENTS
+// ============================================================================
+
+// Add the correct display in IE 10
+[hidden] {
+    display: none !important;
+}
+
+// Visually hidden but accessible to screen readers
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+// ============================================================================
+// ACCESSIBILITY
+// ============================================================================
+
+// Ensure focus is visible for keyboard navigation
+// This helps users navigating with keyboards
+:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+// Remove animations and transitions for users who prefer reduced motion
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+// ============================================================================
+// SCROLLING
+// ============================================================================
+
+// Smooth scrolling for users who don't prefer reduced motion
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+// Ensure consistent scrollbar styling
+html {
+    overflow-y: scroll;
+}
+
+// ============================================================================
+// MISC
+// ============================================================================
+
+// Prevent horizontal scrolling
+body {
+    overflow-x: hidden;
+}
+
+// Remove spacing between cells in tables
+table {
+    border-collapse: collapse;
+}
+
+// Ensure dialogs and modals are displayed correctly
+dialog {
+    border: none;
+    padding: 0;
+}

@@ -1,0 +1,75 @@
+// ============================================================================
+// THEME TOGGLE - Dark/light mode toggle button
+// ============================================================================
+// Styles for the theme toggle button with smooth icon transitions.
+//
+// @layer: Components
+// @category: Theme Toggle
+// ============================================================================
+
+@use "../abstracts" as *;
+
+// ============================================================================
+// THEME TOGGLE BUTTON
+// ============================================================================
+
+.theme-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: spacing(3xl);
+    height: spacing(3xl);
+    padding: spacing(sm);
+    color: hsl(var(--muted-foreground));
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: radius(md);
+    cursor: pointer;
+    @include transition((color, background-color, border-color), fast, smooth);
+
+    &:hover {
+        color: hsl(var(--foreground));
+        background-color: hsl(var(--accent));
+    }
+
+    &:focus-visible {
+        @include focus-ring();
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+// ============================================================================
+// THEME TOGGLE ICONS
+// ============================================================================
+
+.theme-toggle-icon {
+    position: absolute;
+    width: spacing(xl);
+    height: spacing(xl);
+    transition: opacity .2s cubic-bezier(.4,0,.2,1),
+                transform .2s cubic-bezier(.4,0,.2,1);
+}
+
+.theme-toggle-icon-sun {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.8);
+
+    .dark & {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+    }
+}
+
+.theme-toggle-icon-moon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+
+    .dark & {
+        opacity: 0;
+        transform: rotate(90deg) scale(0.8);
+    }
+}

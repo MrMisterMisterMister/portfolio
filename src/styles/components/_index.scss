@@ -1,0 +1,27 @@
+// ============================================================================
+// COMPONENTS INDEX
+// ============================================================================
+// Central import file for all component styles. Components are reusable,
+// modular UI elements that form the building blocks of the interface.
+//
+// @layer: Components - Reusable component styles
+// @category: Index
+// ============================================================================
+
+// UI Components
+@use "card";
+@use "button";
+@use "badge";
+@use "form";
+@use "icon";
+@use "theme-toggle";
+
+// Feature Components
+@use "terminal";
+@use "projects";
+@use "social-icons";
+@use "experience";
+@use "skills";
+
+// Utilities
+@use "utilities";
