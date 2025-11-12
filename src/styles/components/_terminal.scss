@@ -16,14 +16,15 @@
 .terminal-window {
     // Real terminal dark background
     background: hsl(var(--terminal-bg));
-    border: 1px solid color-mod(hsl(var(--terminal-border)));
+    border: 1px solid hsl(var(--terminal-border));
     border-radius: radius(md);
     overflow: hidden;
     box-shadow: 
         0 20px 25px -5px rgba(0, 0, 0, 0.3),
         0 10px 10px -5px rgba(0, 0, 0, 0.2),
         0 0 0 1px rgba(255, 255, 255, 0.05);
-    max-width: 700px;
+    width: 100%;
+    max-width: 700px; /* default medium */
     margin: 0 auto;
     position: relative;
 
@@ -39,6 +40,25 @@
         font-family: "Segoe UI", Arial, sans-serif;
         font-size: 12px;
     }
+}
+
+/* Size modifiers - choose desired width class on the component
+   Usage: <div class="terminal-window terminal--sm"> or add dynamically */
+.terminal-window.terminal--sm {
+    max-width: 360px;
+}
+
+.terminal-window.terminal--md {
+    max-width: 700px;
+}
+
+.terminal-window.terminal--lg {
+    max-width: 1100px;
+}
+
+/* Full-width / fluid variant */
+.terminal-window.terminal--fluid {
+    max-width: 100%;
 }
 
 .terminal-body {
@@ -110,7 +130,7 @@
     display: inline-block;
     width: 0.6em;
     height: 1.2em;
-    background: #0dbc79;
+    background: hsl(var(--terminal-prompt));
     margin-left: 2px;
     animation: blink 1s step-end infinite;
 }
