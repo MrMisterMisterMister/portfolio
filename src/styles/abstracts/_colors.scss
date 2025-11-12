@@ -73,6 +73,15 @@
 
     // Border radius (global setting)
     --radius: 0.5rem;                  // 8px - Base border radius
+
+    // Terminal colors
+    --terminal-bg: 210 40% 98%;            /* very light panel background (HSL) */
+		--terminal-border: 210 40% 90%;        /* light border color */
+    --terminal-foreground: 222 10% 12%;    /* dark text for light terminal */
+    --terminal-prompt: 120 80% 30%;        /* green prompt (HSL) */
+    --terminal-accent: 217 91% 45%;        /* accent/command color (primary) */
+    --terminal-title-bg: 210 20% 92%;      /* title bar background (light) */
+    --terminal-muted: 210 10% 60%;         /* muted text */
 }
 
 .dark {
@@ -124,6 +133,18 @@
     --border: 217 33% 30%;             // #334155 - More visible borders (4.3:1 ratio)
     --input: 217 33% 30%;              // #334155 - Input borders (4.3:1 ratio)
     --ring: 217 91% 65%;               // #60A5FA - Focus ring (matches primary)
+
+    // Terminal colors
+    --terminal-bg: 220 10% 6%;            /* near-black terminal bg */
+		--terminal-border: 220 10% 15%;        /* dark border color */
+    --terminal-foreground: 0 0% 90%;      /* light text */
+    --terminal-prompt: 156 65% 49%;       /* Windows-style bright green */
+    --terminal-prompt-warning: 36 100% 50%;    /* --terminal-prompt-warning */
+    --terminal-prompt-error: 0 84% 65%;         /* --terminal-prompt-error */
+    --terminal-prompt-info: 217 91% 65%;       /* --terminal-prompt-info */
+    --terminal-accent: 217 91% 65%;       /* brighter primary blue in dark */
+    --terminal-title-bg: 217 33% 12%;     /* darker title bar */
+    --terminal-muted: 215 10% 70%;        /* muted/secondary text */
 }
 
 // ============================================================================

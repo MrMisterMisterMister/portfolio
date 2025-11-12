@@ -15,8 +15,8 @@
 
 .terminal-window {
     // Real terminal dark background
-    background: #0c0c0c;
-    border: 1px solid #1e1e1e;
+    background: hsl(var(--terminal-bg));
+    border: 1px solid color-mod(hsl(var(--terminal-border)));
     border-radius: radius(md);
     overflow: hidden;
     box-shadow: 
@@ -27,18 +27,17 @@
     margin: 0 auto;
     position: relative;
 
-    // Windows/Linux-style title bar
     &::before {
-        content: '<Terminal>';
+        content: 'Administrator: Command Prompt';
         display: flex;
         align-items: center;
         height: 30px;
         padding: 0 spacing(base);
-        background: #1e1e1e;
-        border-bottom: 1px solid #0a0a0a;
+        background: hsl(var(--terminal-title-bg));
+        color: hsl(var(--terminal-foreground));
+        border-bottom: 1px solid hsl(var(--terminal-border));
         font-family: "Segoe UI", Arial, sans-serif;
         font-size: 12px;
-        color: #cccccc;
     }
 }
 
@@ -48,8 +47,8 @@
     font-size: font-size(base);
     line-height: 1.6;
     text-align: left;
-    background: #0c0c0c;
-    color: #cccccc;
+    background: transparent;
+    color: hsl(var(--terminal-foreground));
 
     @include bp(md) {
         padding: spacing(xl) spacing(2xl);
@@ -65,23 +64,21 @@
 }
 
 .terminal-prompt {
-    // Windows Command Prompt green
-    color: #0dbc79;
+    color: hsl(var(--terminal-prompt));
     font-weight: font-weight(semibold);
     user-select: none;
     flex-shrink: 0;
 }
 
 .terminal-command {
-    // Command color (cyan/blue)
-    color: #3b8eea;
+    color: hsl(var(--terminal-accent));
     font-weight: font-weight(medium);
 }
 
 .terminal-output {
     margin-top: spacing(xs);
     margin-left: spacing(xl);
-    color: #cccccc;
+    color: hsl(var(--terminal-foreground));
     font-size: 1.2em;
     font-weight: font-weight(semibold);
     line-height: 1.4;
@@ -91,26 +88,20 @@
     }
 
     .text-primary {
-        // Bright green for highlighted output
-        color: #0dbc79;
+        color: hsl(var(--terminal-prompt));
         font-weight: font-weight(bold);
     }
 
-    // Additional terminal color classes
-    .text-success {
-        color: #0dbc79;
-    }
-
     .text-warning {
-        color: #e5c07b;
+        color: hsl(var(--terminal-prompt-warning));
     }
 
     .text-error {
-        color: #e06c75;
+        color: hsl(var(--terminal-prompt-error));
     }
 
     .text-info {
-        color: #3b8eea;
+        color: hsl(var(--terminal-prompt-info));
     }
 }
 

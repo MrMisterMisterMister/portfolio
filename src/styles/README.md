@@ -4,7 +4,7 @@
 
 The styles are organized into modular SCSS partials using a centralized design system with variables:
 
-```
+```txt
 src/styles/
 ├── main.scss              # Main entry point (imports all partials)
 ├── _variables.scss        # Design system variables (spacing, fonts, breakpoints, etc.)
@@ -26,6 +26,7 @@ Main entry point that imports all partials in the correct order. This is the onl
 ### `_variables.scss`
 
 Centralized design system tokens:
+
 - **Spacing scale** (xs to 5xl): 4px - 96px
 - **Font sizes** (xs to 6xl): 12px - 60px
 - **Font weights**: light, normal, medium, semibold, bold
@@ -38,6 +39,7 @@ Centralized design system tokens:
 - **Shadows**: sm to 2xl
 
 All values are accessible via helper functions:
+
 - `spacing($key)`, `font-size($key)`, `font-weight($key)`
 - `radius($key)`, `transition($key)`, `easing($key)`
 - `breakpoint($key)`, `shadow($key)`
@@ -47,6 +49,7 @@ All values are accessible via helper functions:
 Modern vibrant theme with full light and dark mode support:
 
 **Light Mode (Default):**
+
 - **Background**: #FFFFFF (White)
 - **Text**: #0F172A (Dark slate)
 - **Cards**: #FFFFFF with subtle borders
@@ -54,6 +57,7 @@ Modern vibrant theme with full light and dark mode support:
 - **Borders**: #E2E8F0 (Light slate)
 
 **Dark Mode:**
+
 - **Background**: #0F172A (Deep slate)
 - **Text**: #F8FAFC (Off-white)
 - **Cards**: #1E293B (Slate)
@@ -61,6 +65,7 @@ Modern vibrant theme with full light and dark mode support:
 - **Borders**: #334155 (Slate borders)
 
 Functions:
+
 - `theme-color($color)` - Get theme color
 - `brand-color($brand, $variant)` - Get brand colors (LinkedIn, GitHub, Discord)
 - `opacity($level)` - Get opacity level (subtle to full)
@@ -86,6 +91,7 @@ Functions:
 ### `_components.scss`
 
 Component styles using centralized variables:
+
 - **Cards**: Hover effects with shadow and border transitions
 - **Buttons**: Primary, secondary, outline, ghost, danger variants
 - **Forms**: Inputs, labels, textareas with focus states
@@ -128,6 +134,7 @@ All colors use CSS custom properties:
 ### Spacing Scale
 
 Using `spacing()` function:
+
 - `xs`: 0.25rem (4px)
 - `sm`: 0.5rem (8px)
 - `md`: 0.75rem (12px)
@@ -139,6 +146,7 @@ Using `spacing()` function:
 ### Breakpoints
 
 Using `breakpoint()` function:
+
 - `sm`: 640px
 - `md`: 768px
 - `lg`: 1024px
@@ -198,6 +206,7 @@ These animations respect `prefers-reduced-motion` settings.
 ### Hover Transitions
 
 All interactive elements use consistent transition timing:
+
 - Fast: 0.15s (color changes)
 - Base: 0.2s (most hover effects)
 - Slow: 0.3s (complex transformations)
@@ -315,6 +324,7 @@ Edit `_utilities.scss` keyframes section (keep minimal for performance).
 ## Theme Switching
 
 The portfolio includes a theme toggle button that:
+
 - **Defaults to light mode** for a bright, welcoming experience
 - **Respects system preferences** (prefers-color-scheme)
 - **Persists user choice** in localStorage
@@ -323,7 +333,6 @@ The portfolio includes a theme toggle button that:
 
 ---
 
-**Last Updated**: 2025-11-03
 **Theme**: Modern Vibrant (Light/Dark)
 **Default Mode**: Light
 **Design System**: Centralized variables with helper functions
