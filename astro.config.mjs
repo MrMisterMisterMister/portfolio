@@ -4,7 +4,8 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://clodsire.com', //TODO
+  site: 'https://mrmistermistermister.github.io',
+  base: '/',
   integrations: [
     react(),
     sitemap(),
