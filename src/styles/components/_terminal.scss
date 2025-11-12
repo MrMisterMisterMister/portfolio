@@ -30,7 +30,7 @@
 
     // Small devices
     @include bp(xs) {
-        max-width: container(md);
+        width: container(base);
         box-shadow:
             0 15px 20px -5px rgba(0, 0, 0, 0.3),
             0 6px 8px -3px rgba(0, 0, 0, 0.2);
@@ -38,7 +38,7 @@
 
     // Medium devices
     @include bp(md) {
-        max-width: container(lg);
+        width: container(base);
         box-shadow:
             0 20px 25px -5px rgba(0, 0, 0, 0.3),
             0 10px 10px -5px rgba(0, 0, 0, 0.2),
@@ -47,12 +47,12 @@
 
     // Large devices
     @include bp(lg) {
-        max-width: container(xl);
+        width: container(base);
     }
 
     // Extra large devices
     @include bp(xl) {
-        max-width: container(2xl);
+        width: container(base);
     }
 
     // Terminal title bar
