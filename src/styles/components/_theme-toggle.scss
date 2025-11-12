@@ -24,7 +24,7 @@
     color: hsl(var(--muted-foreground));
     background-color: transparent;
     border: 1px solid transparent;
-    border-radius: radius(md);
+    border-radius: radius(sm);
     cursor: pointer;
     @include transition((color, background-color, border-color), fast, smooth);
 

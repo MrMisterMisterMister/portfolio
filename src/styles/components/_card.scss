@@ -14,7 +14,7 @@
 // ============================================================================
 
 .card {
-    border-radius: radius(sm);
+    border-radius: radius(xs);
     // Replace border with subtle shadow
     background-color: hsl(var(--card));
     color: hsl(var(--card-foreground));

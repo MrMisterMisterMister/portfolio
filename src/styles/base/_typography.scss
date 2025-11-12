@@ -228,7 +228,7 @@ mark {
     background-color: alpha-color(accent, opacity(medium));
     color: hsl(var(--accent-foreground));
     padding: spacing(xs) spacing(sm);
-    border-radius: radius(sm);
+    border-radius: radius(xs);
 }
 
 // Deleted text
@@ -263,7 +263,7 @@ code {
     background-color: hsl(var(--muted));
     color: hsl(var(--foreground));
     padding: spacing(xs) spacing(sm);
-    border-radius: radius(sm);
+    border-radius: radius(xs);
     font-weight: font-weight(medium);
 }
 
@@ -272,7 +272,7 @@ kbd {
     background-color: hsl(var(--muted));
     color: hsl(var(--foreground));
     padding: spacing(xs) spacing(sm);
-    border-radius: radius(sm);
+    border-radius: radius(xs);
     border: border-width(thin) solid hsl(var(--border));
     box-shadow: shadow(sm);
     font-size: font-size(sm);
@@ -284,7 +284,7 @@ pre {
     background-color: hsl(var(--muted));
     color: hsl(var(--foreground));
     padding: spacing(lg);
-    border-radius: radius(md);
+    border-radius: radius(sm);
     overflow-x: auto;
     line-height: line-height(relaxed);
     margin: spacing(lg) 0;

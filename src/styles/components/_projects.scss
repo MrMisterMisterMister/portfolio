@@ -31,7 +31,7 @@
     gap: spacing(base);
     max-height: 800px;
     overflow-y: auto;
-    padding: spacing(sm);
+    padding: spacing(sm) spacing(sm) spacing(sm) spacing(xss);
 
     @include bp(lg) {
         max-height: 700px;
@@ -73,10 +73,9 @@
     gap: spacing(base);
     padding: spacing(base);
     background: hsl(var(--card));
-    // Subtle shadow instead of border
     box-shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.08),
                 0 1px 2px -1px hsl(var(--foreground) / 0.08);
-    border-radius: radius(md);
+    border-radius: radius(sm);
     cursor: pointer;
     @include transition(all, base, smooth);
     text-align: left;

@@ -20,7 +20,7 @@
     align-items: center;
     gap: spacing(md);
     padding: spacing(sm) spacing(base);
-    border-radius: radius(md);
+    border-radius: radius(sm);
     border: 2px solid transparent;
     @include transition(all, super-fast, smooth);
     text-decoration: none !important;
@@ -181,7 +181,7 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: border-width(thin) solid alpha-color(border, opacity(light));
-    border-radius: radius(md);
+    border-radius: radius(sm);
     color: hsl(var(--muted-foreground));
     @include transition(all, base, smooth);
     text-decoration: none;

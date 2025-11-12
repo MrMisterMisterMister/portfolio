@@ -17,14 +17,14 @@
     // Real terminal dark background
     background: hsl(var(--terminal-bg));
     border: 1px solid hsl(var(--terminal-border));
-    border-radius: radius(md);
+    border-radius: radius(xs);
     overflow: hidden;
     box-shadow: 
         0 20px 25px -5px rgba(0, 0, 0, 0.3),
         0 10px 10px -5px rgba(0, 0, 0, 0.2),
         0 0 0 1px rgba(255, 255, 255, 0.05);
     width: 100%;
-    max-width: 700px; /* default medium */
+    max-width: container(md);
     margin: 0 auto;
     position: relative;
 
