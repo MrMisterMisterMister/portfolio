@@ -42,25 +42,6 @@
     }
 }
 
-/* Size modifiers - choose desired width class on the component
-   Usage: <div class="terminal-window terminal--sm"> or add dynamically */
-.terminal-window.terminal--sm {
-    max-width: 360px;
-}
-
-.terminal-window.terminal--md {
-    max-width: 700px;
-}
-
-.terminal-window.terminal--lg {
-    max-width: 1100px;
-}
-
-/* Full-width / fluid variant */
-.terminal-window.terminal--fluid {
-    max-width: 100%;
-}
-
 .terminal-body {
     padding: spacing(lg) spacing(xl);
     font-family: "Consolas", "Courier New", monospace;
@@ -125,7 +106,7 @@
     }
 }
 
-// Blinking cursor animation
+// Blinking cursor animation, not used for now
 .terminal-cursor {
     display: inline-block;
     width: 0.6em;
