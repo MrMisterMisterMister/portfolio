@@ -27,15 +27,25 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: spacing(lg);
-    padding-right: spacing(lg);
+    padding-left: spacing(base);
+    padding-right: spacing(base);
+
+    @include bp(xs) {
+        padding-left: spacing(lg);
+        padding-right: spacing(lg);
+    }
 
     @include bp(md) {
+        padding-left: spacing(xl);
+        padding-right: spacing(xl);
+    }
+
+    @include bp(lg) {
         padding-left: spacing(2xl);
         padding-right: spacing(2xl);
     }
 
-    @include bp(lg) {
+    @include bp(xl) {
         padding-left: spacing(3xl);
         padding-right: spacing(3xl);
     }
@@ -74,8 +84,13 @@
 // ============================================================================
 
 .section-spacing-sm {
-    padding-top: spacing(4xl);
-    padding-bottom: spacing(4xl);
+    padding-top: spacing(3xl);
+    padding-bottom: spacing(3xl);
+
+    @include bp(xs) {
+        padding-top: spacing(4xl);
+        padding-bottom: spacing(4xl);
+    }
 
     @include bp(md) {
         padding-top: spacing(5xl);
@@ -84,8 +99,13 @@
 }
 
 .section-spacing-base {
-    padding-top: spacing(5xl);
-    padding-bottom: spacing(5xl);
+    padding-top: spacing(4xl);
+    padding-bottom: spacing(4xl);
+
+    @include bp(xs) {
+        padding-top: spacing(5xl);
+        padding-bottom: spacing(5xl);
+    }
 
     @include bp(md) {
         padding-top: spacing(6xl);
@@ -94,37 +114,72 @@
 }
 
 .section-spacing-lg {
-    padding-top: spacing(6xl);
-    padding-bottom: spacing(6xl);
+    padding-top: spacing(5xl);
+    padding-bottom: spacing(5xl);
+
+    @include bp(xs) {
+        padding-top: spacing(6xl);
+        padding-bottom: spacing(6xl);
+    }
 
     @include bp(md) {
-        padding-top: spacing(8xl);
-        padding-bottom: spacing(8xl);
+        padding-top: calc(spacing(6xl) * 1.25);
+        padding-bottom: calc(spacing(6xl) * 1.25);
+    }
+
+    @include bp(lg) {
+        padding-top: calc(spacing(6xl) * 1.5);
+        padding-bottom: calc(spacing(6xl) * 1.5);
     }
 }
 
 .section-spacing-xl {
-    padding-top: spacing(6xl);
-    padding-bottom: spacing(6xl);
+    padding-top: spacing(4xl);
+    padding-bottom: spacing(4xl);
+
+    @include bp(xs) {
+        padding-top: spacing(5xl);
+        padding-bottom: spacing(5xl);
+    }
 
     @include bp(md) {
-        padding-top: spacing(8xl);
-        padding-bottom: spacing(8xl);
+        padding-top: spacing(6xl);
+        padding-bottom: spacing(6xl);
     }
 
     @include bp(lg) {
-        padding-top: spacing(10xl);
-        padding-bottom: spacing(10xl);
+        padding-top: calc(spacing(6xl) * 1.25);
+        padding-bottom: calc(spacing(6xl) * 1.25);
+    }
+
+    @include bp(xl) {
+        padding-top: calc(spacing(6xl) * 1.5);
+        padding-bottom: calc(spacing(6xl) * 1.5);
     }
 }
 
 .section-spacing-2xl {
-    padding-top: spacing(8xl);
-    padding-bottom: spacing(8xl);
+    padding-top: spacing(5xl);
+    padding-bottom: spacing(5xl);
+
+    @include bp(xs) {
+        padding-top: spacing(6xl);
+        padding-bottom: spacing(6xl);
+    }
 
     @include bp(md) {
-        padding-top: spacing(10xl);
-        padding-bottom: spacing(10xl);
+        padding-top: calc(spacing(6xl) * 1.25);
+        padding-bottom: calc(spacing(6xl) * 1.25);
+    }
+
+    @include bp(lg) {
+        padding-top: calc(spacing(6xl) * 1.5);
+        padding-bottom: calc(spacing(6xl) * 1.5);
+    }
+
+    @include bp(xl) {
+        padding-top: calc(spacing(6xl) * 1.75);
+        padding-bottom: calc(spacing(6xl) * 1.75);
     }
 }
 

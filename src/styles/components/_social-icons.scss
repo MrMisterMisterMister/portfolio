@@ -18,12 +18,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: spacing(md);
-    padding: spacing(sm) spacing(base);
+    gap: spacing(sm);
+    padding: spacing(xs) spacing(sm);
     border-radius: radius(sm);
     border: 2px solid transparent;
     @include transition(all, super-fast, smooth);
     text-decoration: none !important;
+
+    @include bp(xs) {
+        gap: spacing(md);
+        padding: spacing(sm) spacing(md);
+    }
+
+    @include bp(md) {
+        padding: spacing(sm) spacing(base);
+    }
 
     &:hover {
         scale: 1.05;
@@ -35,28 +44,70 @@
 }
 
 .social-icon-wrapper {
-    width: spacing(4xl);
-    height: spacing(4xl);
+    width: spacing(2xl);
+    height: spacing(2xl);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: radius(full);
     @include transition(all, super-fast, smooth);
     background: hsl(var(--muted));
+
+    @include bp(xs) {
+        width: spacing(3xl);
+        height: spacing(3xl);
+    }
+
+    @include bp(md) {
+        width: spacing(3xl);
+        height: spacing(3xl);
+    }
+
+    @include bp(lg) {
+        width: spacing(4xl);
+        height: spacing(4xl);
+    }
 }
 
 .social-icon {
-    width: spacing(2xl);
-    height: spacing(2xl);
+    width: spacing(base);
+    height: spacing(base);
     color: white;
     @include transition(color, super-fast, smooth);
+
+    @include bp(xs) {
+        width: spacing(lg);
+        height: spacing(lg);
+    }
+
+    @include bp(md) {
+        width: spacing(xl);
+        height: spacing(xl);
+    }
+
+    @include bp(lg) {
+        width: spacing(2xl);
+        height: spacing(2xl);
+    }
 }
 
 .social-icon-label {
-    font-size: font-size(base);
+    font-size: font-size(xs);
     font-weight: font-weight(semibold);
     color: hsl(var(--foreground));
     @include transition(color, super-fast, smooth);
+
+    @include bp(xs) {
+        font-size: font-size(sm);
+    }
+
+    @include bp(md) {
+        font-size: font-size(base);
+    }
+
+    @include bp(lg) {
+        font-size: font-size(lg);
+    }
 }
 
 // LinkedIn hover
@@ -175,8 +226,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: spacing(3xl);
-    height: spacing(3xl);
+    width: spacing(xl);
+    height: spacing(xl);
     background: alpha-color(background, opacity(medium));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -187,14 +238,54 @@
     text-decoration: none;
     box-shadow: shadow(sm);
 
+    @include bp(xs) {
+        width: spacing(2xl);
+        height: spacing(2xl);
+    }
+
+    @include bp(md) {
+        width: spacing(2xl);
+        height: spacing(2xl);
+    }
+
+    @include bp(lg) {
+        width: spacing(3xl);
+        height: spacing(3xl);
+    }
+
     .dark & {
         background: alpha-color(background, opacity(moderate));
         border-color: alpha-color(border, opacity(light));
     }
 
     svg {
-        width: spacing(lg);
-        height: spacing(lg);
+        width: spacing(base);
+        height: spacing(base);
+
+        @include bp(xs) {
+            width: spacing(md);
+            height: spacing(md);
+        }
+
+        @include bp(sm) {
+            width: spacing(base);
+            height: spacing(base);
+        }
+
+        @include bp(md) {
+            width: spacing(lg);
+            height: spacing(lg);
+        }
+
+        @include bp(lg) {
+            width: spacing(lg);
+            height: spacing(lg);
+        }
+
+        @include bp(xl) {
+            width: spacing(xl);
+            height: spacing(xl);
+        }
     }
 
     &:hover {

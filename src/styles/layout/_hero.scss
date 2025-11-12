@@ -15,7 +15,7 @@
 // ============================================================================
 
 .section-hero {
-    padding: spacing(3xl) spacing(base);
+    padding: spacing(2xl) spacing(base);
     position: relative;
     min-height: 100vh;
     display: flex;
@@ -24,11 +24,23 @@
     overflow: hidden;
     width: 100%;
 
+    // Extra small devices (480px+)
+    @include bp(xs) {
+        padding: spacing(3xl) spacing(lg);
+    }
+
+    // Medium devices (768px+)
     @include bp(md) {
+        padding: spacing(4xl) spacing(xl);
+    }
+
+    // Large devices (1024px+)
+    @include bp(lg) {
         padding: spacing(5xl) spacing(2xl);
     }
 
-    @include bp(lg) {
+    // Extra large devices (1280px+)
+    @include bp(xl) {
         padding: spacing(6xl) spacing(3xl);
     }
 
@@ -68,7 +80,7 @@
                 alpha-color(border, opacity(moderate)) 1px,
                 transparent 1px
             );
-        background-size: 50px 50px;
+        background-size: 30px 30px;
         background-position: -1px -1px;
         mask-image: radial-gradient(
             ellipse 100% 70% at 50% 40%,
@@ -76,11 +88,23 @@
             transparent 100%
         );
         z-index: -1;
-        opacity: opacity(moderate);
+        opacity: opacity(light);
+
+        @include bp(xs) {
+            background-size: 40px 40px;
+            opacity: opacity(moderate);
+        }
 
         @include bp(md) {
+            background-size: 60px 60px;
+        }
+
+        @include bp(lg) {
             background-size: 80px 80px;
-            opacity: opacity(moderate);
+        }
+
+        @include bp(xl) {
+            background-size: 100px 100px;
         }
     }
 
@@ -95,16 +119,31 @@
 
     .particle {
         position: absolute;
-        width: 4px;
-        height: 4px;
+        width: 3px;
+        height: 3px;
         background: alpha-color(primary, opacity(moderate));
         border-radius: radius(full);
         opacity: 0;
         animation: float 15s infinite ease-in-out;
 
+        @include bp(xs) {
+            width: 4px;
+            height: 4px;
+        }
+
         @include bp(md) {
+            width: 5px;
+            height: 5px;
+        }
+
+        @include bp(lg) {
             width: 6px;
             height: 6px;
+        }
+
+        @include bp(xl) {
+            width: 8px;
+            height: 8px;
         }
     }
 

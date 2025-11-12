@@ -27,7 +27,7 @@
 }
 
 .header-container {
-    height: spacing(5xl);
+    height: spacing(4xl);
     width: 100%;
     max-width: container(2xl);
     margin-left: auto;
@@ -35,35 +35,66 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: spacing(base);
-    padding-right: spacing(base);
-    font-size: font-size(lg);
+    padding-left: spacing(sm);
+    padding-right: spacing(sm);
+    font-size: font-size(base);
+
+    @include bp(xs) {
+        height: spacing(5xl);
+        padding-left: spacing(base);
+        padding-right: spacing(base);
+        font-size: font-size(lg);
+    }
 
     @include bp(md) {
+        padding-left: spacing(lg);
+        padding-right: spacing(lg);
+        font-size: font-size(lg);
+    }
+
+    @include bp(lg) {
         padding-left: spacing(xl);
         padding-right: spacing(xl);
         font-size: font-size(xl);
     }
 
-    @include bp(lg) {
+    @include bp(xl) {
+        padding-left: spacing(2xl);
+        padding-right: spacing(2xl);
         font-size: font-size(2xl);
     }
 
     .logo {
-        font-size: font-size(2xl);
+        font-size: font-size(xl);
         font-weight: font-weight(bold);
+
+        @include bp(xs) {
+            font-size: font-size(2xl);
+        }
 
         @include bp(md) {
             font-size: font-size(3xl);
+        }
+
+        @include bp(lg) {
+            font-size: font-size(4xl);
         }
     }
 
     .nav,
     .actions {
-        font-size: font-size(sm);
+        font-size: font-size(xs);
+
+        @include bp(xs) {
+            font-size: font-size(sm);
+        }
 
         @include bp(md) {
-            font-size: font-size(xl);
+            font-size: font-size(base);
+        }
+
+        @include bp(lg) {
+            font-size: font-size(lg);
         }
 
         .nav-item {
@@ -97,10 +128,18 @@
 
     a,
     button {
-        padding: spacing(sm) 0;
+        padding: spacing(xs) 0;
+
+        @include bp(xs) {
+            padding: spacing(sm) 0;
+        }
 
         @include bp(md) {
             padding: spacing(md) 0;
+        }
+
+        @include bp(lg) {
+            padding: spacing(base) 0;
         }
     }
 }

@@ -18,7 +18,7 @@ import { personalInfo, socialLinks } from "@/lib/personalData";
     </div>
 
     <Container size="lg" as="article" class="text-center">
-        <Stack gap="sm" align="center">
+        <Stack gap="lg" align="center">
             <FadeIn client:load delay={0.2} duration={0.6}>
                 <div class="terminal-window">
                     <div class="terminal-body">
@@ -34,54 +34,56 @@ import { personalInfo, socialLinks } from "@/lib/personalData";
             </FadeIn>
 
             <FadeIn client:load delay={0.4} duration={0.6}>
-                <nav aria-label="Social media links" class="hero-social-nav">
-                    {socialLinks.github && (
-                        <a
-                            href={socialLinks.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="hero-social-link hero-github"
-                            aria-label="Visit my GitHub profile"
-                        >
-                            <Icon name="github" size={24} />
-                            <span class="sr-only">GitHub</span>
-                        </a>
-                    )}
-                    {socialLinks.linkedin && (
-                        <a
-                            href={socialLinks.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="hero-social-link hero-linkedin"
-                            aria-label="Visit my LinkedIn profile"
-                        >
-                            <Icon name="linkedin" size={24} />
-                            <span class="sr-only">LinkedIn</span>
-                        </a>
-                    )}
-                    {socialLinks.discord && (
-                        <a
-                            href={socialLinks.discord}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="hero-social-link hero-discord"
-                            aria-label="Message me on Discord"
-                        >
-                            <Icon name="discord" size={24} />
-                            <span class="sr-only">Discord</span>
-                        </a>
-                    )}
-                    {personalInfo.contactEmail && (
-                        <a
-                            href={`mailto:${personalInfo.contactEmail}`}
-                            class="hero-social-link hero-email"
-                            aria-label={`Send email to ${personalInfo.contactEmail}`}
-                        >
-                            <Icon name="mail" size={24} />
-                            <span class="sr-only">Email</span>
-                        </a>
-                    )}
-                </nav>
+                <Container size="max" class=text-center>
+                    <nav aria-label="Social media links" class="hero-social-nav">
+                        {socialLinks.github && (
+                            <a
+                                href={socialLinks.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hero-social-link hero-github"
+                                aria-label="Visit my GitHub profile"
+                            >
+                                <Icon name="github" size={24} />
+                                <span class="sr-only">GitHub</span>
+                            </a>
+                        )}
+                        {socialLinks.linkedin && (
+                            <a
+                                href={socialLinks.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hero-social-link hero-linkedin"
+                                aria-label="Visit my LinkedIn profile"
+                            >
+                                <Icon name="linkedin" size={24} />
+                                <span class="sr-only">LinkedIn</span>
+                            </a>
+                        )}
+                        {socialLinks.discord && (
+                            <a
+                                href={socialLinks.discord}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hero-social-link hero-discord"
+                                aria-label="Message me on Discord"
+                            >
+                                <Icon name="discord" size={24} />
+                                <span class="sr-only">Discord</span>
+                            </a>
+                        )}
+                        {personalInfo.contactEmail && (
+                            <a
+                                href={`mailto:${personalInfo.contactEmail}`}
+                                class="hero-social-link hero-email"
+                                aria-label={`Send email to ${personalInfo.contactEmail}`}
+                            >
+                                <Icon name="mail" size={24} />
+                                <span class="sr-only">Email</span>
+                            </a>
+                        )}
+                    </nav>
+                </Container>
             </FadeIn>
         </Stack>
     </Container>
