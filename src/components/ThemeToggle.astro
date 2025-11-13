@@ -15,7 +15,6 @@
 ---
 
 <button
-    id="theme-toggle"
     type="button"
     class="theme-toggle"
     aria-label="Toggle between light and dark mode"
@@ -55,7 +54,7 @@
     >
         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
     </svg>
-    <span class="sr-only" id="theme-toggle-label">Toggle theme</span>
+    <span class="sr-only theme-toggle-label">Toggle theme</span>
 </button>
 
 <script>
@@ -82,13 +81,15 @@
 
         localStorage.setItem("theme", theme);
 
-        // Update ARIA label for screen readers
-        const label = document.getElementById("theme-toggle-label");
-        if (label) {
-            label.textContent = theme === "dark"
-                ? "Switch to light mode"
-                : "Switch to dark mode";
-        }
+        // Update ARIA labels for all theme toggle buttons
+        const labels = document.querySelectorAll(".theme-toggle-label");
+        const labelText = theme === "dark"
+            ? "Switch to light mode"
+            : "Switch to dark mode";
+
+        labels.forEach((label) => {
+            label.textContent = labelText;
+        });
     }
 
     /**
@@ -107,12 +108,14 @@
      */
     function updateLabel(): void {
         const isDark = document.documentElement.classList.contains("dark");
-        const label = document.getElementById("theme-toggle-label");
-        if (label) {
-            label.textContent = isDark
-                ? "Switch to light mode"
-                : "Switch to dark mode";
-        }
+        const labels = document.querySelectorAll(".theme-toggle-label");
+        const labelText = isDark
+            ? "Switch to light mode"
+            : "Switch to dark mode";
+
+        labels.forEach((label) => {
+            label.textContent = labelText;
+        });
     }
 
     // ============================================================================
@@ -127,11 +130,11 @@
         // Set initial label
         updateLabel();
 
-        // Add toggle functionality
-        const toggleButton = document.getElementById("theme-toggle");
-        if (toggleButton) {
-            toggleButton.addEventListener("click", toggleTheme);
-        }
+        // Add toggle functionality to ALL theme toggle buttons (desktop + mobile)
+        const toggleButtons = document.querySelectorAll(".theme-toggle");
+        toggleButtons.forEach((button) => {
+            button.addEventListener("click", toggleTheme);
+        });
 
         // Listen for system theme changes
         const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
