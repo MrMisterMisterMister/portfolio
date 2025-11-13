@@ -143,7 +143,7 @@ export const projects: Project[] = [
             technology.godot,
             technology.gdshaders
         ],
-        category: "Website",
+        category: "Games, Shaders, Special Effects",
         githubLinks: [
             { name: "Repository", url: "https://github.com/MrMisterMisterMister/portfolio" }
         ],

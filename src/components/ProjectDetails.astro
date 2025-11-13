@@ -5,21 +5,29 @@ const { project } = Astro.props;
 
 <article class="project-details" data-project-id={project.id}>
     <header class="project-details-header">
-        <h3 class="project-details-title">{project.title}</h3>
-        <p class="project-details-category" aria-label="Project category">{project.category}</p>
-    </header>
-
-    {project.image && (
-        <div class="project-details-image-container">
-            <Image
-                src={project.image}
-                alt={`${project.title} project screenshot`}
-                width={800}
-                height={600}
-                class="project-details-image"
-            />
+        <div class="project-details-header-content">
+            <div>
+                <h3 class="project-details-title">{project.title}</h3>
+                <p class="project-details-category" aria-label="Project category">{project.category}</p>
+            </div>
+            {project.image && project.image !== "/" && project.image.trim() !== "" && (
+                <button
+                    class="project-details-image-thumbnail"
+                    data-image-url={project.image}
+                    data-image-alt={`${project.title} project screenshot`}
+                    aria-label={`View ${project.title} project image`}
+                    type="button"
+                >
+                    <Image
+                        src={project.image}
+                        alt={`${project.title} project thumbnail`}
+                        width={200}
+                        height={150}
+                    />
+                </button>
+            )}
         </div>
-    )}
+    </header>
 
     <section class="project-details-section" aria-labelledby={`description-${project.id}`}>
         <h4 id={`description-${project.id}`} class="project-details-section-title">Description</h4>

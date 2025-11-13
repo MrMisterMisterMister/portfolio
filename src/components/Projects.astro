@@ -8,6 +8,11 @@ import StaggerContainer from "@/components/animations/StaggerContainer";
 import StaggerItem from "@/components/animations/StaggerItem";
 import { Image } from "astro:assets";
 import { projects, categories } from "@/lib/projectsData";
+
+// Helper to check if project has a valid image
+const hasValidImage = (imageUrl: string) => {
+    return imageUrl && imageUrl !== "/" && imageUrl.trim() !== "";
+};
 ---
 
 <Section id="projects">
@@ -31,15 +36,17 @@ import { projects, categories } from "@/lib/projectsData";
                                 class={`project-list-item ${index === 0 ? 'active' : ''}`}
                                 aria-label={`View ${project.title} details`}
                             >
-                                <div class="project-list-item-image">
-                                    <Image
-                                        src={project.image}
-                                        alt={`View of ${project.title} project`}
-                                        layout="constrained"
-                                        width="800"
-                                        height="600"
-                                    />
-                                </div>
+                                {hasValidImage(project.image) && (
+                                    <div class="project-list-item-image">
+                                        <Image
+                                            src={project.image}
+                                            alt={`View of ${project.title} project`}
+                                            layout="constrained"
+                                            width="800"
+                                            height="600"
+                                        />
+                                    </div>
+                                )}
                                 <div class="project-list-item-content">
                                     <h3 class="project-list-item-title">{project.title}</h3>
                                     <p class="project-list-item-category">{project.category}</p>
@@ -67,6 +74,34 @@ import { projects, categories } from "@/lib/projectsData";
                 </div>
             </SlideIn>
         </div>
+
+        <!-- Mobile Modal for Project Details -->
+        <div id="project-modal" class="project-modal" aria-hidden="true" role="dialog" aria-modal="true">
+            <div class="project-modal-backdrop"></div>
+            <div class="project-modal-content">
+                <button class="project-modal-close" aria-label="Close project details">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div id="project-modal-details"></div>
+            </div>
+        </div>
+
+        <!-- Image Lightbox Modal -->
+        <div id="image-lightbox" class="image-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+            <div class="image-lightbox-backdrop"></div>
+            <div class="image-lightbox-content">
+                <button class="image-lightbox-close" aria-label="Close image">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <img id="lightbox-image" src="" alt="" />
+            </div>
+        </div>
     </Stack>
 </Section>
 
@@ -74,25 +109,94 @@ import { projects, categories } from "@/lib/projectsData";
     // Project details functionality (client)
     const projectListItems = document.querySelectorAll(".project-list-item");
     const detailsContent = document.getElementById("project-details-content");
+    const modal = document.getElementById("project-modal");
+    const modalDetails = document.getElementById("project-modal-details");
+    const modalClose = document.querySelector(".project-modal-close");
+    const modalBackdrop = document.querySelector(".project-modal-backdrop");
 
-    // Load first project template already rendered server-side
+    // Check if we're on mobile/tablet (below lg breakpoint)
+    const isMobileView = () => window.innerWidth < 1024;
 
-    // Handle project list item clicks - swap templates
+    // Open modal
+    const openModal = () => {
+        if (modal) {
+            modal.classList.add("active");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
+    };
+
+    // Close modal
+    const closeModal = () => {
+        if (modal) {
+            modal.classList.remove("active");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+        }
+    };
+
+    // Handle project selection
+    const selectProject = (projectId) => {
+        const template = document.getElementById(`project-template-${projectId}`);
+
+        if (!template) return;
+
+        // Update active state
+        projectListItems.forEach((i) => i.classList.remove("active"));
+        const activeItem = document.querySelector(`[data-project-id="${projectId}"]`);
+        if (activeItem) activeItem.classList.add("active");
+
+        const templateClone = template.content.cloneNode(true);
+
+        if (isMobileView()) {
+            // Mobile: Show in modal
+            if (modalDetails) {
+                modalDetails.innerHTML = '';
+                modalDetails.appendChild(templateClone);
+                openModal();
+            }
+        } else {
+            // Desktop: Show in side panel
+            if (detailsContent) {
+                detailsContent.innerHTML = '';
+                detailsContent.appendChild(templateClone);
+            }
+        }
+    };
+
+    // Handle project list item clicks
     projectListItems.forEach((item) => {
         item.addEventListener("click", () => {
             const projectId = item.getAttribute("data-project-id");
-            const template = document.getElementById(`project-template-${projectId}`);
-
-            if (template && detailsContent) {
-                // Update active state
-                projectListItems.forEach((i) => i.classList.remove("active"));
-                item.classList.add("active");
-
-                // Replace details content with template clone
-                detailsContent.innerHTML = '';
-                detailsContent.appendChild(template.content.cloneNode(true));
-            }
+            selectProject(projectId);
         });
+    });
+
+    // Close modal handlers
+    if (modalClose) {
+        modalClose.addEventListener("click", closeModal);
+    }
+
+    if (modalBackdrop) {
+        modalBackdrop.addEventListener("click", closeModal);
+    }
+
+    // Close modal on ESC key
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal?.classList.contains("active")) {
+            closeModal();
+        }
+    });
+
+    // Handle window resize - close modal if resizing from mobile to desktop
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (!isMobileView() && modal?.classList.contains("active")) {
+                closeModal();
+            }
+        }, 250);
     });
 
     // Keyboard navigation
@@ -110,5 +214,60 @@ import { projects, categories } from "@/lib/projectsData";
                 projectListItems[prevIndex]?.click();
             }
         });
+    });
+
+    // Image Lightbox functionality
+    const imageLightbox = document.getElementById("image-lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxClose = document.querySelector(".image-lightbox-close");
+    const lightboxBackdrop = document.querySelector(".image-lightbox-backdrop");
+
+    // Open lightbox
+    const openLightbox = (imageUrl, imageAlt) => {
+        if (imageLightbox && lightboxImage) {
+            lightboxImage.src = imageUrl;
+            lightboxImage.alt = imageAlt;
+            imageLightbox.classList.add("active");
+            imageLightbox.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
+    };
+
+    // Close lightbox
+    const closeLightbox = () => {
+        if (imageLightbox) {
+            imageLightbox.classList.remove("active");
+            imageLightbox.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+        }
+    };
+
+    // Event delegation for image thumbnails (works for dynamically loaded content)
+    document.addEventListener("click", (e) => {
+        const thumbnail = e.target.closest(".project-details-image-thumbnail");
+        if (thumbnail) {
+            e.preventDefault();
+            const imageUrl = thumbnail.getAttribute("data-image-url");
+            const imageAlt = thumbnail.getAttribute("data-image-alt");
+            if (imageUrl && imageAlt) {
+                openLightbox(imageUrl, imageAlt);
+            }
+        }
+    });
+
+    // Close lightbox handlers
+    if (lightboxClose) {
+        lightboxClose.addEventListener("click", closeLightbox);
+    }
+
+    if (lightboxBackdrop) {
+        lightboxBackdrop.addEventListener("click", closeLightbox);
+    }
+
+    // Close lightbox on ESC key
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && imageLightbox?.classList.contains("active")) {
+            closeLightbox();
+        }
     });
 </script>

@@ -156,6 +156,9 @@
     max-height: 600px;
     overflow-y: auto;
 
+    // Hide on mobile/tablet - use modal instead
+    display: none;
+
     @include bp(md) {
         padding: spacing(xl);
         min-height: 500px;
@@ -163,6 +166,7 @@
     }
 
     @include bp(lg) {
+        display: block;
         padding: spacing(3xl);
     }
 
@@ -201,6 +205,13 @@
     margin-bottom: spacing(lg);
 }
 
+.project-details-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: spacing(lg);
+}
+
 .project-details-title {
     font-size: font-size(4xl);
     font-weight: font-weight(bold);
@@ -219,25 +230,38 @@
     font-weight: font-weight(medium);
 }
 
-.project-details-figure {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: spacing(xl) 0;
-    padding: spacing(lg);
-    background: alpha-color(muted, opacity(moderate));
-    border-radius: radius(sm);
-    border: border-width(thin) solid hsl(var(--border));
-}
-
-.project-details-image {
-    display: block;
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    object-fit: contain;
+.project-details-image-thumbnail {
+    flex-shrink: 0;
+    width: 120px;
+    height: 90px;
     border-radius: radius(md);
-    box-shadow: shadow(lg);
+    overflow: hidden;
+    cursor: pointer;
+    border: border-width(base) solid hsl(var(--border));
+    background: hsl(var(--muted));
+    @include transition(all, base, smooth);
+    padding: 0;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: shadow(lg);
+        border-color: hsl(var(--primary));
+    }
+
+    &:focus-visible {
+        @include focus-ring();
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    @include bp(md) {
+        width: 150px;
+        height: 112px;
+    }
 }
 
 .project-details-section {
@@ -293,5 +317,205 @@
             hsl(var(--border) / 0.3) 80%,
             transparent
         );
+    }
+}
+
+// ============================================================================
+// PROJECT MODAL (Mobile/Tablet)
+// ============================================================================
+
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: z(modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: spacing(base);
+    opacity: 0;
+    pointer-events: none;
+    @include transition(opacity, moderate, smooth);
+
+    &.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    // Hide modal on desktop
+    @include bp(lg) {
+        display: none;
+    }
+}
+
+.project-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: hsl(var(--background) / 0.8);
+    backdrop-filter: blur(4px);
+}
+
+.project-modal-content {
+    position: relative;
+    background: hsl(var(--card));
+    border-radius: radius(md);
+    box-shadow: shadow(2xl);
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: spacing(lg);
+    z-index: 1;
+
+    @include bp(md) {
+        padding: spacing(xl);
+    }
+
+    // Minimal scrollbar
+    scrollbar-width: thin;
+    scrollbar-color: alpha-color(muted-foreground, opacity(medium)) transparent;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: alpha-color(muted-foreground, opacity(medium));
+        border-radius: radius(md);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: alpha-color(primary, opacity(moderate));
+    }
+}
+
+.project-modal-close {
+    position: absolute;
+    top: spacing(base);
+    right: spacing(base);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(var(--muted));
+    border: none;
+    border-radius: radius(full);
+    cursor: pointer;
+    color: hsl(var(--foreground));
+    @include transition(all, base, smooth);
+    z-index: 10;
+
+    &:hover {
+        background: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+        transform: scale(1.1);
+    }
+
+    &:focus-visible {
+        @include focus-ring();
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+// ============================================================================
+// IMAGE LIGHTBOX
+// ============================================================================
+
+.image-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: z(modal) + 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: spacing(lg);
+    opacity: 0;
+    pointer-events: none;
+    @include transition(opacity, moderate, smooth);
+
+    &.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.image-lightbox-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: hsl(var(--background) / 0.95);
+    backdrop-filter: blur(8px);
+}
+
+.image-lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        max-width: 100%;
+        max-height: 90vh;
+        width: auto;
+        height: auto;
+        border-radius: radius(lg);
+        box-shadow: shadow(2xl);
+        object-fit: contain;
+    }
+}
+
+.image-lightbox-close {
+    position: fixed;
+    top: spacing(lg);
+    right: spacing(lg);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(var(--card));
+    border: border-width(base) solid hsl(var(--border));
+    border-radius: radius(full);
+    cursor: pointer;
+    color: hsl(var(--foreground));
+    @include transition(all, base, smooth);
+    z-index: 10;
+
+    &:hover {
+        background: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+        border-color: hsl(var(--primary));
+        transform: scale(1.1);
+    }
+
+    &:focus-visible {
+        @include focus-ring();
+    }
+
+    svg {
+        width: 24px;
+        height: 24px;
     }
 }

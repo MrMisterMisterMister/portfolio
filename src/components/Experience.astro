@@ -143,7 +143,7 @@ import { experiences, education, certifications } from "@/lib/experienceData";
                                     <CardContent>
                                         <Stack gap="base">
                                             <Badge variant="outline">{cert.date}</Badge>
-                                            {cert.credentialUrl && (
+                                            {cert.credentialUrl && cert.credentialType === "url" && (
                                                 <Button
                                                     variant="link"
                                                     size="sm"
@@ -157,13 +157,39 @@ import { experiences, education, certifications } from "@/lib/experienceData";
                                                         class="cert-link"
                                                     >
                                                         <Icon name="externalLink" size={12} class="cert-icon" />
-                                                View Credential
-                                            </a>
-                                        </Button>
-                                    )}
-                                </Stack>
-                            </CardContent>
-                        </Card>
+                                                        View Credential
+                                                    </a>
+                                                </Button>
+                                            )}
+                                            {cert.credentialFile && cert.credentialType === "pdf" && (
+                                                <button
+                                                    class="cert-view-btn"
+                                                    data-cert-id={cert.id}
+                                                    data-cert-file={cert.credentialFile}
+                                                    data-cert-name={cert.name}
+                                                    data-cert-type="pdf"
+                                                    type="button"
+                                                >
+                                                    <Icon name="externalLink" size={12} class="cert-icon" />
+                                                    View Certificate
+                                                </button>
+                                            )}
+                                            {cert.credentialFile && cert.credentialType === "image" && (
+                                                <button
+                                                    class="cert-view-btn"
+                                                    data-cert-id={cert.id}
+                                                    data-cert-file={cert.credentialFile}
+                                                    data-cert-name={cert.name}
+                                                    data-cert-type="image"
+                                                    type="button"
+                                                >
+                                                    <Icon name="externalLink" size={12} class="cert-icon" />
+                                                    View Certificate
+                                                </button>
+                                            )}
+                                        </Stack>
+                                    </CardContent>
+                                </Card>
                             </StaggerItem>
                         ))
                     }
@@ -171,4 +197,98 @@ import { experiences, education, certifications } from "@/lib/experienceData";
             </StaggerContainer>
         </Stack>
     </Stack>
+
+    <!-- Certificate Viewer Modal for PDF and Image -->
+    <div id="cert-viewer-modal" class="cert-viewer-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="cert-viewer-backdrop"></div>
+        <div class="cert-viewer-content">
+            <button class="cert-viewer-close" aria-label="Close certificate viewer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="cert-viewer-header">
+                <h3 id="cert-viewer-title"></h3>
+            </div>
+            <div id="cert-viewer-container" class="cert-viewer-container"></div>
+        </div>
+    </div>
 </Section>
+
+<script>
+    // Certificate viewer functionality
+    const certViewerModal = document.getElementById("cert-viewer-modal");
+    const certViewerContainer = document.getElementById("cert-viewer-container");
+    const certViewerTitle = document.getElementById("cert-viewer-title");
+    const certViewerClose = document.querySelector(".cert-viewer-close");
+    const certViewerBackdrop = document.querySelector(".cert-viewer-backdrop");
+
+    // Open certificate viewer
+    const openCertViewer = (file: string, name: string, type: string) => {
+        if (!certViewerModal || !certViewerContainer || !certViewerTitle) return;
+
+        certViewerTitle.textContent = name;
+        certViewerContainer.innerHTML = "";
+
+        if (type === "pdf") {
+            // Create iframe for PDF
+            const iframe = document.createElement("iframe");
+            iframe.src = file;
+            iframe.className = "cert-pdf-viewer";
+            iframe.title = `${name} Certificate PDF`;
+            certViewerContainer.appendChild(iframe);
+        } else if (type === "image") {
+            // Create image element
+            const img = document.createElement("img");
+            img.src = file;
+            img.alt = `${name} Certificate`;
+            img.className = "cert-image-viewer";
+            certViewerContainer.appendChild(img);
+        }
+
+        certViewerModal.classList.add("active");
+        certViewerModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    };
+
+    // Close certificate viewer
+    const closeCertViewer = () => {
+        if (!certViewerModal || !certViewerContainer) return;
+
+        certViewerModal.classList.remove("active");
+        certViewerModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        certViewerContainer.innerHTML = "";
+    };
+
+    // Event delegation for certificate view buttons
+    document.addEventListener("click", (e) => {
+        const btn = (e.target as HTMLElement).closest(".cert-view-btn");
+        if (btn) {
+            const file = btn.getAttribute("data-cert-file");
+            const name = btn.getAttribute("data-cert-name");
+            const type = btn.getAttribute("data-cert-type");
+
+            if (file && name && type) {
+                openCertViewer(file, name, type);
+            }
+        }
+    });
+
+    // Close handlers
+    if (certViewerClose) {
+        certViewerClose.addEventListener("click", closeCertViewer);
+    }
+
+    if (certViewerBackdrop) {
+        certViewerBackdrop.addEventListener("click", closeCertViewer);
+    }
+
+    // ESC key handler
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && certViewerModal?.classList.contains("active")) {
+            closeCertViewer();
+        }
+    });
+</script>

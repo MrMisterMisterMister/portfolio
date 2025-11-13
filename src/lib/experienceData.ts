@@ -22,6 +22,8 @@ export interface Certification {
     issuer: string;
     date: string;
     credentialUrl?: string;
+    credentialType?: "url" | "pdf" | "image"; // Type of credential
+    credentialFile?: string; // Path to PDF or image file in public folder
 }
 
 export const experiences: Experience[] = [
