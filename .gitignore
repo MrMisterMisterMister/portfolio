@@ -71,7 +71,6 @@ public/?.*
 *.iml
 
 # Optional: lock files for reproducible builds
-# Uncomment if you want to ignore them
 # package-lock.json
 # yarn.lock
 
