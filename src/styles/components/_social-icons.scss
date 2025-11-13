@@ -18,19 +18,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: spacing(sm);
-    padding: spacing(sm);
+    gap: spacing(xs);
+    padding: spacing(xs) spacing(sm);
     border-radius: radius(sm);
     border: 2px solid transparent;
     @include transition(all, super-fast, smooth);
     text-decoration: none !important;
 
     @include bp(sm) {
-        gap: spacing(md);
+        gap: spacing(sm);
         padding: spacing(sm) spacing(base);
     }
 
     @include bp(md) {
+        gap: spacing(md);
+        padding: spacing(sm) spacing(lg);
+    }
+
+    @include bp(lg) {
         gap: spacing(base);
         padding: spacing(base) spacing(lg);
     }
@@ -45,8 +50,8 @@
 }
 
 .social-icon-wrapper {
-    width: spacing(2xl);
-    height: spacing(2xl);
+    width: spacing(xl);
+    height: spacing(xl);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,59 +60,59 @@
     background: hsl(var(--muted));
 
     @include bp(sm) {
+        width: spacing(2xl);
+        height: spacing(2xl);
+    }
+
+    @include bp(md) {
         width: spacing(3xl);
         height: spacing(3xl);
     }
 
-    @include bp(md) {
+    @include bp(lg) {
         width: spacing(4xl);
         height: spacing(4xl);
-    }
-
-    @include bp(lg) {
-        width: spacing(5xl);
-        height: spacing(5xl);
     }
 }
 
 .social-icon {
-    width: spacing(base);
-    height: spacing(base);
+    width: spacing(sm);
+    height: spacing(sm);
     color: white;
     @include transition(color, super-fast, smooth);
 
     @include bp(sm) {
+        width: spacing(base);
+        height: spacing(base);
+    }
+
+    @include bp(md) {
         width: spacing(lg);
         height: spacing(lg);
     }
 
-    @include bp(md) {
+    @include bp(lg) {
         width: spacing(xl);
         height: spacing(xl);
-    }
-
-    @include bp(lg) {
-        width: spacing(2xl);
-        height: spacing(2xl);
     }
 }
 
 .social-icon-label {
-    font-size: font-size(sm);
+    font-size: font-size(xs);
     font-weight: font-weight(semibold);
     color: hsl(var(--foreground));
     @include transition(color, super-fast, smooth);
 
     @include bp(sm) {
-        font-size: font-size(base);
+        font-size: font-size(sm);
     }
 
     @include bp(md) {
-        font-size: font-size(lg);
+        font-size: font-size(base);
     }
 
     @include bp(lg) {
-        font-size: font-size(xl);
+        font-size: font-size(lg);
     }
 }
 
@@ -224,20 +229,26 @@
 // ============================================================================
 
 .hero-social-link {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: spacing(xl);
     height: spacing(xl);
-    background: alpha-color(background, opacity(medium));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: border-width(thin) solid alpha-color(border, opacity(light));
-    border-radius: radius(sm);
+    background: linear-gradient(135deg,
+        alpha-color(background, opacity(intense)) 0%,
+        alpha-color(muted, opacity(medium)) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: border-width(thin) solid alpha-color(border, opacity(moderate));
+    border-radius: radius(md);
     color: hsl(var(--muted-foreground));
     @include transition(all, base, smooth);
     text-decoration: none;
-    box-shadow: shadow(sm);
+    box-shadow: 0 4px 6px -1px alpha-color(foreground, opacity(subtle)),
+                0 2px 4px -1px alpha-color(foreground, opacity(light)),
+                inset 0 1px 0 0 alpha-color(background, opacity(light));
+    overflow: hidden;
 
     @include bp(sm) {
         width: spacing(2xl);
@@ -254,12 +265,40 @@
         height: spacing(4xl);
     }
 
+    // Gradient overlay for shine effect
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            alpha-color(background, opacity(moderate)),
+            transparent
+        );
+        @include transition(left, slow, smooth);
+    }
+
+    &:hover::before {
+        left: 100%;
+    }
+
     .dark & {
-        background: alpha-color(background, opacity(moderate));
-        border-color: alpha-color(border, opacity(light));
+        background: linear-gradient(135deg,
+            alpha-color(background, opacity(intense)) 0%,
+            alpha-color(muted, opacity(moderate)) 100%);
+        border-color: alpha-color(border, opacity(moderate));
+        box-shadow: 0 4px 6px -1px alpha-color(foreground, opacity(moderate)),
+                    0 2px 4px -1px alpha-color(foreground, opacity(medium)),
+                    inset 0 1px 0 0 alpha-color(muted, opacity(light));
     }
 
     svg {
+        position: relative;
+        z-index: 1;
         width: spacing(base);
         height: spacing(base);
 
@@ -280,12 +319,17 @@
     }
 
     &:hover {
-        transform: translateY(-2px);
-        box-shadow: shadow(md);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 10px 15px -3px alpha-color(foreground, opacity(medium)),
+                    0 4px 6px -2px alpha-color(foreground, opacity(moderate)),
+                    inset 0 1px 0 0 alpha-color(background, opacity(moderate));
+        border-color: alpha-color(border, opacity(intense));
     }
 
     &:active {
-        transform: translateY(0);
+        transform: translateY(-1px) scale(1.02);
+        box-shadow: 0 4px 6px -1px alpha-color(foreground, opacity(moderate)),
+                    0 2px 4px -1px alpha-color(foreground, opacity(medium));
     }
 }
 
@@ -351,19 +395,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: spacing(xs);
+    gap: 0;
     flex-wrap: nowrap;
 
     @include bp(sm) {
-        gap: spacing(sm);
+        gap: spacing(xs);
     }
 
     @include bp(md) {
-        gap: spacing(base);
+        gap: spacing(sm);
     }
 
     @include bp(lg) {
-        gap: spacing(lg);
+        gap: spacing(base);
     }
 
     // Grid already handles layout, just ensure it's nav-aware

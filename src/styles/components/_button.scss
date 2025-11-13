@@ -15,7 +15,7 @@
 
 .btn {
     @include button-base();
-    border-radius: radius(lg);
+    border-radius: radius(sm);
     font-size: font-size(base);
     font-weight: font-weight(medium);
     position: relative;

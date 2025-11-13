@@ -83,7 +83,7 @@
     background: hsl(var(--card));
     box-shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.08),
                 0 1px 2px -1px hsl(var(--foreground) / 0.08);
-    border-radius: radius(sm);
+    border-radius: radius(xs);
     cursor: pointer;
     @include transition(all, base, smooth);
     text-align: left;
@@ -116,7 +116,7 @@
     width: 60px;
     height: 60px;
     flex-shrink: 0;
-    border-radius: radius(sm);
+    border-radius: radius(xs);
     overflow: hidden;
     background: hsl(var(--muted));
 
@@ -169,7 +169,7 @@
     // Elevated shadow instead of border
     box-shadow: 0 4px 6px -1px hsl(var(--foreground) / 0.08),
                 0 2px 4px -2px hsl(var(--foreground) / 0.08);
-    border-radius: radius(sm);
+    border-radius: radius(xs);
     padding: spacing(lg);
     min-height: auto;
     max-height: 600px;
@@ -253,7 +253,7 @@
     flex-shrink: 0;
     width: 120px;
     height: 90px;
-    border-radius: radius(md);
+    border-radius: radius(xs);
     overflow: hidden;
     cursor: pointer;
     border: border-width(base) solid hsl(var(--border));
@@ -382,7 +382,7 @@
 .project-modal-content {
     position: relative;
     background: hsl(var(--card));
-    border-radius: radius(md);
+    border-radius: radius(xs);
     box-shadow: shadow(2xl);
     width: 100%;
     max-width: 900px;
