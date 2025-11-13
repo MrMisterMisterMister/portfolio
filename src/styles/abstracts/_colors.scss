@@ -26,16 +26,16 @@
     // LIGHT MODE - Soft blue palette with WCAG AA compliance
     // ------------------------------------------------------------------------
 
-    // Base colors - Soft blue background
-    --background: 210 40% 98%;         // #F7FAFE - Soft light blue background
+    // Base colors - Softer, less bright neutral background
+    --background: 220 15% 95%;         // Softer gray-blue, less bright
     --foreground: 222 84% 5%;          // #020617 - Very dark slate text (20.1:1 ratio)
 
     // Surface colors (cards, panels, etc.)
-    --card: 210 40% 99%;               // #FBFDFF - Very light blue for cards
+    --card: 220 15% 97%;               // Very light neutral for cards
     --card-foreground: 222 84% 5%;     // #020617 - Very dark text on cards (20.8:1 ratio)
 
     // Popover colors
-    --popover: 210 40% 99%;            // #FBFDFF - Light blue popover
+    --popover: 220 15% 97%;            // Light neutral popover
     --popover-foreground: 222 84% 5%;  // #020617 - Dark popover text (20.8:1 ratio)
 
     // Primary brand color - Vibrant blue
@@ -44,21 +44,21 @@
     --primary-hover: 217 91% 38%;      // #1A42C3 - Darker vibrant blue for hover (better contrast)
     --primary-active: 217 91% 35%;     // #1739AB - Even darker for active state
 
-    // Secondary/subtle colors - Blue-gray harmony
-    --secondary: 210 30% 88%;          // #D7E3F0 - Light blue-gray
+    // Secondary/subtle colors - Softer gray-blue
+    --secondary: 220 15% 88%;          // Softer gray-blue
     --secondary-foreground: 222 84% 5%; // #020617 - Dark text on secondary (14.8:1 ratio)
-    --secondary-hover: 210 30% 82%;    // #C5D6E8 - Darker for hover
-    --secondary-active: 210 30% 78%;   // #B8CCDF - Even darker for active
+    --secondary-hover: 220 15% 82%;    // Darker for hover
+    --secondary-active: 220 15% 78%;   // Even darker for active
 
-    // Muted/subdued colors - Subtle blue-gray
-    --muted: 210 35% 94%;              // #EBF3FB - Very light blue-gray
-    --muted-foreground: 215 25% 27%;   // #364152 - Dark muted text (7.5:1 ratio)
+    // Muted/subdued colors - Subtle neutral gray
+    --muted: 220 12% 92%;              // Softer neutral gray
+    --muted-foreground: 220 15% 30%;   // Dark muted text (7.5:1 ratio)
 
-    // Accent colors - Slightly saturated blue
-    --accent: 210 40% 96%;             // #F0F7FE - Accent light blue
+    // Accent colors - Softer neutral accent
+    --accent: 220 15% 94%;             // Softer accent neutral
     --accent-foreground: 222 84% 5%;   // #020617 - Dark text on accent (19.2:1 ratio)
-    --accent-hover: 210 40% 92%;       // #E0EFFC - Darker for hover
-    --accent-active: 210 40% 88%;      // #D0E7FA - Even darker for active
+    --accent-hover: 220 15% 90%;       // Darker for hover
+    --accent-active: 220 15% 86%;      // Even darker for active
 
     // Destructive/error colors
     --destructive: 0 72% 51%;          // #DC2626 - Red (4.54:1 ratio)
@@ -66,22 +66,22 @@
     --destructive-hover: 0 72% 44%;    // #C71F1F - Darker red for hover
     --destructive-active: 0 72% 40%;   // #B31B1B - Even darker for active
 
-    // Border and input colors - Blue-gray borders
-    --border: 210 30% 80%;             // #C1D4E8 - Blue-gray borders (2.8:1 ratio)
-    --input: 210 30% 80%;              // #C1D4E8 - Input borders (2.8:1 ratio)
+    // Border and input colors - Softer neutral borders
+    --border: 220 12% 85%;             // Softer neutral borders
+    --input: 220 12% 85%;              // Input borders
     --ring: 217 91% 45%;               // #1D4ED8 - Focus ring (matches primary)
 
     // Border radius (global setting)
     --radius: 0.5rem;                  // 8px - Base border radius
 
     // Terminal colors
-    --terminal-bg: 210 40% 98%;            /* very light panel background (HSL) */
-		--terminal-border: 210 40% 90%;        /* light border color */
+    --terminal-bg: 220 15% 95%;            /* softer panel background (HSL) */
+		--terminal-border: 220 12% 88%;        /* softer border color */
     --terminal-foreground: 222 10% 12%;    /* dark text for light terminal */
     --terminal-prompt: 120 80% 30%;        /* green prompt (HSL) */
     --terminal-accent: 217 91% 45%;        /* accent/command color (primary) */
-    --terminal-title-bg: 210 20% 92%;      /* title bar background (light) */
-    --terminal-muted: 210 10% 60%;         /* muted text */
+    --terminal-title-bg: 220 15% 90%;      /* title bar background (light) */
+    --terminal-muted: 220 12% 55%;         /* muted text */
 }
 
 .dark {

@@ -13,6 +13,33 @@
 @use "sass:list";
 
 // ============================================================================
+// DEVELOPER SETTINGS (INTERNAL USE ONLY)
+// ============================================================================
+// These settings are for DEVELOPMENT and DESIGN purposes only.
+// Users should NOT have access to modify these settings.
+// Only developers/designers should change these values in the codebase.
+//
+// WARNING: Changing these settings affects the entire site's appearance.
+// ============================================================================
+
+// Global transparency mode for components
+// When enabled, all major components (cards, sections, etc.) will have
+// a transparent glass-morphism effect similar to the header.
+//
+// @type Boolean
+// @default false
+// @internal - DO NOT expose to users
+//
+// Usage:
+//   Set to `true` to enable transparent components site-wide
+//   Set to `false` for solid component backgrounds (default)
+$enable-transparent-components: false !default;
+
+// Transparency settings (only active when $enable-transparent-components is true)
+$transparent-component-opacity: 0.95 !default;  // Opacity level for transparent components
+$transparent-component-blur: 12px !default;     // Backdrop blur amount
+
+// ============================================================================
 // SPACING SCALE
 // ============================================================================
 // A consistent spacing scale based on a 4px base unit (0.25rem).
