@@ -24,6 +24,7 @@ export const programmingLanguages: Technology[] = [
     { name: "GDScript", link: "https://godotengine.org/" },
     { name: "Node.js", link: "https://nodejs.org/" },
     { name: "Arduino", link: "https://www.arduino.cc/" },
+    { name: "GDShaders", link: "https://godotengine.org/" },
 ];
 
 export const frameworks: Technology[] = [

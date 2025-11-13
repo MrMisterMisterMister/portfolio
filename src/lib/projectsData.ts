@@ -128,6 +128,28 @@ export const projects: Project[] = [
     // },
     {
         id: "4",
+        title: "GameDev Achievements",
+        description: "Achievements for the Game Development minor.",
+        longDescription: `Achievements are basically projects that I completed as part of the Game Development minor
+            for a certain course. Each achievement represents a specific skill or concept that I learned during the course.
+            There are two types of achievemnts: Gold and Platinum. Gold achievements are the basic ones that everyone has to do.
+            Platinum achievements are optional and more difficult ones that you can do to challenge yourself further.
+            <br><br>
+            The achievements cover a wide range of topics, including game design, programming, shaders, and more.
+            By completing these achievements, I was able to gain hands-on experience and develop my skills in game development.`,
+    image: "/",
+        technologies: [
+            technology.gdscript,
+            technology.godot,
+            technology.gdshaders
+        ],
+        category: "Website",
+        githubLinks: [
+            { name: "Repository", url: "https://github.com/MrMisterMisterMister/portfolio" }
+        ],
+    },
+    {
+        id: "5",
         title: "This Portfolio",
         description: "Responsive portfolio website built with Astro and TypeScript.",
         longDescription: `The source code for this portfolio website, designed to showcase my projects, skills, and professional experience. 
@@ -138,7 +160,7 @@ export const projects: Project[] = [
             ARIA labels, SEO optimization, and fast loading times. Styled with Tailwind CSS for a clean, professional appearance 
             that works seamlessly across all devices. The site is fully open-source and serves as both a portfolio piece and a 
             reference implementation for modern web development practices.`,
-    image: "/favicon.svg",
+    image: "/",
         technologies: [
             technology.astro,
             technology.typescript,
@@ -146,7 +168,7 @@ export const projects: Project[] = [
         ],
         category: "Website",
         githubLinks: [
-            { name: "Source Code", url: "https://github.com/MrMisterMisterMister/portfolio" }
+            { name: "Repository", url: "https://github.com/MrMisterMisterMister/portfolio" }
         ],
     }
 ];
