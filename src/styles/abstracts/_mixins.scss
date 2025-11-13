@@ -558,10 +558,10 @@
     @if $enable-transparent-components {
         background: alpha-color(background, $transparent-component-opacity) !important;
         background-color: transparent;
-        backdrop-filter: blur($transparent-component-blur);
-        -webkit-backdrop-filter: blur($transparent-component-blur);
+        backdrop-filter: blur($transparent-component-blur) !important; 
+        -webkit-backdrop-filter: blur($transparent-component-blur) !important;
 
         // Slightly more visible border for glass effect
-        border: border-width(thin) solid alpha-color(border, 0.3) !important;
+        border: border-width(thicker) solid alpha-color(ring, 0.5) !important;
     }
 }

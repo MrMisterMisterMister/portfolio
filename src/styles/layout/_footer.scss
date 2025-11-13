@@ -16,7 +16,15 @@
 .footer {
     width: 100%;
     border-top: border-width(thin) solid hsl(var(--border));
-    background-color: hsl(var(--background));
+    width: 100%;
+    box-shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.05),
+                0 1px 2px -1px hsl(var(--foreground) / 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    // background: alpha-color(primary, opacity(subtle));
+
+    // background-color: hsl(var(--background));
+    background: alpha-color(background, $transparent-component-opacity) !important;
     padding: spacing(xl) 0;
 
     @include bp(md) {
