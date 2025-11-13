@@ -19,19 +19,20 @@
     flex-direction: column;
     align-items: center;
     gap: spacing(sm);
-    padding: spacing(xs) spacing(sm);
+    padding: spacing(sm);
     border-radius: radius(sm);
     border: 2px solid transparent;
     @include transition(all, super-fast, smooth);
     text-decoration: none !important;
 
-    @include bp(xs) {
+    @include bp(sm) {
         gap: spacing(md);
-        padding: spacing(sm) spacing(md);
+        padding: spacing(sm) spacing(base);
     }
 
     @include bp(md) {
-        padding: spacing(sm) spacing(base);
+        gap: spacing(base);
+        padding: spacing(base) spacing(lg);
     }
 
     &:hover {
@@ -53,19 +54,19 @@
     @include transition(all, super-fast, smooth);
     background: hsl(var(--muted));
 
-    @include bp(xs) {
+    @include bp(sm) {
         width: spacing(3xl);
         height: spacing(3xl);
     }
 
     @include bp(md) {
-        width: spacing(3xl);
-        height: spacing(3xl);
+        width: spacing(4xl);
+        height: spacing(4xl);
     }
 
     @include bp(lg) {
-        width: spacing(4xl);
-        height: spacing(4xl);
+        width: spacing(5xl);
+        height: spacing(5xl);
     }
 }
 
@@ -75,7 +76,7 @@
     color: white;
     @include transition(color, super-fast, smooth);
 
-    @include bp(xs) {
+    @include bp(sm) {
         width: spacing(lg);
         height: spacing(lg);
     }
@@ -92,21 +93,21 @@
 }
 
 .social-icon-label {
-    font-size: font-size(xs);
+    font-size: font-size(sm);
     font-weight: font-weight(semibold);
     color: hsl(var(--foreground));
     @include transition(color, super-fast, smooth);
 
-    @include bp(xs) {
-        font-size: font-size(sm);
-    }
-
-    @include bp(md) {
+    @include bp(sm) {
         font-size: font-size(base);
     }
 
-    @include bp(lg) {
+    @include bp(md) {
         font-size: font-size(lg);
+    }
+
+    @include bp(lg) {
+        font-size: font-size(xl);
     }
 }
 
@@ -238,19 +239,19 @@
     text-decoration: none;
     box-shadow: shadow(sm);
 
-    @include bp(xs) {
+    @include bp(sm) {
         width: spacing(2xl);
         height: spacing(2xl);
     }
 
     @include bp(md) {
-        width: spacing(2xl);
-        height: spacing(2xl);
+        width: spacing(3xl);
+        height: spacing(3xl);
     }
 
     @include bp(lg) {
-        width: spacing(3xl);
-        height: spacing(3xl);
+        width: spacing(4xl);
+        height: spacing(4xl);
     }
 
     .dark & {
@@ -262,29 +263,19 @@
         width: spacing(base);
         height: spacing(base);
 
-        @include bp(xs) {
-            width: spacing(md);
-            height: spacing(md);
-        }
-
         @include bp(sm) {
-            width: spacing(base);
-            height: spacing(base);
+            width: spacing(lg);
+            height: spacing(lg);
         }
 
         @include bp(md) {
-            width: spacing(lg);
-            height: spacing(lg);
+            width: spacing(xl);
+            height: spacing(xl);
         }
 
         @include bp(lg) {
-            width: spacing(lg);
-            height: spacing(lg);
-        }
-
-        @include bp(xl) {
-            width: spacing(xl);
-            height: spacing(xl);
+            width: spacing(2xl);
+            height: spacing(2xl);
         }
     }
 
@@ -357,6 +348,24 @@
 // ============================================================================
 
 .social-links-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: spacing(xs);
+    flex-wrap: nowrap;
+
+    @include bp(sm) {
+        gap: spacing(sm);
+    }
+
+    @include bp(md) {
+        gap: spacing(base);
+    }
+
+    @include bp(lg) {
+        gap: spacing(lg);
+    }
+
     // Grid already handles layout, just ensure it's nav-aware
     & [aria-label] {
         // Accessibility: ensure social links have proper focus states

@@ -200,7 +200,21 @@
 
 .hero-social-nav {
     display: flex;
-    align-items: flex-start;
-    gap: spacing(base);
+    align-items: center;
+    justify-content: center;
+    gap: spacing(xs);
+    flex-wrap: nowrap;
+
+    @include bp(sm) {
+        gap: spacing(sm);
+    }
+
+    @include bp(md) {
+        gap: spacing(base);
+    }
+
+    @include bp(lg) {
+        gap: spacing(lg);
+    }
 }
 

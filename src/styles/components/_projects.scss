@@ -78,8 +78,8 @@
 
 .project-list-item {
     display: flex;
-    gap: spacing(base);
-    padding: spacing(base);
+    gap: spacing(sm);
+    padding: spacing(sm);
     background: hsl(var(--card));
     box-shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.08),
                 0 1px 2px -1px hsl(var(--foreground) / 0.08);
@@ -88,6 +88,12 @@
     @include transition(all, base, smooth);
     text-align: left;
     width: 100%;
+    align-items: center;
+
+    @include bp(md) {
+        gap: spacing(base);
+        padding: spacing(base);
+    }
 
     &:hover {
         box-shadow: 0 4px 6px -1px hsl(var(--primary) / 0.15),
@@ -107,12 +113,17 @@
 }
 
 .project-list-item-image {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     flex-shrink: 0;
     border-radius: radius(sm);
     overflow: hidden;
     background: hsl(var(--muted));
+
+    @include bp(md) {
+        width: 80px;
+        height: 80px;
+    }
 
     img {
         width: 100%;
@@ -130,18 +141,26 @@
 }
 
 .project-list-item-title {
-    font-size: font-size(lg);
+    font-size: font-size(base);
     font-weight: font-weight(semibold);
     color: hsl(var(--foreground));
     line-height: line-height(snug);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    @include bp(md) {
+        font-size: font-size(lg);
+    }
 }
 
 .project-list-item-category {
-    font-size: font-size(sm);
+    font-size: font-size(xs);
     color: hsl(var(--muted-foreground));
+
+    @include bp(md) {
+        font-size: font-size(sm);
+    }
 }
 
 // Right: Project Details Panel

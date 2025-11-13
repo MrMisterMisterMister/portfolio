@@ -19,6 +19,10 @@
 // ============================================================================
 // For this single-page portfolio, page-specific styles may be minimal.
 // Most styles should live in components or layout modules.
+// Use global responsive text utilities from base/_typography.scss:
+// - .text-responsive - For body content
+// - .text-responsive-heading - For headings
+// - .text-responsive-sm - For smaller text
 //
 // Planned modules:
 // - _home.scss - Home page specific styles (if needed)

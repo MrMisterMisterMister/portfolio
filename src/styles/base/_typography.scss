@@ -350,7 +350,7 @@ hr {
 // UTILITY CLASSES
 // ============================================================================
 
-// Text size utilities
+// Text size utilities (static)
 .text-xs {
     font-size: font-size(xs);
 }
@@ -377,6 +377,57 @@ hr {
 }
 .text-5xl {
     font-size: font-size(5xl);
+}
+
+// Responsive text size utilities
+// Usage: <p class="text-responsive">Text</p> or <h4 class="text-responsive-heading">Heading</h4>
+
+// Responsive text for headings (larger sizes)
+.text-responsive-heading {
+    font-size: font-size(base);
+    font-weight: font-weight(semibold);
+    line-height: line-height(normal);
+
+    @include bp(sm) {
+        font-size: font-size(lg);
+    }
+
+    @include bp(md) {
+        font-size: font-size(xl);
+    }
+}
+
+// Responsive text for body content
+.text-responsive {
+    font-size: font-size(sm);
+    line-height: line-height(relaxed);
+
+    @include bp(sm) {
+        font-size: font-size(base);
+    }
+
+    @include bp(md) {
+        font-size: font-size(lg);
+    }
+
+    @include bp(lg) {
+        font-size: font-size(base);
+        line-height: line-height(body);
+    }
+}
+
+// Responsive text for smaller body content
+.text-responsive-sm {
+    font-size: font-size(xs);
+    line-height: line-height(normal);
+
+    @include bp(sm) {
+        font-size: font-size(sm);
+    }
+
+    @include bp(md) {
+        font-size: font-size(base);
+    }
 }
 
 // Font weight utilities

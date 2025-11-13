@@ -2,7 +2,6 @@
 import Section from "@/components/layout/Section.astro";
 import Container from "@/components/layout/Container.astro";
 import Stack from "@/components/layout/Stack.astro";
-import Grid from "@/components/layout/Grid.astro";
 import Card from "@/components/ui/Card.astro";
 import CardContent from "@/components/ui/CardContent.astro";
 import FadeIn from "@/components/animations/FadeIn";
@@ -23,18 +22,18 @@ import { getAge, personalInfo } from "@/lib/personalData";
                     <Card>
                         <CardContent class="pt-6">
                             <Stack gap="base" as="article">
-                                <h4 class="text-lg font-semibold">Hello there.</h4>
-                                <p class="text-lg leading-relaxed text-muted-foreground">
+                                <h4 class="text-responsive-heading">Hello there.</h4>
+                                <p class="text-responsive text-muted">
                                     I'm {getAge()} years of age, and a {
                                         personalInfo.occupation
                                     } in my 4th year. I always try doing what I feel like doing, but most of
                                     the times, that is not possible.
                                 </p>
-                                <p class="text-lg leading-relaxed text-muted-foreground">
+                                <p class="text-responsive text-muted">
                                     At the moment, I'm focused on expanding my skills in IoT and embedded
                                     systems, while also exploring opportunities in Full-Stack Development.
                                 </p>
-                                <p class="text-lg leading-relaxed text-muted-foreground">
+                                <p class="text-responsive text-muted">
                                     Feel free to reach out to me if you have any questions or just want to chat.
                                 </p>
                             </Stack>
@@ -44,7 +43,7 @@ import { getAge, personalInfo } from "@/lib/personalData";
 
                 <FadeIn client:load delay={0.4} duration={0.6}>
                     <Container size="max">
-                        <Grid columns={3} gap="xs" as="nav" class="social-links-grid">
+                        <nav class="social-links-grid">
                 <a
                     href="https://www.linkedin.com/sly-moertanom"
                     target="_blank"
@@ -113,7 +112,7 @@ import { getAge, personalInfo } from "@/lib/personalData";
                     </div>
                     <span class="social-icon-label">Discord</span>
                 </a>
-                        </Grid>
+                        </nav>
                     </Container>
                 </FadeIn>
             </Stack>
