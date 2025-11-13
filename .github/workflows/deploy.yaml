@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   build:
+    environment: github-pages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
@@ -27,8 +28,20 @@ jobs:
           node-version: 24 # The specific version of Node that should be used to build your site. Defaults to 22. (optional)
           package-manager: npm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
           build-cmd: npm run build # The command to run to build your site. Runs the package build script/task by default. (optional)
-        # env:
-          # PUBLIC_POKEAPI: 'https://pokeapi.co/api/v2' # Use single quotation marks for the variable value. (optional)
+        env:
+          PUBLIC_FIRST_NAME: ${{ vars['PUBLIC_FIRST_NAME'] }}
+          PUBLIC_LAST_NAME: ${{ vars['PUBLIC_LAST_NAME'] }}
+          PUBLIC_YOE: ${{ vars['PUBLIC_YOE'] }}
+          PUBLIC_CURRENT_JOB: ${{ vars['PUBLIC_CURRENT_JOB'] }}
+          PUBLIC_OCCUPATION: ${{ vars['PUBLIC_OCCUPATION'] }}
+          PUBLIC_CURRENT_COMPANY: ${{ vars['PUBLIC_CURRENT_COMPANY'] }}
+          PUBLIC_CONTACT_EMAIL: ${{ vars['PUBLIC_CONTACT_EMAIL'] }}
+          PUBLIC_BIO: ${{ vars['PUBLIC_BIO'] }}
+          PUBLIC_TAGLINE: ${{ vars['PUBLIC_TAGLINE'] }}
+          PUBLIC_GITHUB_URL: ${{ vars['PUBLIC_GITHUB_URL'] }}
+          PUBLIC_LINKEDIN_URL: ${{ vars['PUBLIC_LINKEDIN_URL'] }}
+          PUBLIC_TWITTER_URL: ${{ vars['PUBLIC_TWITTER_URL'] }}
+          PUBLIC_WEBSITE_URL: ${{ vars['PUBLIC_WEBSITE_URL'] }}
 
   deploy:
     needs: build
