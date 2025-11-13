@@ -57,7 +57,7 @@ const navItems = [
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu">
+    <div id="mobile-menu" class="mobile-menu hidden">
         <nav class="mobile-menu-nav" aria-label="Mobile navigation">
             {
                 navItems.map((item) => (
@@ -75,40 +75,57 @@ const navItems = [
 </header>
 
 <script>
-    // Mobile menu toggle
-    const mobileMenuButton = document.getElementById("mobile-menu-button");
-    const mobileMenu = document.getElementById("mobile-menu");
+    function initializeHeader() {
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
 
-    mobileMenuButton?.addEventListener("click", () => {
-        const isExpanded = mobileMenuButton.getAttribute("aria-expanded") === "true";
-        mobileMenuButton.setAttribute("aria-expanded", String(!isExpanded));
-        mobileMenu?.classList.toggle("hidden");
-    });
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener("click", () => {
+                const isExpanded = mobileMenuButton.getAttribute("aria-expanded") === "true";
+                mobileMenuButton.setAttribute("aria-expanded", String(!isExpanded));
+                mobileMenu.classList.toggle("hidden");
+            });
+        }
 
-    // Smooth scroll navigation
-    const navLinks = document.querySelectorAll("[data-nav-link]");
+        // Smooth scroll navigation
+        const navLinks = document.querySelectorAll("[data-nav-link]");
 
-    navLinks.forEach((link) => {
-        link.addEventListener("click", (e) => {
-            const href = link.getAttribute("data-href");
-            if (href) {
-                const element = document.querySelector(href);
-                if (element) {
-                    element.scrollIntoView({ behavior: "smooth", block: "start" });
-                    // Close mobile menu if open
-                    mobileMenu?.classList.add("hidden");
-                    mobileMenuButton?.setAttribute("aria-expanded", "false");
+        navLinks.forEach((link) => {
+            link.addEventListener("click", (e) => {
+                const href = link.getAttribute("data-href");
+                if (href) {
+                    const element = document.querySelector(href);
+                    if (element) {
+                        element.scrollIntoView({ behavior: "smooth", block: "start" });
+                        // Close mobile menu if open
+                        if (mobileMenu) {
+                            mobileMenu.classList.add("hidden");
+                        }
+                        if (mobileMenuButton) {
+                            mobileMenuButton.setAttribute("aria-expanded", "false");
+                        }
+                    }
+                }
+            });
+        });
+
+        // Close menu on escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && mobileMenu && !mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.add("hidden");
+                if (mobileMenuButton) {
+                    mobileMenuButton.setAttribute("aria-expanded", "false");
+                    mobileMenuButton.focus();
                 }
             }
         });
-    });
+    }
 
-    // Close menu on escape key
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && mobileMenu && !mobileMenu.classList.contains("hidden")) {
-            mobileMenu.classList.add("hidden");
-            mobileMenuButton?.setAttribute("aria-expanded", "false");
-            mobileMenuButton?.focus();
-        }
-    });
+    // Execute immediately if DOM is already loaded, otherwise wait for DOMContentLoaded
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializeHeader);
+    } else {
+        initializeHeader();
+    }
 </script>

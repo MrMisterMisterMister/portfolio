@@ -194,7 +194,7 @@
 }
 
 .mobile-menu {
-    display: none;
+    display: block;
     border-top: border-width(thin) solid hsl(var(--border));
     background-color: hsl(var(--background));
 
