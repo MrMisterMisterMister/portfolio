@@ -145,7 +145,7 @@ export const projects: Project[] = [
         ],
         category: "Games, Shaders, Special Effects",
         githubLinks: [
-            { name: "Repository", url: "https://github.com/MrMisterMisterMister/portfolio" }
+            { name: "Repository", url: "https://github.com/MrMisterMisterMister/hhs-game-dev-minor" }
         ],
     },
     {
