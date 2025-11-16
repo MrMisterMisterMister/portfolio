@@ -14,6 +14,6 @@ export const skillsData: SkillCategory[] = [
     },
     {
         category: "Tools & Platforms",
-        skills: ["Git", "Vercel", "DigitalOcean", "Nginx", "CI/CD", "Figma", "Linux", "REST APIs", "Godot"]
+        skills: ["Git", "Vercel", "DigitalOcean", "Nginx", "CI/CD", "Figma", "REST APIs", "Godot"]
     }
 ];
